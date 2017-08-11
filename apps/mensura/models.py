@@ -11,6 +11,3 @@ class MensuraGeneral(models.Model):
     empresa = models.CharField(max_length=40)
     situacion = models.CharField(max_length=20)
     usuario = models.ForeignKey(Usuario)
-
-
-    
