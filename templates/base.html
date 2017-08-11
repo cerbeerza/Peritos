@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+<meta charset="utf-8" /> 
+<head>
+    
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"  />
+    <title>Sistema de Postulación y Renovación Peritos Mensuradores | {% block title %}Inicio{% endblock %}</title>
+</head>
+<body>
+    <div id="header">
+        <h1>Sistema de Postulación y Renovación Peritos Mensuradores</h1>
+    </div>
+    <div id="content">
+        {% block content %}
+        
+        <h3>Contenido Base</h3>
+        
+        {% endblock %}
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
