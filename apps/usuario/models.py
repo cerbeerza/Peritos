@@ -10,6 +10,7 @@ class Usuario(models.Model):
     fecha_nac = models.DateField()
     email = models.EmailField()
     password = models.CharField(max_length=20)
+    tipo_usuario = models.CharField(max_length=5, default="user", blank=True)
 
     generos = (
         ('M','MASCULINO'),
