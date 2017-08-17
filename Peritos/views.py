@@ -43,4 +43,10 @@ def login_page(request):
     return render(request, 'templates/administrations/login.html', {'message': message, 'form': form})
 
 
+def registro_page(request):
+    message = None
+    if request.method == "POST":
+
+
+
 
