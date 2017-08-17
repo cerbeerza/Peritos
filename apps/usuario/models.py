@@ -3,6 +3,7 @@ from django.db import models
 
 class Usuario(models.Model):
     
+
     rut = models.CharField(max_length=8, primary_key=True)
     username = models.CharField(max_length=50, blank=True)
     nombres = models.CharField(max_length=50)
@@ -34,7 +35,7 @@ class Usuario(models.Model):
         ('ingGeoMen', 'Ingeniero en Geomensura'),
         ('ingEjecGeo', 'Ingeniero de Ejecución en Geomensura'),
         ('ingEjecMin', 'Ingeniero de Ejecución en Minas'),
-    ) 
+    )
     profesion = models.CharField(max_length=40)
     universidad = models.CharField(max_length=50)
     archivo_titulo = models.CharField(max_length=300, blank=True)
@@ -44,7 +45,6 @@ class Usuario(models.Model):
     empresa = models.CharField(max_length=50)
     telefono_empresa = models.IntegerField()
     direccion_empresa = models.CharField(max_length=80)
-
     
 
 
