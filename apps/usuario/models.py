@@ -4,6 +4,7 @@ from django.db import models
 class Usuario(models.Model):
     
     rut = models.CharField(max_length=8, primary_key=True)
+    username = models.CharField(max_length=50, blank=True)
     nombres = models.CharField(max_length=50)
     apellido_p = models.CharField(max_length=50)
     apellido_m = models.CharField(max_length=50)
