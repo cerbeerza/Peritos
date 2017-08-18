@@ -3,6 +3,7 @@ from django.shortcuts import render
 from Peritos.forms import LoginForm
 from django.contrib.auth import authenticate, login
 #from apps.usuario.models import Usuario
+from apps.administration.models import Profile
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -43,9 +44,55 @@ def login_page(request):
     return render(request, 'templates/administrations/login.html', {'message': message, 'form': form})
 
 
+
 def registro_page(request):
     message = None
     if request.method == "POST":
+        rut = request.POST['']
+
+        try:
+            var = Profile.objects.get(rut=rut)
+        except ObjectDoesNotExist:
+            var = None
+
+        if var == None:
+            # Recojer todos los datos necesarios
+            direccion = request.POST['']
+            apellidoM = request.POST['']
+            appelidoP = request.POST['']
+            comuna = request.POST['']
+            direccionEmpresa = request.POST['']
+            empresa = request.POST['']
+            estadoCivil = request.POST['']
+            fechaNac = request.POST['']
+            genero = request.POST['']
+            nacionalidad = request.POST['']
+            nombres = request.POST['']
+            profesion = request.POST['']
+            region = request.POST['']
+            telefonoCasa = request.POST['']
+            telefonoEmpresa = request.POST['']
+            universidad = request.POST['']
+            yearTitulo = request.POST['']
+            telefonoCel = request.POST['']
+            password = request.POST['']
+
+
+            User.password = password
+            User.is_superuser = False
+            User.first_name = nombres
+            #User.
+
+
+
+
+
+
+
+
+
+
+
 
 
 
