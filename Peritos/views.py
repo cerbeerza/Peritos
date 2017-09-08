@@ -81,7 +81,7 @@ def registro_page(request):
             User.password = password
             User.is_superuser = False
             User.first_name = nombres
-            #User.
+            #User.dasdas
 
 
 
