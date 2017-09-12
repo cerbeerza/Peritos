@@ -4,6 +4,7 @@ from Peritos.forms import LoginForm
 from django.contrib.auth import authenticate, login
 #from apps.usuario.models import Usuario
 from apps.administration.models import Profile
+from apps.administration.forms import UserProfileForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -46,7 +47,7 @@ def login_page(request):
 
 
 def registro_page(request):
-    message = None
+    '''message = None
     if request.method == "POST":
         rut = request.POST['']
 
@@ -80,8 +81,38 @@ def registro_page(request):
 
             User.password = password
             User.is_superuser = False
-            User.first_name = nombres
-            #User.dasdas
+            User.first_name = nombres '''
+
+    #message = 'ALGO'
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST)
+        if form.is_valid():
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            email = request.POST['email']
+            username = request.POST['username']
+
+            try:
+                var = User.objects.get(username=username)
+            except ObjectDoesNotExist:
+                var = None
+
+            if var == None:
+                usuario = User.objects.create(username = username, first_name = first_name, last_name = last_name, email = email)
+                usuario.save()
+                message= 'Se ha creado el usuario'
+
+        else:
+            message = 'Formulario no valido'
+
+    else:
+        form = UserProfileForm
+        message = None
+
+    return render(request, 'templates/administrations/login.html', {'message': message, 'form': form})
+
+
+
 
 
 
