@@ -87,22 +87,17 @@ def registro_page(request):
     if request.method == 'POST':
         form = UserProfileForm(request.POST)
         if form.is_valid():
-            first_name = request.POST['first_name']
-            last_name = request.POST['last_name']
-            email = request.POST['email']
-            username = request.POST['username']
-
             try:
-                var = User.objects.get(username=username)
+                var = User.objects.get(username=request.POST['username'])
             except ObjectDoesNotExist:
                 var = None
 
             if var == None:
-                usuario = User.objects.create(username = username, first_name = first_name, last_name = last_name, email = email)
+                usuario = User.objects.create(username = request.POST['username'], first_name = request.POST['first_name'], last_name = request.POST['last_name'], email = request.POST['email'], password = request.POST['password'])
                 usuario.save()
-                usuarioActual = User.objects.get(username=username)
+                usuarioActual = User.objects.get(username=request.POST['username'])
                 p = Profile.objects.get(user_id=usuarioActual.id)
-                p.apellido_p = last_name
+                p.apellido_p = request.POST['last_name']
                 p.save()
                 message = 'Se ha creado el usuario'
         else:
