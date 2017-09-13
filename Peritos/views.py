@@ -100,8 +100,11 @@ def registro_page(request):
             if var == None:
                 usuario = User.objects.create(username = username, first_name = first_name, last_name = last_name, email = email)
                 usuario.save()
-                message= 'Se ha creado el usuario'
-
+                usuarioActual = User.objects.get(username=username)
+                p = Profile.objects.get(user_id=usuarioActual.id)
+                p.apellido_p = last_name
+                p.save()
+                message = 'Se ha creado el usuario'
         else:
             message = 'Formulario no valido'
 
@@ -109,7 +112,7 @@ def registro_page(request):
         form = UserProfileForm
         message = None
 
-    return render(request, 'templates/administrations/login.html', {'message': message, 'form': form})
+    return render(request, 'templates/administrations/registroSimple.html', {'message': message, 'form': form})
 
 
 
