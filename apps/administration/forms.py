@@ -1,10 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User
+from apps.administration.models import Profile
+
+
 
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = Profile
 
         fields = [
 
@@ -27,7 +30,6 @@ class UserProfileForm(forms.ModelForm):
             'universidad',
             'year_titulo',
             'rut',
-            'password',
 
         ]
 
@@ -52,7 +54,6 @@ class UserProfileForm(forms.ModelForm):
             'universidad' : 'Universidad',
             'year_titulo' : 'Año Titulación',
             'rut' : 'Rut',
-            'password' : 'Password',
 
         }
 
@@ -77,7 +78,35 @@ class UserProfileForm(forms.ModelForm):
             'universidad' : forms.TextInput(attrs={'class':'form-control'}),
             'year_titulo' : forms.NumberInput(attrs={'class':'form-control'}),
             'rut' : forms.TextInput(attrs={'class':'form-control'}),
-            'password' : forms.PasswordInput(attrs={'class':'form-control'}),
-
 
         }
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+
+        fields = [
+
+                    'username',
+                    'password',
+                    'email',
+
+
+                ]
+
+        labels = {
+
+                    'username': 'Nombre de Usuario',
+                    'password': 'Password',
+                    'email': 'Email',
+
+                }
+
+        widgets = {
+
+                    'username': forms.TextInput(attrs={'class': 'form-control'}),
+                    'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+                    'email': forms.EmailInput(attrs={'class': 'form-control'}),
+
+
+                }

@@ -4,7 +4,8 @@ from Peritos.forms import LoginForm
 from django.contrib.auth import authenticate, login
 #from apps.usuario.models import Usuario
 from apps.administration.models import Profile
-from apps.administration.forms import UserProfileForm
+from apps.administration.forms import UserProfileForm, UserForm
+
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -85,29 +86,40 @@ def registro_page(request):
 
     #message = 'ALGO'
     if request.method == 'POST':
-        form = UserProfileForm(request.POST)
-        if form.is_valid():
+        profile_form = UserProfileForm(request.POST)
+        user_form = UserForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
             try:
                 var = User.objects.get(username=request.POST['username'])
             except ObjectDoesNotExist:
                 var = None
 
             if var == None:
-                usuario = User.objects.create(username = request.POST['username'], first_name = request.POST['first_name'], last_name = request.POST['last_name'], email = request.POST['email'], password = request.POST['password'])
-                usuario.save()
-                usuarioActual = User.objects.get(username=request.POST['username'])
-                p = Profile.objects.get(user_id=usuarioActual.id)
-                p.apellido_p = request.POST['last_name']
-                p.save()
+                #usuario = User.objects.create(username = request.POST['username'], email = request.POST['email'], password = request.POST['password'])
+                #usuario.save()
+                #usuarioActual = User.objects.get(username=request.POST['username'])
+                #p = Profile.objects.get(user_id=usuarioActual.id)
+                #p.apellido_p = request.POST['apellido_p']
+                #p.save()
+                user_form.save()
+
+                profile_form.save()
+                #profile_form.save()
+
+
                 message = 'Se ha creado el usuario'
+            else: 'Usuario ya existe'
         else:
             message = 'Formulario no valido'
 
     else:
-        form = UserProfileForm
+        user_form = UserForm
+        profile_form = UserProfileForm
+
+
         message = None
 
-    return render(request, 'templates/administrations/registroSimple.html', {'message': message, 'form': form})
+    return render(request, 'templates/administrations/registroSimple.html', {'message': message, 'user_form': user_form, 'profile_form': profile_form})
 
 
 
