@@ -1,0 +1,17 @@
+{% extends 'templates/base.html' %} {% block content %}
+
+<h3>Contenido Ingresa Usuario</h3>
+
+<h1>Regitro Simple</h1>
+    {% if message %}
+    <b>{{ message }}</b>
+    {% endif %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+
+    <button type="submit">Guardar</button>
+</form>
+{% endblock %}
