@@ -103,8 +103,30 @@ def registro_page(request):
                 #p.save()
                 user_form.save()
 
-                profile_form.save()
                 #profile_form.save()
+                user = User.objects.get(username=request.POST['username'])
+                userId = user.id
+                profile = Profile.objects.get(user_id=userId)
+                profile.direccion = request.POST['direccion']
+                profile.telefono_cel = request.POST['telefono_cel']
+                profile.telefono_casa = request.POST['telefono_casa']
+                profile.apellido_p = request.POST['apellido_p']
+                profile.apellido_m = request.POST['apellido_m']
+                profile.comuna = request.POST['comuna']
+                profile.direccion_empresa = request.POST['direccion_empresa']
+                profile.empresa = request.POST['empresa']
+                profile.estado_civil = request.POST['estado_civil']
+                profile.fecha_nac = request.POST['fecha_nac']
+                profile.genero = request.POST['genero']
+                profile.nacionalidad = request.POST['nacionalidad']
+                profile.nombres = request.POST['nombres']
+                profile.profesion = request.POST['profesion']
+                profile.region = request.POST['region']
+                profile.telefono_empresa  = request.POST['telefono_empresa']
+                profile.universidad = request.POST['universidad']
+                profile.year_titulo = request.POST['year_titulo']
+                profile.rut = request.POST['rut']
+                profile.save()
 
 
                 message = 'Se ha creado el usuario'
