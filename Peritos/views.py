@@ -17,20 +17,6 @@ def login_page(request):
             username = request.POST['username']
             password = request.POST['password']
 
-            '''    
-            try:
-                usuario = Usuario.objects.get(rut=username)
-            except ObjectDoesNotExist:
-                usuario = None
-                message = "Usuario no existe"
-
-            if usuario is not None:
-                if usuario.password == password:
-                    #login(request, usuario)
-                    message= "Correcto"
-                else:
-                    message= "Password Incorrecto"
-                    '''
             user = authenticate(username=username, password=password)
             if user is not None:
                 if user.is_active:
@@ -45,46 +31,8 @@ def login_page(request):
         form = LoginForm()
     return render(request, 'templates/administrations/login.html', {'message': message, 'form': form})
 
-
-
 def registro_page(request):
-    '''message = None
-    if request.method == "POST":
-        rut = request.POST['']
 
-        try:
-            var = Profile.objects.get(rut=rut)
-        except ObjectDoesNotExist:
-            var = None
-
-        if var == None:
-            # Recojer todos los datos necesarios
-            direccion = request.POST['']
-            apellidoM = request.POST['']
-            appelidoP = request.POST['']
-            comuna = request.POST['']
-            direccionEmpresa = request.POST['']
-            empresa = request.POST['']
-            estadoCivil = request.POST['']
-            fechaNac = request.POST['']
-            genero = request.POST['']
-            nacionalidad = request.POST['']
-            nombres = request.POST['']
-            profesion = request.POST['']
-            region = request.POST['']
-            telefonoCasa = request.POST['']
-            telefonoEmpresa = request.POST['']
-            universidad = request.POST['']
-            yearTitulo = request.POST['']
-            telefonoCel = request.POST['']
-            password = request.POST['']
-
-
-            User.password = password
-            User.is_superuser = False
-            User.first_name = nombres '''
-
-    #message = 'ALGO'
     if request.method == 'POST':
         profile_form = UserProfileForm(request.POST)
         user_form = UserForm(request.POST)
@@ -95,12 +43,7 @@ def registro_page(request):
                 var = None
 
             if var == None:
-                #usuario = User.objects.create(username = request.POST['username'], email = request.POST['email'], password = request.POST['password'])
-                #usuario.save()
-                #usuarioActual = User.objects.get(username=request.POST['username'])
-                #p = Profile.objects.get(user_id=usuarioActual.id)
-                #p.apellido_p = request.POST['apellido_p']
-                #p.save()
+
                 user_form.save()
 
                 #profile_form.save()
@@ -128,7 +71,6 @@ def registro_page(request):
                 profile.rut = request.POST['rut']
                 profile.save()
 
-
                 message = 'Se ha creado el usuario'
             else: 'Usuario ya existe'
         else:
@@ -137,7 +79,6 @@ def registro_page(request):
     else:
         user_form = UserForm
         profile_form = UserProfileForm
-
 
         message = None
 

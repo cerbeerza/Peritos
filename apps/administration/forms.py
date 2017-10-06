@@ -91,7 +91,6 @@ class UserForm(forms.ModelForm):
                     'password',
                     'email',
 
-
                 ]
 
         labels = {
@@ -108,5 +107,5 @@ class UserForm(forms.ModelForm):
                     'password': forms.PasswordInput(attrs={'class': 'form-control'}),
                     'email': forms.EmailInput(attrs={'class': 'form-control'}),
 
-
                 }
+
