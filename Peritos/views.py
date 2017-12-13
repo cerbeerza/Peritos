@@ -36,7 +36,8 @@ def registro_page(request):
     if request.method == 'POST':
         profile_form = UserProfileForm(request.POST)
         user_form = UserForm(request.POST)
-        if user_form.is_valid() and profile_form.is_valid():
+        #if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
             try:
                 var = User.objects.get(username=request.POST['username'])
             except ObjectDoesNotExist:
