@@ -2,6 +2,7 @@ from django.template import RequestContext
 from django.shortcuts import render
 from Peritos.forms import LoginForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.hashers import make_password
 #from apps.usuario.models import Usuario
 from apps.administration.models import Profile
 from apps.administration.forms import UserProfileForm, UserForm
@@ -36,8 +37,8 @@ def registro_page(request):
     if request.method == 'POST':
         profile_form = UserProfileForm(request.POST)
         user_form = UserForm(request.POST)
-        #if user_form.is_valid() and profile_form.is_valid():
-        if user_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
+        #if user_form.is_valid():
             try:
                 var = User.objects.get(username=request.POST['username'])
             except ObjectDoesNotExist:
@@ -50,6 +51,10 @@ def registro_page(request):
                 #profile_form.save()
                 user = User.objects.get(username=request.POST['username'])
                 userId = user.id
+
+                user.password = make_password(request.POST['password'], salt=None, hasher='default')
+
+
                 profile = Profile.objects.get(user_id=userId)
                 profile.direccion = request.POST['direccion']
                 profile.telefono_cel = request.POST['telefono_cel']
