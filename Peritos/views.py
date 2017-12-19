@@ -53,6 +53,8 @@ def registro_page(request):
                 userId = user.id
 
                 user.password = make_password(request.POST['password'], salt=None, hasher='default')
+                user.save()
+
 
 
                 profile = Profile.objects.get(user_id=userId)
