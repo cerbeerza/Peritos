@@ -19,8 +19,6 @@ from Peritos.views import login_page, registro_page
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^usuario/', include('apps.usuario.urls', namespace="usuario")),
-    url(r'^mensura/', include('apps.mensura.urls', namespace="mensura")),
     url(r'^$', login_page, name="login"),
     url(r'^registro/', registro_page, name="registro"),
 ]
