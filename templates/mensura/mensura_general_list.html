@@ -1,0 +1,50 @@
+{% extends 'base.html' %} {% block content %}
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Usuario </td>
+            <td>Nº Mensuras</td>
+            <td>Periodo</td>
+            <td>Promedio</td>
+            <td>Empresa</td>
+            <td>Situación</td>
+            <td>Acción</td>
+            
+            
+        </tr>
+
+    </thead>
+
+    <tbody>
+        {% if object_list %}
+        {% for mensura in object_list %}
+        <tr>
+            <td> {{ mensura.usuario_id }}</td>
+            <td> {{ mensura.num_mensura }}</td>
+            <td> {{ mensura.periodo }}</td>
+            <td> {{ mensura.promedio }}</td>
+            <td> {{ mensura.empresa }}</td>
+            <td> {{ mensura.situacion }}</td>
+            <td> 
+                <a class="btn btn-primary" href="{% url 'mensura:mensura_general_editar' mensura.id%}">Editar</a>
+                <a class="btn btn-danger" href="{% url 'mensura:mensura_general_eliminar' mensura.id%}">Eliminar</a>
+            </td>
+
+        </tr>
+        {% endfor%}
+
+        {% else %}
+
+        <h1>No hay registros</h1>
+
+        {% endif %}
+
+    </tbody>
+
+
+
+</table>
+
+{% endblock %}
