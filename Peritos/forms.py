@@ -1,5 +1,5 @@
 from django import forms
 
 class LoginForm(forms.Form):
-    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'col s12 m6 14'}))
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control col-md-8', 'placeholder':'Usuario'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control col-md-8', 'placeholder':'Password'}))
