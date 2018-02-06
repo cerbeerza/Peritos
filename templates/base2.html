@@ -29,6 +29,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
 
 
+<link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.min.css' %}">
+
 <link rel="stylesheet" href="{% static 'css/material-kit.css' %}">
 
 <!-- demo -->
@@ -132,6 +134,7 @@
 <!--	Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
 <script src="{% static 'js/plugins/nouislider.min.js' %}"></script>
 
+<script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
 
 
 
@@ -140,6 +143,17 @@
 <script src="{% static 'js/material-kit.js' %}"></script>
 
     <script src="{% static 'assets-for-demo/js/material-kit-demo.js' %}"></script>
+
+
+   <script>
+
+$('.datepicker').datepicker({
+    format: "dd/mm/yyyy"
+});
+
+
+
+</script>
 
 
     </body>

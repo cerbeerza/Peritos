@@ -36,10 +36,11 @@
                                                 {{ profile_form.direccion_empresa }}
 											</div>
 
-                                     <div class="form-group label-floating col-md-10">
+                                     <div class="form-group date col-md-10" data-provide="datepicker">
                                                 <label class="bmd-label-floating" for="{{ profile_form.fecha_nac.name }}">{{ profile_form.fecha_nac.label }}</label>
                                                 {{ profile_form.fecha_nac }}
 											</div>
+
 
                                      <div class="form-group label-floating col-md-10">
                                                 <label class="bmd-label-floating" for="{{ profile_form.telefono_cel.name }}">{{ profile_form.telefono_cel.label }}</label>
@@ -67,8 +68,8 @@
 											</div>
 
                                      <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.password.name }}">{{ profile_form.password.label }}</label>
-                                                {{ profile_form.password }}
+                                                <label class="bmd-label-floating" for="{{ user_form.password.name }}">{{ user_form.password.label }}</label>
+                                                {{ user_form.password }}
 											</div>
 
 
@@ -122,13 +123,13 @@
 											</div>
 
                                      <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.username.name }}">{{ profile_form.username.label }}</label>
-                                                {{ profile_form.username }}
+                                                <label class="bmd-label-floating" for="{{ user_form.username.name }}">{{ user_form.username.label }}</label>
+                                                {{ user_form.username }}
 											</div>
 
                                      <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.email.name }}">{{ profile_form.email.label }}</label>
-                                                {{ profile_form.email }}
+                                                <label class="bmd-label-floating" for="{{ user_form.email.name }}">{{ user_form.email.label }}</label>
+                                                {{ user_form.email }}
 											</div>
 
                                 </div>
