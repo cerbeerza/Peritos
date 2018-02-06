@@ -1,3 +1,4 @@
 from django.contrib import admin
+from apps.mensura.models import MensuraGeneral
 
-# Register your models here.
+admin.site.register(MensuraGeneral)

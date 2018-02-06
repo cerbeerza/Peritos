@@ -1,164 +1,154 @@
-{% extends 'templates/base.html' %} {% block content %}
+{% extends 'templates/base2.html' %} {% block content %}
 {% load material_form %}
 
-<h3>Registro de Usuario</h3>
+ <form class="form" method="post" action="">
+                                        {% csrf_token %}
 
 
-<form method="post">
-    {% csrf_token %}
 
     <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.rut.name}}">{{form.rut.label}}</label>
-                {{form.rut}}
+    			<div class="col-md-12 ml-auto mr-auto">
+					<div class="card card-signup">
+						<h2 class="card-title text-center">Registro de Nuevo Usuario</h2>
+						<div class="card-body">
+							<div class="row">
+
+
+								<div class="col-md-6">
+
+                                            <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.nombres.name }}">{{ profile_form.nombres.label }}</label>
+                                                {{ profile_form.nombres }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.apellido_m.name }}">{{ profile_form.apellido_m.label }}</label>
+                                                {{ profile_form.apellido_m }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.comuna.name }}">{{ profile_form.comuna.label }}</label>
+                                                {{ profile_form.comuna }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.direccion_empresa.name }}">{{ profile_form.direccion_empresa.label }}</label>
+                                                {{ profile_form.direccion_empresa }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.fecha_nac.name }}">{{ profile_form.fecha_nac.label }}</label>
+                                                {{ profile_form.fecha_nac }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.telefono_cel.name }}">{{ profile_form.telefono_cel.label }}</label>
+                                                {{ profile_form.telefono_cel }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.profesion.name }}">{{ profile_form.profesion.label }}</label>
+                                                {{ profile_form.profesion }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.telefono_casa.name }}">{{ profile_form.telefono_casa.label }}</label>
+                                                {{ profile_form.telefono_casa }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.universidad.name }}">{{ profile_form.universidad.label }}</label>
+                                                {{ profile_form.universidad }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.rut.name }}">{{ profile_form.rut.label }}</label>
+                                                {{ profile_form.rut }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.password.name }}">{{ profile_form.password.label }}</label>
+                                                {{ profile_form.password }}
+											</div>
+
+
+								</div>
+
+                                <div class="col-md-6">
+
+                                         <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.apellido_p.name }}">{{ profile_form.apellido_p.label }}</label>
+                                                {{ profile_form.apellido_p }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.direccion.name }}">{{ profile_form.direccion.label }}</label>
+                                                {{ profile_form.direccion }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.empresa.name }}">{{ profile_form.empresa.label }}</label>
+                                                {{ profile_form.empresa }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.estado_civil.name }}">{{ profile_form.estado_civil.label }}</label>
+                                                {{ profile_form.estado_civil }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.genero.name }}">{{ profile_form.genero.label }}</label>
+                                                {{ profile_form.genero }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.nacionalidad.name }}">{{ profile_form.nacionalidad.label }}</label>
+                                                {{ profile_form.nacionalidad }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.region.name }}">{{ profile_form.region.label }}</label>
+                                                {{ profile_form.region }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.telefono_empresa.name }}">{{ profile_form.telefono_empresa.label }}</label>
+                                                {{ profile_form.telefono_empresa }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.year_titulo.name }}">{{ profile_form.year_titulo.label }}</label>
+                                                {{ profile_form.year_titulo }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.username.name }}">{{ profile_form.username.label }}</label>
+                                                {{ profile_form.username }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-10">
+                                                <label class="bmd-label-floating" for="{{ profile_form.email.name }}">{{ profile_form.email.label }}</label>
+                                                {{ profile_form.email }}
+											</div>
+
+                                </div>
+
+
+
+                            </div>
+
+                            <div class="text-center">
+
+                                            <button type="submit" class="btn btn-primary btn-round">Aceptar</button>
+										</div>
+						</div>
+					</div>
+                </div>
             </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.nombres.name}}">{{form.nombres.label}}</label>
-                {{form.nombres}}
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.apellido_p.name}}">{{form.apellido_p.label}}</label>
-                {{form.apellido_p}}
-            </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.apellido_m.name}}">{{form.apellido_m.label}}</label>
-                {{form.apellido_m}}
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.fecha_nac.name}}">{{form.fecha_nac.label}}</label>
-                {{form.fecha_nac}}
-            </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.email.name}}">{{form.email.label}}</label>
-                {{form.email}}
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.password.name}}">{{form.password.label}}</label>
-                {{form.password}}
-            </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.genero.name}}">{{form.genero.label}}</label>
-                {{form.genero}}
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.nacionalidad.name}}">{{form.nacionalidad.label}}</label>
-                {{form.nacionalidad}}
-            </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.direccion.name}}">{{form.direccion.label}}</label>
-                {{form.direccion}}
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.region.name}}">{{form.region.label}}</label>
-                {{form.region}}
-            </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.comuna.name}}">{{form.comuna.label}}</label>
-                {{form.comuna}}
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.estado_civil.name}}">{{form.estado_civil.label}}</label>
-                {{form.estado_civil}}
-            </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.telefono_casa.name}}">{{form.telefono_casa.label}}</label>
-                {{form.telefono_casa}}
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.telefono_cel.name}}">{{form.telefono_cel.label}}</label>
-                {{form.telefono_cel}}
-            </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.profesion.name}}">{{form.profesion.label}}</label>
-                {{form.profesion}}
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.universidad.name}}">{{form.universidad.label}}</label>
-                {{form.universidad}}
-            </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.year_titulo.name}}">{{form.year_titulo.label}}</label>
-                {{form.year_titulo}}
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.empresa.name}}">{{form.empresa.label}}</label>
-                {{form.empresa}}
-            </div>
-        </div>
-
-         <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.telefono_empresa.name}}">{{form.telefono_empresa.label}}</label>
-                {{form.telefono_empresa}}
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="{{form.direccion_empresa.name}}">{{form.direccion_empresa.label}}</label>
-                {{form.direccion_empresa}}
-            </div>
-        </div>
 
 
-    </div>
+
+	</form>
 
 
-    <button type="submit">Guardar</button>
-</form>
 {% endblock %}

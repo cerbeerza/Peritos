@@ -10,8 +10,3 @@ class MensuraGeneralList(ListView):
     model = MensuraGeneral
     template_name = 'mensura/mensura_general_list.html'
 
-
-class MensuraGeneralCreate(CreateView):
-    model = MensuraGeneral
-    template_name = 'mensura/mensura_general_form.html'
-

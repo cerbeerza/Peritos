@@ -90,7 +90,7 @@ def registro_page(request):
 
         message = None
 
-    return render(request, 'templates/administrations/registroSimple.html', {'message': message, 'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'templates/administrations/registro.html', {'message': message, 'user_form': user_form, 'profile_form': profile_form})
 
 
 

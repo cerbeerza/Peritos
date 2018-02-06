@@ -1,24 +1,22 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base2.html' %} {% block content %}
 
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <td>Usuario </td>
-            <td>Nº Mensuras</td>
-            <td>Periodo</td>
-            <td>Promedio</td>
-            <td>Empresa</td>
-            <td>Situación</td>
-            <td>Acción</td>
-            
-            
-        </tr>
-
-    </thead>
-
-    <tbody>
-        {% if object_list %}
+<div class="card">
+	<div class="card-header" style="background: #c87050" >
+		<h4 class="title">Mensuras Generales</h4>
+		<p class="category">Promedio de Mensuras por Usuario</p>
+	</div>
+	<div class="card-content table-responsive table-full-width">
+		<table class="table">
+			<thead class="text-danger">
+				<th>Usuario</th>
+				<th>N° Mensuras</th>
+				<th>Periodo</th>
+				<th>Promedio</th>
+                <th>Empresa</th>
+                <th>Situación</th>
+			</thead>
+			<tbody>
+			 {% if object_list %}
         {% for mensura in object_list %}
         <tr>
             <td> {{ mensura.usuario_id }}</td>
@@ -27,10 +25,7 @@
             <td> {{ mensura.promedio }}</td>
             <td> {{ mensura.empresa }}</td>
             <td> {{ mensura.situacion }}</td>
-            <td> 
-                <a class="btn btn-primary" href="{% url 'mensura:mensura_general_editar' mensura.id%}">Editar</a>
-                <a class="btn btn-danger" href="{% url 'mensura:mensura_general_eliminar' mensura.id%}">Eliminar</a>
-            </td>
+
 
         </tr>
         {% endfor%}
@@ -40,11 +35,10 @@
         <h1>No hay registros</h1>
 
         {% endif %}
+			</tbody>
+		</table>
 
-    </tbody>
-
-
-
-</table>
+	</div>
+</div>
 
 {% endblock %}

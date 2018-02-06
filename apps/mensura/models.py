@@ -10,6 +10,11 @@ class MensuraGeneral(models.Model):
     situacion = models.CharField(max_length=20)
     usuario_id = models.CharField(max_length=10)
 
+    def __str__(self):
+        return self.usuario_id
+
+
+
 
 
 

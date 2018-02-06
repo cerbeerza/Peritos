@@ -18,7 +18,7 @@
 
 <title>
 
-    Profile &#45; Material Kit by Creative Tim
+    Peritos Mensuradores
 
 </title>
 
@@ -31,6 +31,10 @@
 
 <link rel="stylesheet" href="{% static 'css/material-kit.css' %}">
 
+<!-- demo -->
+    <link href=" {% static 'assets-for-demo/demo.css' %}" rel="stylesheet"/>
+<link href="{% static 'assets-for-demo/vertical-nav.css' %}" rel="stylesheet"/>
+
 
     </head>
     <body class="profile-page ">
@@ -38,7 +42,7 @@
 
     <div class="container">
         <div class="navbar-translate">
-            <a class="navbar-brand" href="../index.html">Material Kit </a>
+            <a class="navbar-brand" href="/">PLATAFORMA PERITOS MENSURADORES </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 <span class="navbar-toggler-icon"></span>
@@ -53,7 +57,7 @@
 
                 <li class="dropdown nav-item">
                   <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                      <i class="material-icons">apps</i> Components
+                      <i class="material-icons">apps</i>  MENÚ
                   </a>
                   <div class="dropdown-menu dropdown-with-icons">
                     <a href="../index.html" class="dropdown-item">
@@ -66,33 +70,6 @@
 
                   </div>
                 </li>
-
-
-
-          				<li class="nav-item">
-          					<a class="nav-link" href="javascript:void(0)" onclick="scrollToDownload()">
-          						<i class="material-icons">cloud_download</i> Download
-          					</a>
-          				</li>
-          				<li class="nav-item">
-          					<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank" data-original-title="Follow us on Twitter">
-          						<i class="fa fa-twitter"></i>
-          					</a>
-          				</li>
-          				<li class="nav-item">
-          					<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank" data-original-title="Like us on Facebook">
-          						<i class="fa fa-facebook-square"></i>
-          					</a>
-          				</li>
-          				<li class="nav-item">
-          					<a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank" data-original-title="Follow us on Instagram">
-          						<i class="fa fa-instagram"></i>
-          					</a>
-          				</li>
-
-
-
-
 
 
             </ul>
@@ -124,32 +101,9 @@
         <footer class="footer ">
 
     <div class="container">
-        <nav class="pull-left">
-            <ul>
-                <li>
-                    <a href="https://www.creative-tim.com">
-                        Creative Tim
-                    </a>
-                </li>
-                <li>
-                    <a href="http://presentation.creative-tim.com">
-                       About Us
-                    </a>
-                </li>
-                <li>
-                    <a href="http://blog.creative-tim.com">
-                       Blog
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.creative-tim.com/license">
-                        Licenses
-                    </a>
-                </li>
-            </ul>
-        </nav>
+
         <div class="copyright pull-right">
-            &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="material-icons">favorite</i> by <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            &copy; <script>document.write(new Date().getFullYear())</script>, Sernageomin.
         </div>
     </div>
 
@@ -183,7 +137,9 @@
 
 <!-- Material Kit Core initialisations of plugins and Bootstrap Material Design Library -->
 
-<script src="{% static 'js/material-kit.js?v=2.0.0' %}"></script>
+<script src="{% static 'js/material-kit.js' %}"></script>
+
+    <script src="{% static 'assets-for-demo/js/material-kit-demo.js' %}"></script>
 
 
     </body>
