@@ -66,7 +66,7 @@ class UserProfileForm(forms.ModelForm):
             'comuna' : forms.TextInput(attrs={'class':'form-control'}),
             'direccion_empresa' : forms.TextInput(attrs={'class':'form-control'}),
             'empresa' : forms.TextInput(attrs={'class':'form-control'}),
-            'estado_civil' : forms.Select(attrs={'class':'form-control selectpicker'}),
+            'estado_civil' : forms.Select(attrs={'class':'form-control'}),
             'fecha_nac' : forms.DateInput(attrs={'class':'form-control'}),
             'genero' : forms.Select(attrs={'class':'form-control'}),
             'nacionalidad' : forms.TextInput(attrs={'class':'form-control'}),

@@ -7,6 +7,8 @@ from django.contrib.auth.hashers import make_password
 from apps.administration.models import Profile
 from apps.administration.forms import UserProfileForm, UserForm
 
+import datetime
+
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -67,7 +69,9 @@ def registro_page(request):
                 profile.direccion_empresa = request.POST['direccion_empresa']
                 profile.empresa = request.POST['empresa']
                 profile.estado_civil = request.POST['estado_civil']
-                profile.fecha_nac = request.POST['fecha_nac']
+                fechaNac = request.POST['fecha_nac']
+                print(type(fechaNac))
+                profile.fecha_nac = fechaNac.strftime('%Y-%m-%d')
                 profile.genero = request.POST['genero']
                 profile.nacionalidad = request.POST['nacionalidad']
                 profile.nombres = request.POST['nombres']
