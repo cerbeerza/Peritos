@@ -70,8 +70,8 @@ def registro_page(request):
                 profile.empresa = request.POST['empresa']
                 profile.estado_civil = request.POST['estado_civil']
                 fechaNac = request.POST['fecha_nac']
-                print(type(fechaNac))
-                profile.fecha_nac = fechaNac.strftime('%Y-%m-%d')
+                fechaFormat = datetime.datetime.strptime(fechaNac, '%d/%m/%Y')
+                profile.fecha_nac = fechaFormat
                 profile.genero = request.POST['genero']
                 profile.nacionalidad = request.POST['nacionalidad']
                 profile.nombres = request.POST['nombres']
