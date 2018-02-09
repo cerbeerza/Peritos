@@ -6,6 +6,7 @@ from django.contrib.auth.hashers import make_password
 #from apps.usuario.models import Usuario
 from apps.administration.models import Profile
 from apps.administration.forms import UserProfileForm, UserForm
+from apps.zona.models import *
 
 import datetime
 
@@ -94,7 +95,13 @@ def registro_page(request):
 
         message = None
 
-    return render(request, 'templates/administrations/registro.html', {'message': message, 'user_form': user_form, 'profile_form': profile_form})
+    regiones = Region.objects.all()
+
+    return render(request, 'templates/administrations/registro.html', {'message': message, 'user_form': user_form, 'profile_form': profile_form, 'regiones': regiones})
+
+
+
+
 
 
 

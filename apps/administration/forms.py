@@ -72,7 +72,7 @@ class UserProfileForm(forms.ModelForm):
             'nacionalidad' : forms.TextInput(attrs={'class':'form-control'}),
             'nombres' : forms.TextInput(attrs={'class':'form-control'}),
             'profesion' : forms.TextInput(attrs={'class':'form-control'}),
-            'region' : forms.TextInput(attrs={'class':'form-control'}),
+            'region' : forms.Select(attrs={'class':'form-control'}),
             'telefono_casa' : forms.NumberInput(attrs={'class':'form-control'}),
             'telefono_empresa' : forms.NumberInput(attrs={'class':'form-control'}),
             'universidad' : forms.TextInput(attrs={'class':'form-control'}),

@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
+from apps.zona.models import Region, Provincia, Comuna
+
+
+
 
 
 
@@ -20,7 +24,9 @@ class Profile(models.Model):
     genero = models.CharField(max_length=1, choices=generos, null=True)
     nacionalidad = models.CharField(max_length=20, null=True)
     direccion = models.CharField(max_length=80, null=True)
-    region = models.CharField(max_length=30, null=True)
+
+    region = models.CharField(max_length=50, null=True)
+    provincia = models.CharField(max_length=50, null=True)
     comuna = models.CharField(max_length=50, null=True)
     estados_civil = (
         ('SOLTERO', 'SOLTERO(A)'),
