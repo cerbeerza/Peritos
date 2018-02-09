@@ -109,7 +109,7 @@
 
                                      <div class="form-group label-floating col-md-10">
                                          <label class="bmd-label-floating" for="selectRegiones"> Selecciona Región</label>
-                                         <select name="{{ profile_form.region.name }}" id="{{ profile_form.region }}" class="form-control">
+                                         <select name="{{ profile_form.region.name }}" id="{{ profile_form.name }}" class="form-control">
                                                   {% for item in regiones %}
                                                       <option val = {{ item.nombre}}> {{ item.nombre }} </option>
                                                   {% endfor %}
