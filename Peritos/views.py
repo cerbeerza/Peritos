@@ -7,6 +7,9 @@ from django.contrib.auth.hashers import make_password
 from apps.administration.models import Profile
 from apps.administration.forms import UserProfileForm, UserForm
 from apps.zona.models import *
+from django.http import HttpResponse
+from django.http import JsonResponse
+
 
 import datetime
 
@@ -100,6 +103,24 @@ def registro_page(request):
     return render(request, 'templates/administrations/registro.html', {'message': message, 'user_form': user_form, 'profile_form': profile_form, 'regiones': regiones})
 
 
+
+
+def getProvincia(request):
+
+    nombre_region = request.GET['reg']
+
+    result_set = []
+    all_provincias = []
+
+    answer = str(nombre_region[1:-1])
+    selected_region = Region.objects.get(nombre=answer)
+
+    all_provincias = selected_region.provincia_set.all()
+    for region in all_provincias:
+        result_set.append({'name': region.nombre})
+
+    #return HttpResponse(json.dumps(result_set), content_type='application/json')
+    return JsonResponse(result_set, safe=False)
 
 
 

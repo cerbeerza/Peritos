@@ -1,4 +1,31 @@
-{% extends 'templates/base2.html' %} {% block content %}
+{% extends 'templates/base2.html' %}
+
+{% block scripts %}
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript" src="http://yourjavascript.com/7174319415/script.js"></script>
+
+<script>
+			$(document).ready(function(){
+				 $('select#{{ profile_form.region.name }}').change(function () {
+    				 var optionSelected = $(this).find("option:selected");
+    				 var valueSelected  = optionSelected.val();
+     				 var region_name   = optionSelected.text();
+     				 data = {'reg' : region_name };
+       				 ajax('/getProvincia',data,function(result){
+       					 	console.log(result);
+       					 	$("#selectProvincias option").remove();
+       					 	for (var i = result.length - 1; i >= 0; i--) {
+       					 		$("#selectProvincias").append('<option>'+ result[i].name +'</option>');
+       					 	};
+       					 });
+ 				 });
+			});
+		</script>
+
+{% endblock %}
+
+{% block content %}
 {% load material_form %}
 
  <form class="form" method="post" action="">
@@ -109,7 +136,7 @@
 
                                      <div class="form-group label-floating col-md-10">
                                          <label class="bmd-label-floating" for="selectRegiones"> Selecciona Región</label>
-                                         <select name="{{ profile_form.region.name }}" id="{{ profile_form.name }}" class="form-control">
+                                         <select name="{{ profile_form.region.name }}" id="{{ profile_form.region.name }}" class="form-control">
                                                   {% for item in regiones %}
                                                       <option val = {{ item.nombre}}> {{ item.nombre }} </option>
                                                   {% endfor %}
