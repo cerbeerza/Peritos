@@ -7,20 +7,67 @@
 
 <script>
 			$(document).ready(function(){
+
+
 				 $('select#{{ profile_form.region.name }}').change(function () {
+                     $("#{{ profile_form.comuna.name }} option").remove();
+				     $("#{{ profile_form.comuna.name }}").append('<option value="-1" label="Seleccione"></option>');
+
     				 var optionSelected = $(this).find("option:selected");
+
+    					if (optionSelected.val()  == "-1"){
+    				             $("#{{ profile_form.comuna.name }} option").remove();
+                                 $("#{{ profile_form.comuna.name }}").append('<option value="-1" label="Seleccione"></option>');
+                                 $("#{{ profile_form.provincia.name }} option").remove();
+                                 $("#{{ profile_form.provincia.name }}").append('<option value="-1" label="Seleccione"></option>');
+                     }
+
+    				 else{
     				 var valueSelected  = optionSelected.val();
      				 var region_name   = optionSelected.text();
      				 data = {'reg' : region_name };
        				 ajax('/getProvincia',data,function(result){
        					 	console.log(result);
-       					 	$("#selectProvincias option").remove();
+       					 	$("#{{ profile_form.provincia.name }} option").remove();
+
+                        $("#{{ profile_form.provincia.name }}").append('<option value="-1" label="Seleccione"></option>');
        					 	for (var i = result.length - 1; i >= 0; i--) {
-       					 		$("#selectProvincias").append('<option>'+ result[i].name +'</option>');
+       					 		$("#{{ profile_form.provincia.name }}").append('<option>'+ result[i].name +'</option>');
        					 	};
        					 });
+       				 }
  				 });
+
+				  $('select#{{ profile_form.provincia.name }}').change(function () {
+    				 var optionSelected = $(this).find("option:selected");
+
+    				 	if (optionSelected.val()  == "-1")
+                            {
+                                $("#{{ profile_form.comuna.name }} option").remove();
+                                $("#{{ profile_form.comuna.name }}").append('<option value="-1" label="Seleccione"></option>');
+                            }
+                            else {
+                            var valueSelected = optionSelected.val();
+                            var provincia_name = optionSelected.text();
+                            data = {'prov': provincia_name};
+                            ajax('/getComuna', data, function (result) {
+                                console.log(result);
+
+
+                                $("#{{ profile_form.comuna.name }} option").remove();
+                                $("#{{ profile_form.comuna.name }}").append('<option value="-1" label="Seleccione"></option>');
+                                for (var i = result.length - 1; i >= 0; i--) {
+                                    $("#{{ profile_form.comuna.name }}").append('<option>' + result[i].name + '</option>');
+                                }
+                                ;
+
+                            });
+                        }
+ 				 });
+
+
 			});
+
 		</script>
 
 {% endblock %}
@@ -53,10 +100,18 @@
                                                 {{ profile_form.apellido_m }}
 											</div>
 
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.comuna.name }}">{{ profile_form.comuna.label }}</label>
-                                                {{ profile_form.comuna }}
+                                    <div class="form-group label-floating col-md-10">
+                                         <label class="bmd-label-floating" for="{{ profile_form.comuna.name }}"> Selecciona Comuna</label>
+                                         <select name="{{ profile_form.comuna.name }}" id="{{ profile_form.comuna.name }}" class="form-control">
+                                             <option label="Seleccione"  value="-1" ></option>
+                                               {% for item in comunas %}
+                                                      <option val = {{ item.nombre}}> {{ item.nombre }} </option>
+                                                  {% endfor %}
+                                         </select>
+
 											</div>
+
+
 
                                      <div class="form-group label-floating col-md-10">
                                                 <label class="bmd-label-floating" for="{{ profile_form.direccion_empresa.name }}">{{ profile_form.direccion_empresa.label }}</label>
@@ -135,9 +190,10 @@
 											</div>
 
                                      <div class="form-group label-floating col-md-10">
-                                         <label class="bmd-label-floating" for="selectRegiones"> Selecciona Región</label>
+                                         <label class="bmd-label-floating" for="{{ profile_form.region.name }}"> Selecciona Región</label>
                                          <select name="{{ profile_form.region.name }}" id="{{ profile_form.region.name }}" class="form-control">
-                                                  {% for item in regiones %}
+                                             <option label="Seleccione"  value="-1" ></option>
+                                             {% for item in regiones %}
                                                       <option val = {{ item.nombre}}> {{ item.nombre }} </option>
                                                   {% endfor %}
 
@@ -164,6 +220,17 @@
                                      <div class="form-group label-floating col-md-10">
                                                 <label class="bmd-label-floating" for="{{ user_form.email.name }}">{{ user_form.email.label }}</label>
                                                 {{ user_form.email }}
+											</div>
+
+                                 <div class="form-group label-floating col-md-10">
+                                         <label class="bmd-label-floating" for="{{ profile_form.provincia.name }}"> Selecciona Provincia</label>
+                                         <select name="{{ profile_form.provincia.name }}" id="{{ profile_form.provincia.name }}" class="form-control">
+                                           <option label="Seleccione"  value="-1" ></option>
+                                              {% for item in provincias %}
+                                                      <option val = {{ item.nombre}}> {{ item.nombre }} </option>
+                                                  {% endfor %}
+                                         </select>
+
 											</div>
 
                                 </div>

@@ -30,6 +30,7 @@ class UserProfileForm(forms.ModelForm):
             'universidad',
             'year_titulo',
             'rut',
+            'provincia',
 
         ]
 
@@ -54,6 +55,7 @@ class UserProfileForm(forms.ModelForm):
             'universidad' : 'Universidad',
             'year_titulo' : 'Año Titulación',
             'rut' : 'Rut',
+            'provincia':'Provincia',
 
         }
 
@@ -63,7 +65,7 @@ class UserProfileForm(forms.ModelForm):
             'telefono_cel' : forms.NumberInput(attrs={'class':'form-control'}),
             'apellido_p' : forms.TextInput(attrs={'class':'form-control'}),
             'apellido_m' : forms.TextInput(attrs={'class':'form-control'}),
-            'comuna' : forms.TextInput(attrs={'class':'form-control'}),
+            'comuna' : forms.Select(attrs={'class':'form-control'}),
             'direccion_empresa' : forms.TextInput(attrs={'class':'form-control'}),
             'empresa' : forms.TextInput(attrs={'class':'form-control'}),
             'estado_civil' : forms.Select(attrs={'class':'form-control'}),
@@ -78,6 +80,7 @@ class UserProfileForm(forms.ModelForm):
             'universidad' : forms.TextInput(attrs={'class':'form-control'}),
             'year_titulo' : forms.NumberInput(attrs={'class':'form-control'}),
             'rut' : forms.TextInput(attrs={'class':'form-control'}),
+            'provincia': forms.Select(attrs={'class':'form-control'}),
 
         }
 

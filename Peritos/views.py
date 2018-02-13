@@ -99,8 +99,10 @@ def registro_page(request):
         message = None
 
     regiones = Region.objects.all()
+    provincias = []
+    comunas = []
 
-    return render(request, 'templates/administrations/registro.html', {'message': message, 'user_form': user_form, 'profile_form': profile_form, 'regiones': regiones})
+    return render(request, 'templates/administrations/registro.html', {'message': message, 'user_form': user_form, 'profile_form': profile_form, 'regiones': regiones, 'provincias': provincias, 'comunas': comunas})
 
 
 
@@ -116,8 +118,27 @@ def getProvincia(request):
     selected_region = Region.objects.get(nombre=answer)
 
     all_provincias = selected_region.provincia_set.all()
-    for region in all_provincias:
-        result_set.append({'name': region.nombre})
+    for provincia in all_provincias:
+        result_set.append({'name': provincia.nombre})
+
+    #return HttpResponse(json.dumps(result_set), content_type='application/json')
+    return JsonResponse(result_set, safe=False)
+
+
+
+def getComuna(request):
+
+    nombre_provincia = request.GET['prov']
+
+    result_set = []
+    all_comunas = []
+
+    answer = nombre_provincia
+    selected_provincia = Provincia.objects.get(nombre=answer)
+
+    all_comunas = selected_provincia.comuna_set.all()
+    for comuna in all_comunas:
+        result_set.append({'name': comuna.nombre})
 
     #return HttpResponse(json.dumps(result_set), content_type='application/json')
     return JsonResponse(result_set, safe=False)
