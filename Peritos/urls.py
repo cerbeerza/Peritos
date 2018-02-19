@@ -15,13 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from Peritos.views import login_page, registro_page, getProvincia, getComuna
+from Peritos.views import login_page, registro_page, getProvincia, getComuna, homepage_view, logout_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', login_page, name="login"),
+    url(r'^logout/', logout_view, name="logout"),
     url(r'^registro/', registro_page, name="registro"),
+    url(r'^home/', homepage_view, name="home"),
     url(r'^mensura/', include('apps.mensura.urls', namespace="mensura")),
+    url(r'^prueba/', include('apps.prueba.urls', namespace="prueba")),
     url(r'^getProvincia/', getProvincia, name="obtener_provincia"),
     url(r'^getComuna/', getComuna, name="obtener_comuna"),
+
 ]

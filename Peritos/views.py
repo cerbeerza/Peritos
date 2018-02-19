@@ -1,8 +1,9 @@
-from django.template import RequestContext
-from django.shortcuts import render
+from django.template import RequestContext, Context
+from django.shortcuts import render, redirect
 from Peritos.forms import LoginForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.decorators import login_required
 #from apps.usuario.models import Usuario
 from apps.administration.models import Profile
 from apps.administration.forms import UserProfileForm, UserForm
@@ -29,6 +30,7 @@ def login_page(request):
                 if user.is_active:
                     login(request, user)
                     message = "Correcto"
+                    return render(request, 'templates/administrations/homepage.html')
                 else:
                     message = "Inactivo"
             else:
@@ -142,6 +144,15 @@ def getComuna(request):
 
     #return HttpResponse(json.dumps(result_set), content_type='application/json')
     return JsonResponse(result_set, safe=False)
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
+
+@login_required()
+def homepage_view(request):
+    return render(request, 'administrations/homepage.html')
+
 
 
 

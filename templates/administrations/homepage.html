@@ -1,0 +1,17 @@
+{% extends 'templates/base2.html' %}
+
+{% block content %}
+
+
+    <h3>Página de INICIO HOME</h3>
+
+    {% if user.is_authenticated %}
+
+    <p>Hola,<b>{{ user.username }}</b></p>
+
+    {% else %}
+    <p>Hola, no estás logeado</p>
+
+    {% endif %}
+
+{% endblock %}

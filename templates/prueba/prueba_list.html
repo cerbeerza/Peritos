@@ -1,0 +1,49 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+    <div class="card">
+	<div class="card-header" style="background: #c87050" >
+		<h4 class="title">Notas Prueba Peritos</h4>
+		<p class="category">Notas de Peritos</p>
+	</div>
+	<div class="card-content table-responsive table-full-width">
+		<table class="table">
+			<thead class="text-danger">
+				<th>Rut</th>
+				<th>Nombre</th>
+				<th>Región</th>
+				<th>Parte A</th>
+                <th>Parte B</th>
+                <th>Nota</th>
+                <th>Situación</th>
+                <th>Periodo</th>
+            </thead>
+			<tbody>
+			 {% if object_list %}
+        {% for prueba in object_list %}
+        <tr>
+            <td> {{ prueba.rut }}</td>
+            <td> {{ prueba.nombre }}</td>
+            <td> {{ prueba.region }}</td>
+            <td> {{ prueba.parte_a }}</td>
+            <td> {{ prueba.parte_b }}</td>
+            <td> {{ prueba.parte_final }}</td>
+            <td> {{ prueba.nota }}</td>
+            <td> {{ prueba.periodo }}</td>
+
+        </tr>
+        {% endfor%}
+
+        {% else %}
+
+        <h1>No hay registros</h1>
+
+        {% endif %}
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
+
+{% endblock %}

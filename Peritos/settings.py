@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.administration',
     'apps.mensura',
     'apps.zona',
+    'apps.prueba',
 
 ]
 
@@ -57,6 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Peritos.urls'
+LOGIN_URL = '/'
 
 TEMPLATES = [
     {

@@ -57,7 +57,11 @@
             </button>
         </div>
 
-        <div class="collapse navbar-collapse">
+       {% block menu %}
+
+    {% if user.is_authenticated %}
+
+    <div class="collapse navbar-collapse">
             <ul class="navbar-nav ml-auto">
 
 
@@ -68,11 +72,27 @@
                   </a>
                   <div class="dropdown-menu dropdown-with-icons">
                     <a href="../index.html" class="dropdown-item">
-                        <i class="material-icons">layers</i> All Components
+                        <i class="material-icons">perm_identity</i>Mis Datos
                     </a>
 
-                    <a href="http://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
-                        <i class="material-icons">content_paste</i> Documentation
+                    <a href="prueba/listar" class="dropdown-item">
+                        <i class="material-icons">content_paste</i> Notas Exámenes
+                    </a>
+
+                      <a href="prueba/listar" class="dropdown-item">
+                        <i class="material-icons">border_all</i> Notas Mensuras
+                    </a>
+
+                      <a href="http://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
+                        <i class="material-icons">mode_edit</i> Proceso de Postulación
+                    </a>
+
+                      <a href="http://demos.creative-tim.com/material-kit/docs/2.0/getting-started/introduction.html" class="dropdown-item">
+                        <i class="material-icons">transfer_within_a_station</i> Proceso de Renovación
+                    </a>
+
+                       <a href="logout/" class="dropdown-item">
+                        <i class="material-icons">directions_run</i> Cerrar Sesión
                     </a>
 
                   </div>
@@ -81,6 +101,10 @@
 
             </ul>
         </div>
+
+    {% endif %}
+
+{% endblock %}
     </div>
 </nav>
 
