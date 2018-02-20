@@ -14,13 +14,14 @@
 				<th>Región</th>
 				<th>Parte A</th>
                 <th>Parte B</th>
+                <th>Puntaje Total</th>
                 <th>Nota</th>
                 <th>Situación</th>
                 <th>Periodo</th>
             </thead>
 			<tbody>
-			 {% if object_list %}
-        {% for prueba in object_list %}
+			 {% if  object_list  %}
+        {% for prueba in  object_list  %}
         <tr>
             <td> {{ prueba.rut }}</td>
             <td> {{ prueba.nombre }}</td>
@@ -29,6 +30,7 @@
             <td> {{ prueba.parte_b }}</td>
             <td> {{ prueba.parte_final }}</td>
             <td> {{ prueba.nota }}</td>
+            <td> {{ prueba.situacion }}</td>
             <td> {{ prueba.periodo }}</td>
 
         </tr>
