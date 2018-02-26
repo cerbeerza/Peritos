@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from apps.prueba.models import Prueba
+from apps.administration.models import Profile
+
 
 
 
@@ -12,7 +14,16 @@ class PruebaList(ListView):
 
 
 def pruebaListFn(request):
-    resultado = Prueba.objects.filter(periodo='2015')
 
-    return render(request, 'templates/prueba/prueba_list.html',{'objeto': resultado} )
+    resultado = None
+
+    if request.user.is_authenticated():
+        userId = request.user.id
+        getUser = Profile.objects.get(id=userId)
+        userRut = getUser.rut
+        resultado = Prueba.objects.filter(rut=userRut)
+
+
+
+    return render(request, 'templates/prueba/prueba_list.html',{'objeto': resultado})
 
