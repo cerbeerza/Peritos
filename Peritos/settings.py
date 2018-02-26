@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'apps.mensura',
     'apps.zona',
     'apps.prueba',
+    'apps.postulacion',
+    'apps.renovacion',
 
 ]
 

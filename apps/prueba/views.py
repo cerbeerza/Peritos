@@ -9,7 +9,7 @@ from apps.administration.models import Profile
 class PruebaList(ListView):
 
     model = Prueba
-    queryset =  Prueba.objects.filter(periodo='2016')
+    queryset = Prueba.objects.filter(periodo='2016')
     template_name = 'prueba/prueba_list.html'
 
 
