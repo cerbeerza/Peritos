@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^registro/', registro_page, name="registro"),
     url(r'^home/', homepage_view, name="home"),
     url(r'^mensura/', include('apps.mensura.urls', namespace="mensura")),
+    url(r'^postulacion/', include('apps.postulacion.urls', namespace="postulacion")),
     url(r'^prueba/', include('apps.prueba.urls', namespace="prueba")),
     url(r'^getProvincia/', getProvincia, name="obtener_provincia"),
     url(r'^getComuna/', getComuna, name="obtener_comuna"),

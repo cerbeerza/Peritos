@@ -1,0 +1,60 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+  {% load material_form %}
+
+ <form class="form" method="post" action="">
+                                        {% csrf_token %}
+
+
+
+    <div class="row">
+    			<div class="col-md-12 ml-auto mr-auto">
+					<div class="card card-signup">
+						<h2 class="card-title text-center">Nueva Postulación</h2>
+						<div class="card-body">
+							<div class="row">
+
+
+								<div class="col-md-6">
+
+                                   <div class="form-group label-floating col-md-10">
+                                         <label class="bmd-label-floating" for="{{ form.region_examen.name }}"> {{ form.region_examen.label }}</label>
+                                         <select name="{{ form.region_examen.name }}" id="{{ form.region_examen.name }}" class="form-control">
+                                             <option label="Seleccione"  value="-1" ></option>
+                                             {% for item in regiones %}
+                                                      <option val = {{ item.nombre}}> {{ item.nombre }} </option>
+                                                  {% endfor %}
+
+
+                                              </select>
+											</div>
+
+
+								</div>
+
+<!--                                <div class="col-md-6">
+
+                                </div> -->
+
+
+
+                            </div>
+
+                            <div class="text-center">
+
+                                            <button type="submit" class="btn btn-primary btn-round">Aceptar</button>
+										</div>
+						</div>
+					</div>
+                </div>
+            </div>
+
+
+
+	</form>
+
+
+
+
+{% endblock %}
