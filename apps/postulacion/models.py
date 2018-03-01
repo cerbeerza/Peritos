@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from apps.administration.models import Profile
 
 class Postulacion(models.Model):
 
@@ -9,7 +10,8 @@ class Postulacion(models.Model):
     region_examen = models.CharField(max_length=40)
 
     def __str__(self):
-        return self.id_user
+        userProfile = Profile.objects.get(user_id=self.id_user)
+        return userProfile.nombres + " " + userProfile.apellido_p + " " + userProfile.apellido_m
 
 
 

@@ -17,6 +17,14 @@ def crea_postulacion(request):
             region = request.POST['region_examen']
             userId = request.user.id
             idUsuarioFk = User.objects.get(id=userId)
+            registroPost = Postulacion.objects.filter(id_user_id=userId)
+            if len(registroPost) != 0:
+                message = "Ya ha realizado una postulación para este periodo"
+                regiones = Region.objects.all()
+                form = PostulacionForm
+                return render(request, 'templates/postulacion/postulacion_create.html',
+                              {'form': form, 'regiones': regiones, 'message': message})
+
             postulacion = Postulacion(id_user=idUsuarioFk, region_examen=region, periodo=yearPeriodo)
             postulacion.save()
 
