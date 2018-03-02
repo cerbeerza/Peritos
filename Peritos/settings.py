@@ -62,6 +62,10 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'Peritos.urls'
 LOGIN_URL = '/'
 
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

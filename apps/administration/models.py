@@ -43,13 +43,16 @@ class Profile(models.Model):
     )
     profesion = models.CharField(max_length=40, null=True)
     universidad = models.CharField(max_length=50, null=True)
-    archivo_titulo = models.CharField(max_length=300, blank=True, null=True)
-    archivo_ci = models.CharField(max_length=300, blank=True, null=True)
-    archivo_ant = models.CharField(max_length=300, blank=True, null=True)
+    archivo_titulo = models.FileField(null=True, blank=True)
+    archivo_ci = models.FileField(upload_to='Archivo/', null=True, blank=True)
+    archivo_ant = models.FileField(null=True, blank=True)
     year_titulo = models.IntegerField(null=True)
     empresa = models.CharField(max_length=50, null=True)
     telefono_empresa = models.IntegerField(null=True)
     direccion_empresa = models.CharField(max_length=80, null=True)
+
+
+
 
 
 

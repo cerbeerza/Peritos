@@ -31,6 +31,7 @@ class UserProfileForm(forms.ModelForm):
             'year_titulo',
             'rut',
             'provincia',
+            'archivo_titulo',
 
         ]
 
@@ -57,6 +58,7 @@ class UserProfileForm(forms.ModelForm):
             'rut' : 'Rut',
             'provincia':'Provincia',
 
+
         }
 
         widgets = {
@@ -81,6 +83,7 @@ class UserProfileForm(forms.ModelForm):
             'year_titulo' : forms.NumberInput(attrs={'class':'form-control'}),
             'rut' : forms.TextInput(attrs={'class':'form-control'}),
             'provincia': forms.Select(attrs={'class':'form-control'}),
+
 
         }
 

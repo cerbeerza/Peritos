@@ -43,7 +43,7 @@ def login_page(request):
 def registro_page(request):
 
     if request.method == 'POST':
-        profile_form = UserProfileForm(request.POST)
+        profile_form = UserProfileForm(request.POST, request.FILES)
         user_form = UserForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
         #if user_form.is_valid():
@@ -87,6 +87,8 @@ def registro_page(request):
                 profile.universidad = request.POST['universidad']
                 profile.year_titulo = request.POST['year_titulo']
                 profile.rut = request.POST['rut']
+
+                handle_uploaded_file(request.FILES['archivo_titulo'])
                 profile.save()
 
                 message = 'Se ha creado el usuario'
@@ -107,7 +109,10 @@ def registro_page(request):
     return render(request, 'templates/administrations/registro.html', {'message': message, 'user_form': user_form, 'profile_form': profile_form, 'regiones': regiones, 'provincias': provincias, 'comunas': comunas})
 
 
-
+def handle_uploaded_file(f):
+    with open('d:/files/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
 
 def getProvincia(request):
 
