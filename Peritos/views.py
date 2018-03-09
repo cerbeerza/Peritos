@@ -52,7 +52,7 @@ def registro_page(request):
             except ObjectDoesNotExist:
                 var = None
 
-            if var == None:
+            if var is None:
 
                 user_form.save()
 
