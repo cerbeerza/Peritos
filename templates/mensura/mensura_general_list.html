@@ -4,12 +4,11 @@
     {% csrf_token %}
     <label for="selectPeriodo"> Selecciona Periodo: </label>
     <select name="selectPeriodo" id="selectPeriodo">
-        <option value="2010"> 2010</option>
-        <option value="2011"> 2011</option>
-        <option value="2012"> 2012</option>
-        <option value="2013"> 2013</option>
-        <option value="2014"> 2014</option>
-        <option value="2015"> 2015</option>
+        {% if listaPeriodos %}
+            {% for listado in listaPeriodos %}
+                <option value="{{ listado.periodo }}">{{ listado.periodo }}</option>
+            {% endfor %}
+        {% endif %}
 
     </select>
     <button type="submit" class="btn btn-primary btn-round">Aceptar</button>
@@ -32,25 +31,26 @@
                 <th>Situación</th>
 			</thead>
 			<tbody>
-			 {% if objeto %}
-        {% for mensura in objeto %}
+
+        {% if objeto2 %}
+
         <tr>
 
 
-            <td> {{ mensura.periodo }}</td>
-            <td> {{ mensura.notaPromedio }}</td>
-
+            <td>  {{ objeto2.nombrePer }}</td>
+            <td>  {{ objeto2.movPer }}</td>
+            <td>  {{ objeto2.periodo }}</td>
+            <td>  {{ objeto2.notaPromedio }}</td>
+            <td>  {{ objeto2.empresa }}</td>
+            <td>  {{ objeto2.situacion }}</td>
 
 
 
         </tr>
-        {% endfor%}
-
-        {% else %}
-
-        <h1>No hay registros</h1>
 
         {% endif %}
+
+
 			</tbody>
 		</table>
 
