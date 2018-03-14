@@ -2,16 +2,20 @@
 
     <form class="form" method="POST" action="">
     {% csrf_token %}
+
+    {% if estado %}
     <label for="selectPeriodo"> Selecciona Periodo: </label>
     <select name="selectPeriodo" id="selectPeriodo">
         {% if listaPeriodos %}
+
             {% for listado in listaPeriodos %}
-                <option value="{{ listado.periodo }}">{{ listado.periodo }}</option>
+                <option value="{{ listado }}">{{ listado }}</option>
             {% endfor %}
         {% endif %}
 
     </select>
     <button type="submit" class="btn btn-primary btn-round">Aceptar</button>
+    {% endif %}
 
     </form>
 
@@ -29,9 +33,11 @@
 				<th>Promedio</th>
                 <th>Empresa</th>
                 <th>Situación</th>
+                <th>Ver Detalle</th>
 			</thead>
 			<tbody>
 
+            <h3> {{ message }}</h3>
         {% if objeto2 %}
 
         <tr>
@@ -43,6 +49,7 @@
             <td>  {{ objeto2.notaPromedio }}</td>
             <td>  {{ objeto2.empresa }}</td>
             <td>  {{ objeto2.situacion }}</td>
+            <td>  <a class="navbar-brand" href="detalle_mensura">Ver Detalle </a></td>
 
 
 
