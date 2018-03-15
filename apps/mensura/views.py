@@ -104,7 +104,7 @@ def mensuraGeneralFn(request):
 
 
 @login_required()
-def mensuraDetalleFn(request):
+def mensuraDetalleFn(request, periodo):
 
     if request.method == "GET":
 
@@ -112,7 +112,33 @@ def mensuraDetalleFn(request):
         idUsuarioFk = User.objects.get(id=userId)
         rutUser = idUsuarioFk.profile.rut
 
-        return render(request, 'templates/mensura/mensura_general_list.html',)
+        cabeceras = {
+            "Content-Type": "application/json"
+        }
+
+        datos = '{ "periodo": "'+periodo+'", "rutper": "008050812", "pass": "sngmq21.,+"}'
+
+        notas = requests.post("http://172.16.61.214:8081/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser", data=datos, headers=cabeceras)
+        listadoNotas = notas.json()
+
+        '''for listadoX in listadoNotas:
+
+            fechaFull = listadoX['fecper']
+            year = fechaFull[0:4]
+            mes = fechaFull[5:7]
+            dia = fechaFull[8:10]
+            listadoX['fecper'] = dia + "/" + mes + "/" + year'''
+
+        for indice in range(len(listadoNotas)):
+
+            fechaFull = listadoNotas[indice]['fecper']
+            year = fechaFull[0:4]
+            mes = fechaFull[5:7]
+            dia = fechaFull[8:10]
+            listadoNotas[indice]['fecper'] = dia + "/" + mes + "/" + year
+
+
+        return render(request, 'templates/mensura/mensura_general_list.html', {'objeto_detalle' : listadoNotas})
 
 
 

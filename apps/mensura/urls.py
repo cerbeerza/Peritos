@@ -6,7 +6,7 @@ urlpatterns = [
 
     #url(r'^registrar$', MensuraGeneralCreate.as_view(), name='mensura_general_crear'),
     url(r'^listar$', mensuraGeneralFn, name='mensura_general_listar'),
-    url(r'^detalle_mensura$', mensuraDetalleFn, name='mensura_detalle_listar'),
+    url(r'^detalle_mensura/([0-9]{4})/$', mensuraDetalleFn, name='mensura_detalle_listar'),
 
 
 ]

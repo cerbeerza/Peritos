@@ -25,7 +25,9 @@
 		<p class="category">Promedio de Mensuras por Usuario</p>
 	</div>
 	<div class="card-content table-responsive table-full-width">
-		<table class="table">
+		<h3> {{ message }}</h3>
+        {% if objeto2 %}
+        <table class="table">
 			<thead class="text-danger">
 				<th>Usuario</th>
 				<th>N° Mensuras</th>
@@ -37,8 +39,8 @@
 			</thead>
 			<tbody>
 
-            <h3> {{ message }}</h3>
-        {% if objeto2 %}
+
+
 
         <tr>
 
@@ -49,17 +51,53 @@
             <td>  {{ objeto2.notaPromedio }}</td>
             <td>  {{ objeto2.empresa }}</td>
             <td>  {{ objeto2.situacion }}</td>
-            <td>  <a class="navbar-brand" href="detalle_mensura">Ver Detalle </a></td>
+            <td>  <a class="navbar-brand" href="detalle_mensura/{{ objeto2.periodo }}">Ver Detalle </a></td>
 
 
 
         </tr>
 
-        {% endif %}
+
 
 
 			</tbody>
 		</table>
+        {% endif %}
+
+
+    {% if objeto_detalle %}
+
+
+    <table class="table">
+			<thead class="text-danger">
+				<th>Rol</th>
+				<th>Nombre Mensura</th>
+				<th>Fecha </th>
+                <th>Nota</th>
+
+			</thead>
+			<tbody>
+
+
+
+         {% for notas in objeto_detalle %}
+        <tr>
+
+            <td>  {{ notas.norol }}</td>
+            <td>  {{ notas.nombreCons }}</td>
+            <td>  {{ notas.fecper }}</td>
+            <td>  {{ notas.notaParcial }}</td>
+
+        </tr>
+            {% endfor %}
+
+
+			</tbody>
+		</table>
+
+    {% endif %}
+
+
 
 	</div>
 </div>
