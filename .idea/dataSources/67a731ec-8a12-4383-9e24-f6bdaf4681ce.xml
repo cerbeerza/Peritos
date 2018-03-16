@@ -100,7 +100,7 @@
       <Position>16</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="43" parent="6" name="archivo_ci">
+    <column id="43" parent="6" name="archivo_titulo">
       <Position>17</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
@@ -133,7 +133,7 @@
       <Position>24</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="51" parent="6" name="archivo_titulo">
+    <column id="51" parent="6" name="archivo_ci">
       <Position>25</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
