@@ -161,6 +161,99 @@ def homepage_view(request):
     return render(request, 'administrations/homepage.html')
 
 
+@login_required()
+def editar_datos(request):
+
+    if request.method == "GET":
+
+        userId = request.user.id
+        idUsuarioFk = User.objects.get(id=userId)
+        rutUser = idUsuarioFk.profile.rut
+        datos_personales = Profile.objects.get(rut=rutUser)
+
+        datos = {
+                 'nombres': datos_personales.nombres,
+                 'apellido_p': datos_personales.apellido_p,
+                 'apelido_m': datos_personales.apellido_m,
+                 'fecha_nac': datos_personales.fecha_nac,
+                 'rut': datos_personales.rut,
+                 'genero': datos_personales.genero,
+                 'nacionalidad': datos_personales.nacionalidad,
+                 'direccion': datos_personales.direccion,
+                 'region': datos_personales.region,
+                 'comuna': datos_personales.comuna,
+                 'estado_civil': datos_personales.estado_civil,
+                 'telefono_casa': datos_personales.telefono_casa,
+                 'telefono_cel': datos_personales.telefono_cel,
+                 'profesion': datos_personales.profesion,
+                 'universidad': datos_personales.universidad,
+                 'year_titulo': datos_personales.year_titulo,
+                 'empresa': datos_personales.empresa,
+                 'telefono_empresa': datos_personales.telefono_empresa,
+                 'direccion_empresa': datos_personales.direccion_empresa,
+                 'provincia': datos_personales.provincia,
+
+                }
+
+        datosUser = {
+                        'email': idUsuarioFk.email,
+                        'username': idUsuarioFk.username,
+                    }
+
+        profile_form = UserProfileForm(initial=datos)
+        user_form = UserForm(initial=datosUser)
+
+        return render(request, 'administrations/editar_datos.html', { 'profile_form' : profile_form, 'user_form': user_form})
+
+    if request.method == "POST":
+
+        form = UserProfileForm(request.POST)
+        if form.is_valid():
+
+            userId = request.user.id
+            usuario = User.objects.get(id=userId)
+            profile = Profile.objects.get(user_id=usuario)
+            profile.nombres = request.POST['nombres']
+            profile.apellido_p = request.POST['apellido_p']
+            profile.apellido_m = request.POST['apellido_m']
+            fecha_nac = request.POST['fecha_nac']
+            fechaFormat = datetime.datetime.strptime(fecha_nac, '%d/%m/%Y')
+            profile.fecha_nac = fechaFormat
+            profile.rut = request.POST['rut']
+            profile.genero = request.POST['genero']
+            profile.nacionalidad = request.POST['nacionalidad']
+            profile.direccion = request.POST['direccion']
+            profile.region = request.POST['region']
+            profile.comuna = request.POST['nombres']
+            profile.estado_civil = request.POST['comuna']
+            profile.telefono_casa = request.POST['telefono_casa']
+            profile.telefono_cel = request.POST['telefono_cel']
+            profile.profesion = request.POST['profesion']
+            profile.universidad = request.POST['universidad']
+            profile.year_titulo = request.POST['year_titulo']
+            profile.empresa = request.POST['empresa']
+            profile.telefono_empresa = request.POST['telefono_empresa']
+            profile.direccion_empresa = request.POST['direccion_empresa']
+            profile.provincia = request.POST['provincia']
+            profile.save()
+            usuario
+
+            message = "Sus datos han sido actualizados correctamente"
+
+            return render(request, 'administrations/homepage.html', {'message': message})
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

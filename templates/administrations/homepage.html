@@ -5,11 +5,13 @@
 
     <h3>Página de INICIO HOME</h3>
 
-    {{ message }}
+
 
     {% if user.is_authenticated %}
 
-    <p>Hola,<b>{{ user.username }}</b></p>
+
+    <p>Hola, <b>{{ user.username }}</b></p>
+       <br>  {{ message }}
 
     {% else %}
     <p>Hola, no estás logeado</p>

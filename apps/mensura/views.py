@@ -36,7 +36,7 @@ def mensuraGeneralFn(request):
 
         try:
 
-            periodos = requests.post("http://172.16.61.214:8081/NotasPeritosREST/service/NotasPeritos/getPeriodos",
+            periodos = requests.post("http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getPeriodos",
                                      data=datos, headers=cabeceras)
         except:
             estado = False
@@ -63,7 +63,7 @@ def mensuraGeneralFn(request):
         datos = '{"periodo" : "'+periodo+'", "rutper" : "008050812", "pass" : "sngmq21.,+"}'
 
         try:
-            response = requests.post("http://172.16.61.214:8081/NotasPeritosREST/service/NotasPeritos/getNotaPromedioByUser",
+            response = requests.post("http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaPromedioByUser",
                                      data=datos, headers=cabeceras)
         except:
             message = "Ha ocurrido un problema para realizar tu consulta, no necesitas saber por que"
@@ -78,7 +78,7 @@ def mensuraGeneralFn(request):
         nombrePer = datoJson['nomper']
         situacion = None
 
-        periodos = requests.post("http://172.16.61.214:8081/NotasPeritosREST/service/NotasPeritos/getPeriodos",
+        periodos = requests.post("http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getPeriodos",
                                  data=datos, headers=cabeceras)
 
         listPeriodos = periodos.json()
@@ -118,7 +118,7 @@ def mensuraDetalleFn(request, periodo):
 
         datos = '{ "periodo": "'+periodo+'", "rutper": "008050812", "pass": "sngmq21.,+"}'
 
-        notas = requests.post("http://172.16.61.214:8081/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser", data=datos, headers=cabeceras)
+        notas = requests.post("http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser", data=datos, headers=cabeceras)
         listadoNotas = notas.json()
 
         '''for listadoX in listadoNotas:
