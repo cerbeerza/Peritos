@@ -5,6 +5,7 @@
       <DefaultCasing>exact</DefaultCasing>
     </root>
     <schema id="2" parent="1" name="information_schema">
+      <Current>1</Current>
       <Collation>utf8_general_ci</Collation>
     </schema>
     <schema id="3" parent="1" name="mysql">
@@ -14,7 +15,6 @@
       <Collation>utf8_general_ci</Collation>
     </schema>
     <schema id="5" parent="1" name="peritos">
-      <Current>1</Current>
       <Visible>1</Visible>
       <Collation>latin1_swedish_ci</Collation>
     </schema>
@@ -1018,80 +1018,80 @@
       <DataType>varchar(50)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="258" parent="229" name="comuna">
+    <column id="258" parent="229" name="provincia">
       <Position>11</Position>
       <DataType>varchar(50)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="259" parent="229" name="estado_civil">
+    <column id="259" parent="229" name="comuna">
       <Position>12</Position>
+      <DataType>varchar(50)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="260" parent="229" name="estado_civil">
+      <Position>13</Position>
       <DataType>varchar(20)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="260" parent="229" name="telefono_casa">
-      <Position>13</Position>
-      <DataType>int(11)|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="261" parent="229" name="telefono_cel">
+    <column id="261" parent="229" name="telefono_casa">
       <Position>14</Position>
       <DataType>int(11)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="262" parent="229" name="profesion">
+    <column id="262" parent="229" name="telefono_cel">
       <Position>15</Position>
+      <DataType>int(11)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="263" parent="229" name="profesion">
+      <Position>16</Position>
       <DataType>varchar(40)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="263" parent="229" name="universidad">
-      <Position>16</Position>
+    <column id="264" parent="229" name="universidad">
+      <Position>17</Position>
       <DataType>varchar(50)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="264" parent="229" name="archivo_titulo">
-      <Position>17</Position>
-      <DataType>varchar(100)|0</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="265" parent="229" name="archivo_ci">
+    <column id="265" parent="229" name="archivo_titulo">
       <Position>18</Position>
       <DataType>varchar(100)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="266" parent="229" name="archivo_ant">
+    <column id="266" parent="229" name="archivo_ci">
       <Position>19</Position>
       <DataType>varchar(100)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="267" parent="229" name="year_titulo">
+    <column id="267" parent="229" name="archivo_ant">
       <Position>20</Position>
+      <DataType>varchar(100)|0</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="268" parent="229" name="year_titulo">
+      <Position>21</Position>
       <DataType>int(11)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="268" parent="229" name="empresa">
-      <Position>21</Position>
+    <column id="269" parent="229" name="empresa">
+      <Position>22</Position>
       <DataType>varchar(50)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="269" parent="229" name="telefono_empresa">
-      <Position>22</Position>
+    <column id="270" parent="229" name="telefono_empresa">
+      <Position>23</Position>
       <DataType>int(11)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="270" parent="229" name="direccion_empresa">
-      <Position>23</Position>
+    <column id="271" parent="229" name="direccion_empresa">
+      <Position>24</Position>
       <DataType>varchar(80)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="271" parent="229" name="user_id">
-      <Position>24</Position>
+    <column id="272" parent="229" name="user_id">
+      <Position>25</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="272" parent="229" name="provincia">
-      <Position>25</Position>
-      <DataType>varchar(50)|0</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <index id="273" parent="229" name="user_id">
