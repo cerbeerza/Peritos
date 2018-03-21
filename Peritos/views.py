@@ -20,6 +20,19 @@ from django.core.exceptions import ObjectDoesNotExist
 def login_page(request):
     message = None
     if request.method == "POST":
+
+        '''
+        #bloque para cambio de password cifrada
+        listaQuerySet = User.objects.all()
+        for elemento in listaQuerySet:
+            idElemento = elemento.id
+            objetoUser = User.objects.get(id=idElemento)
+            passwordNativa = objetoUser.password
+            objetoUser.password = make_password(passwordNativa)
+            objetoUser.save()
+
+        message = "OK" '''
+
         form = LoginForm(request.POST)
         if form.is_valid():
             username = request.POST['username']

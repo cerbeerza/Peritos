@@ -4,7 +4,9 @@ from apps.zona.models import Region
 from apps.postulacion.models import Postulacion
 from django.contrib.auth.models import User
 from datetime import date
+from django.contrib.auth.decorators import login_required
 
+@login_required()
 def crea_postulacion(request):
     message = None
     regiones = []

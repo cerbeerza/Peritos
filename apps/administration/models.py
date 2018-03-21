@@ -34,8 +34,8 @@ class Profile(models.Model):
         ('VIUDO', 'VIUDO(A)'),
     )
     estado_civil = models.CharField(max_length=20, choices=estados_civil, null=True)
-    telefono_casa = models.IntegerField(null=True)
-    telefono_cel = models.IntegerField(null=True)
+    telefono_casa = models.CharField(null=True, max_length=20)
+    telefono_cel = models.CharField(null=True, max_length=20)
     profesiones = (
         ('ingGeoMen', 'Ingeniero en Geomensura'),
         ('ingEjecGeo', 'Ingeniero de Ejecución en Geomensura'),
@@ -48,7 +48,7 @@ class Profile(models.Model):
     archivo_ant = models.FileField(null=True, blank=True)
     year_titulo = models.IntegerField(null=True)
     empresa = models.CharField(max_length=50, null=True)
-    telefono_empresa = models.IntegerField(null=True)
+    telefono_empresa = models.CharField(null=True, max_length=20)
     direccion_empresa = models.CharField(max_length=80, null=True)
 
 
