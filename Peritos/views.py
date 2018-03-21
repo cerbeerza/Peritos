@@ -115,7 +115,7 @@ def handle_uploaded_file(f):
         for chunk in f.chunks():
             destination.write(chunk)
 
-@login_required()
+
 def getProvincia(request):
 
     nombre_region = request.GET['reg']
@@ -134,7 +134,7 @@ def getProvincia(request):
     return JsonResponse(result_set, safe=False)
 
 
-@login_required()
+
 def getComuna(request):
 
     nombre_provincia = request.GET['prov']
