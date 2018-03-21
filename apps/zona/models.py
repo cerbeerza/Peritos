@@ -27,7 +27,7 @@ class Comuna(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=80)
     id_provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
-    cod_comuna = models.CharField(max_length=4, primary_key=True)
+    cod_comuna = models.CharField(max_length=5, primary_key=True)
 
     def __str__(self):
         return self.nombre

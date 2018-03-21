@@ -15,6 +15,7 @@
       <Collation>utf8_general_ci</Collation>
     </schema>
     <schema id="5" parent="1" name="peritos">
+      <Current>1</Current>
       <Visible>1</Visible>
       <Collation>latin1_swedish_ci</Collation>
     </schema>
@@ -1816,7 +1817,7 @@ model</ColNames>
     </column>
     <column id="402" parent="245" name="cod_comuna">
       <Position>3</Position>
-      <DataType>varchar(4)|0</DataType>
+      <DataType>varchar(5)|0</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
