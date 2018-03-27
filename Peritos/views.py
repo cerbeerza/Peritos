@@ -10,6 +10,9 @@ from apps.administration.forms import UserProfileForm, UserForm
 from apps.zona.models import *
 from django.http import HttpResponse
 from django.http import JsonResponse
+from random import choice
+from django.core.mail import EmailMessage
+
 
 
 import datetime
@@ -172,6 +175,42 @@ def logout_view(request):
 @login_required()
 def homepage_view(request):
     return render(request, 'administrations/homepage.html')
+
+
+
+def reset_password(request):
+
+    if request.method == 'GET':
+        return render(request, 'templates/administrations/reset_password.html')
+
+    if request.method == 'POST':
+        rutUsuario = request.POST['rut_input']
+        usuario = User.objects.get(username=rutUsuario)
+        longitud = 16
+        valores = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ<=>@#%&+"
+        p = ""
+        p = p.join([choice(valores) for i in range(longitud)])
+        pc = make_password(p, salt=None, hasher='default')
+        usuario.password = pc
+        usuario.save()
+        correo = usuario.email
+
+
+        mensaje_email = EmailMessage(subject='TEST',
+                                     body='Su contraseña es: '+ p,
+                                     from_email='ignacio.beltran.silva@gmail.com',
+                                     to=[correo],
+                                     )
+        mensaje_email.send()
+
+        message = "Mensaje Enviado"
+
+
+
+        return render(request, 'templates/administrations/reset_password.html', { 'message' : message})
+
+
+
 
 
 @login_required()
