@@ -105,7 +105,7 @@ def registro_page(request):
                 profile.year_titulo = request.POST['year_titulo']
                 profile.rut = request.POST['rut']
 
-                handle_uploaded_file(request.FILES['archivo_titulo'])
+                #handle_uploaded_file(request.FILES['archivo_titulo'])
                 profile.save()
 
                 message = 'Se ha creado el usuario'
@@ -185,7 +185,10 @@ def reset_password(request):
 
     if request.method == 'POST':
         rutUsuario = request.POST['rut_input']
-        usuario = User.objects.get(username=rutUsuario)
+        rutFormat = rutUsuario[0:len(rutUsuario)-2]
+        rutFormat = rutFormat.replace(".","")
+        profile = Profile.objects.get(rut=rutFormat)
+        usuario = User.objects.get(id=profile.id)
         longitud = 16
         valores = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ<=>@#%&+"
         p = ""
@@ -203,7 +206,7 @@ def reset_password(request):
                                      )
         mensaje_email.send()
 
-        message = "Mensaje Enviado"
+        message = "Mensaje Enviado a su correo electrónico"
 
 
 
