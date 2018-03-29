@@ -25,7 +25,7 @@ SECRET_KEY = '0udwuuwjwvru$3b@7=8c6-(*^j6%(t5jeyqlv-vtse5m22hc)k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.16.60.35']
 
 
 # Application definition
@@ -95,7 +95,7 @@ DATABASES = {
         'NAME': 'peritos',
         'USER': 'root',
         'PASSWORD': 'Peritos0104',
-        'HOST': '172.16.60.35',
+        'HOST': '172.17.0.3',
         'PORT': '3306',
     }
 }
