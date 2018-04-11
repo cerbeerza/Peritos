@@ -1,0 +1,56 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+  {% load material_form %}
+
+ <form class="form" method="post" action="" enctype="multipart/form-data">
+                                        {% csrf_token %}
+
+<div class="row">
+    			<div class="col-md-12 ml-auto mr-auto">
+					<div class="card card-signup">
+						<h2 class="card-title text-center">Proceso de Renovación</h2>
+						<div class="card-body">
+							<div class="row">
+                            {{ message }}
+
+
+								<div class="col-md-6">
+
+
+                                    <label for="fileCCI">Cédula de Identidad</label>
+                                       <input type="file" name="fileCCI">
+
+                                     <label for="fileANT">Certificado de Antecedentes</label>
+                                       <input type="file" name="fileANT">
+
+                                     <label for="fileTIT">Cédula de Identidad</label>
+                                       <input type="file" name="fileTIT">
+
+								</div>
+
+<!--                                <div class="col-md-6">
+
+                                </div> -->
+
+
+
+                            </div>
+
+                            <div class="text-center">
+
+                                            <button type="submit" class="btn btn-primary btn-round">Aceptar</button>
+										</div>
+						</div>
+					</div>
+                </div>
+            </div>
+
+
+
+     </form>
+
+
+
+
+{% endblock %}
