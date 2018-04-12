@@ -188,7 +188,7 @@ def reset_password(request):
         rutFormat = rutUsuario[0:len(rutUsuario)-2]
         rutFormat = rutFormat.replace(".","")
         profile = Profile.objects.get(rut=rutFormat)
-        usuario = User.objects.get(id=profile.id)
+        usuario = User.objects.get(id=profile.user_id)
         longitud = 16
         valores = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ<=>@#%&+"
         p = ""
@@ -211,6 +211,39 @@ def reset_password(request):
 
 
         return render(request, 'templates/administrations/reset_password.html', { 'message' : message})
+
+
+@login_required()
+def cambiar_password(request):
+
+    if request.method == 'GET':
+        return render(request, 'templates/administrations/cambia_password.html')
+
+    if request.method == 'POST':
+
+        message = None
+        usuario = request.user.id
+        pass1 = request.POST['pass1_input']
+        pass2 = request.POST['pass2_input']
+
+        if pass1 != pass2:
+            message = 'Las contraseñas deben ser iguales'
+
+        else:
+
+            objetoUser = User.objects.get(id=usuario)
+            hashPass = make_password(pass1, salt=None, hasher='default')
+            objetoUser.password = hashPass
+            objetoUser.save()
+            message = 'Su contraseña a sido actualizada'
+
+
+        return render(request, 'templates/administrations/cambia_password.html', { 'message' : message})
+
+
+
+
+
 
 
 
