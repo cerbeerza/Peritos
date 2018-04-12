@@ -25,7 +25,7 @@ SECRET_KEY = '0udwuuwjwvru$3b@7=8c6-(*^j6%(t5jeyqlv-vtse5m22hc)k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['172.16.60.35']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'apps.prueba',
     'apps.postulacion',
     'apps.renovacion',
+    'apps.periodo',
+    'apps.apelacion',
 
 ]
 
@@ -64,6 +66,7 @@ LOGIN_URL = '/'
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_ROOT = 'D:/files/'
 MEDIA_URL = '/media/'
 
 TEMPLATES = [
@@ -95,7 +98,7 @@ DATABASES = {
         'NAME': 'peritos',
         'USER': 'root',
         'PASSWORD': 'Peritos0104',
-        'HOST': '172.17.0.3',
+        'HOST': '172.16.60.35',
         'PORT': '3306',
     }
 }
