@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from Peritos.views import login_page, registro_page, getProvincia, getComuna, homepage_view, logout_view, editar_datos, reset_password, cambiar_password
+from apps.apelacion.views import apelacion
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -32,5 +33,6 @@ urlpatterns = [
     url(r'^mis_datos/', editar_datos, name="editar_datos"),
     url(r'^reset_password/', reset_password, name="resetear_password"),
     url(r'^cambiar_password/', cambiar_password, name="cambiar_password"),
+    url(r'^apelacion/', apelacion, name="apelacion"),
 
 ]

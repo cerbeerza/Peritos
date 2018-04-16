@@ -3,18 +3,16 @@
 {% block content %}
 
 
-    <h3>Cambio de Contraseña</h3>
+    <h3>Ingresar Apelación</h3>
 
     <form name="formRut" class="form" method="post" action="">
     {% csrf_token %}
 
         <b>{{ message }}</b>
 
-    <label value="Password"></label>
-    <input type="password" id="pass1_input" class="form-control" name="pass1_input" required>
 
-    <label value="Confirma Password"></label>
-    <input type="password" id="pass2_input" class="form-control" name="pass2_input" required>
+    <textarea id="txtApelacion" name="txtApelacion" rows="4" cols="50"></textarea>
+
 
     <button type="submit" class="btn btn-primary btn-round">Aceptar</button>
 

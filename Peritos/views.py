@@ -12,6 +12,10 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from random import choice
 from django.core.mail import EmailMessage
+from apps.nomina.models import Nomina
+from datetime import date
+from apps.periodo.models import PeriodoProceso
+import requests, json
 
 
 
@@ -46,7 +50,59 @@ def login_page(request):
                 if user.is_active:
                     login(request, user)
                     message = "Correcto"
-                    return render(request, 'templates/administrations/homepage.html')
+
+                    #Validación de Tipo de Usuario
+                    fecha_actual = date.today()
+                    objetoPeriodo = PeriodoProceso.objects.get(fechaDesde__lte=fecha_actual,
+                                                               fechaHasta__gte=fecha_actual)
+                    periodo = objetoPeriodo.periodo
+                    year = periodo[0:4]
+                    year2 = int(year) - 1
+
+                    usuario = request.user.id
+                    rutUsuario = Profile.objects.get(user_id=usuario)
+                    nomina = Nomina.objects.filter(rut_nomina=rutUsuario.rut, periodo=year2)
+
+                    if len(nomina) == 0:
+                        message = 'Según nuestros registros usted no aparece en nuestros registros como NOMINADO, usted debe postular'
+                    else:
+                        message = 'Usted aparece en nuestros Registros como NOMINADO'
+
+                    #Validación de Periodos o Notas
+                    cabeceras = {
+                        "Content-Type": "application/json"
+                    }
+
+                    datos = '{ "periodo": "' + year + '", "rutper": "008050812", "pass": "sngmq21.,+"}'
+
+                    notas = requests.post(
+                        "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser",
+                        data=datos, headers=cabeceras)
+                    listadoNotas = notas.json()
+
+                    if len(listadoNotas) == 0:
+
+                        datos = '{ "periodo": "' + year2 + '", "rutper": "008050812", "pass": "sngmq21.,+"}'
+                        notas = requests.post(
+                            "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser",
+                            data=datos, headers=cabeceras)
+                        listadoNotas = notas.json()
+
+                        if len(listadoNotas) == 0:
+                            message = 'No presenta notas de mensuras en 2 periodos'
+                            return render(request, 'templates/administrations/homepage.html', {'message': message})
+
+
+                    suma = 0.0
+                    for indice in range(len(listadoNotas)):
+
+                        notaParcial = float(listadoNotas[indice]['notaParcial'])
+                        suma = suma + notaParcial
+                    total = suma / len(listadoNotas)
+
+
+
+                    return render(request, 'templates/administrations/homepage.html', {'message': message})
                 else:
                     message = "Inactivo"
             else:
