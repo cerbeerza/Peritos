@@ -5,6 +5,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 import requests, json
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from apps.administration.models import Profile
 
 from apps.mensura.models import MensuraGeneral
 
@@ -48,10 +49,14 @@ def mensuraGeneralFn(request):
 
         listPeriodos = periodos.json()
 
-        return render(request, 'templates/mensura/mensura_general_list.html', {'listaPeriodos' : listPeriodos, 'estado': estado})
+        return render(request, 'templates/mensura/mensura_general_list.html', {'listaPeriodos': listPeriodos, 'estado':estado})
 
 
     elif request.method == "POST":
+
+        usuario = request.user.id
+        rutUsuario = Profile.objects.get(user_id=usuario)
+        rutRut = rutUsuario.rut
 
 
         periodo = request.POST['selectPeriodo']
@@ -60,7 +65,7 @@ def mensuraGeneralFn(request):
             "Content-Type": "application/json"
         }
 
-        datos = '{"periodo" : "'+periodo+'", "rutper" : "008050812", "pass" : "sngmq21.,+"}'
+        datos = '{"periodo" : "'+periodo+'", "rutper" : "'+rutRut+'", "pass" : "sngmq21.,+"}'
 
         try:
             response = requests.post("http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaPromedioByUser",
@@ -116,7 +121,7 @@ def mensuraDetalleFn(request, periodo):
             "Content-Type": "application/json"
         }
 
-        datos = '{ "periodo": "'+periodo+'", "rutper": "008050812", "pass": "sngmq21.,+"}'
+        datos = '{ "periodo": "'+periodo+'", "rutper": "'+rutUser+'", "pass": "sngmq21.,+"}'
 
         notas = requests.post("http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser", data=datos, headers=cabeceras)
         listadoNotas = notas.json()

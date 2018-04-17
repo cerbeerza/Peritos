@@ -26,6 +26,9 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def login_page(request):
     message = None
+    message2 = None
+    verificaNota = False
+    calculaNota = False
     if request.method == "POST":
 
         '''
@@ -61,48 +64,59 @@ def login_page(request):
 
                     usuario = request.user.id
                     rutUsuario = Profile.objects.get(user_id=usuario)
+                    rutRut = rutUsuario.rut
                     nomina = Nomina.objects.filter(rut_nomina=rutUsuario.rut, periodo=year2)
 
                     if len(nomina) == 0:
                         message = 'Según nuestros registros usted no aparece en nuestros registros como NOMINADO, usted debe postular'
+
                     else:
                         message = 'Usted aparece en nuestros Registros como NOMINADO'
+                        verificaNota = True
 
-                    #Validación de Periodos o Notas
-                    cabeceras = {
-                        "Content-Type": "application/json"
-                    }
+                    if verificaNota:
 
-                    datos = '{ "periodo": "' + year + '", "rutper": "008050812", "pass": "sngmq21.,+"}'
+                        #Validación de Periodos o Notas
+                        cabeceras = {
+                            "Content-Type": "application/json"
+                        }
 
-                    notas = requests.post(
-                        "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser",
-                        data=datos, headers=cabeceras)
-                    listadoNotas = notas.json()
+                        datos = '{ "periodo": "' + year + '", "rutper": "'+rutRut+'", "pass": "sngmq21.,+"}'
 
-                    if len(listadoNotas) == 0:
-
-                        datos = '{ "periodo": "' + year2 + '", "rutper": "008050812", "pass": "sngmq21.,+"}'
                         notas = requests.post(
                             "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser",
                             data=datos, headers=cabeceras)
                         listadoNotas = notas.json()
 
                         if len(listadoNotas) == 0:
-                            message = 'No presenta notas de mensuras en 2 periodos'
-                            return render(request, 'templates/administrations/homepage.html', {'message': message})
 
+                            datos = '{ "periodo": "' + str(year2) + '", "rutper": "'+rutRut+'", "pass": "sngmq21.,+"}'
+                            notas = requests.post(
+                                "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser",
+                                data=datos, headers=cabeceras)
+                            listadoNotas = notas.json()
 
-                    suma = 0.0
-                    for indice in range(len(listadoNotas)):
+                            if len(listadoNotas) == 0:
+                                message2 = 'No presenta notas de mensuras en 2 periodos, no puede renovar'
+                            else:
+                                calculaNota = True
+                        else:
+                            calculaNota = True
 
-                        notaParcial = float(listadoNotas[indice]['notaParcial'])
-                        suma = suma + notaParcial
-                    total = suma / len(listadoNotas)
+                        if calculaNota:
+                            suma = 0.0
+                            for indice in range(len(listadoNotas)):
 
+                                notaParcial = float(listadoNotas[indice]['notaParcial'])
+                                suma = suma + notaParcial
+                            total = suma / len(listadoNotas)
 
+                            if total < 4.0:
+                                message2 = 'Hasta el momento su nota es inferior a 4.0, lo que significa que por el momento no puede renovar'
+                            elif total == 0.0:
+                                message2 = 'No presenta notas'
 
-                    return render(request, 'templates/administrations/homepage.html', {'message': message})
+                    return render(request, 'templates/administrations/homepage.html', {'message': message, 'message2' : message2})
                 else:
                     message = "Inactivo"
             else:
