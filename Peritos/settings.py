@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'apps.renovacion',
     'apps.periodo',
     'apps.apelacion',
+    'apps.nomina',
 
 ]
 
