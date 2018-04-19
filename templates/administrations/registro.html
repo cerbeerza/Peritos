@@ -3,14 +3,17 @@
 {% block scripts %}
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="http://yourjavascript.com/7174319415/script.js"></script>
 
 
 <script>
 
 
 
+
 			$(document).ready(function(){
 
+			    $('.datepicker').datepicker();
 
 
 				 $('select#{{ profile_form.region.name }}').change(function () {
@@ -73,11 +76,7 @@
 
 			});
 
-			 $(function(){
-                var datepicker = $.fn.datepicker.noConflict();
-               console.log(datepicker);
 
-            });
 
 		</script>
 
