@@ -3,10 +3,14 @@
 {% block scripts %}
 
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="http://yourjavascript.com/7174319415/script.js"></script>
+
 
 <script>
+
+
+
 			$(document).ready(function(){
+
 
 
 				 $('select#{{ profile_form.region.name }}').change(function () {
@@ -66,7 +70,14 @@
  				 });
 
 
+
 			});
+
+			 $(function(){
+                var datepicker = $.fn.datepicker.noConflict();
+               console.log(datepicker);
+
+            });
 
 		</script>
 
@@ -148,7 +159,7 @@
 
 
 
-                                     <div class="form-group date  col-md-6" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                                     <div class="form-group datepicker col-md-6" data-provide="datepicker">
                                                 <label class="bmd-label-floating" for="{{ profile_form.fecha_nac.name }}">{{ profile_form.fecha_nac.label }}</label>
                                                 {{ profile_form.fecha_nac }}
 											</div>
