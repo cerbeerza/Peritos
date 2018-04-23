@@ -64,7 +64,7 @@ class UserProfileForm(forms.ModelForm):
         widgets = {
 
             'direccion' : forms.TextInput(attrs={'class':'form-control'}),
-            'telefono_cel' : forms.NumberInput(attrs={'class':'form-control'}),
+            'telefono_cel' : forms.TextInput(attrs={'class':'form-control'}),
             'apellido_p' : forms.TextInput(attrs={'class':'form-control'}),
             'apellido_m' : forms.TextInput(attrs={'class':'form-control'}),
             'comuna' : forms.Select(attrs={'class':'form-control'}),
@@ -77,10 +77,10 @@ class UserProfileForm(forms.ModelForm):
             'nombres' : forms.TextInput(attrs={'class':'form-control'}),
             'profesion' : forms.TextInput(attrs={'class':'form-control'}),
             'region' : forms.Select(attrs={'class':'form-control'}),
-            'telefono_casa' : forms.NumberInput(attrs={'class':'form-control'}),
-            'telefono_empresa' : forms.NumberInput(attrs={'class':'form-control'}),
+            'telefono_casa' : forms.TextInput(attrs={'class':'form-control'}),
+            'telefono_empresa' : forms.TextInput(attrs={'class':'form-control'}),
             'universidad' : forms.TextInput(attrs={'class':'form-control'}),
-            'year_titulo' : forms.NumberInput(attrs={'class':'form-control'}),
+            'year_titulo' : forms.TextInput(attrs={'class':'form-control'}),
             'rut' : forms.TextInput(attrs={'class':'form-control'}),
             'provincia': forms.Select(attrs={'class':'form-control'}),
 
