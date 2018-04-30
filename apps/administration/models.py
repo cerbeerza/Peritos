@@ -18,10 +18,11 @@ class Profile(models.Model):
     fecha_nac = models.DateField(null=True)
     rut = models.CharField(max_length=10, null=True)
     generos = (
+        ('S', 'Seleccione'),
         ('M', 'MASCULINO'),
         ('F', 'FEMENINO'),
     )
-    genero = models.CharField(max_length=1, choices=generos, null=True)
+    genero = models.CharField(max_length=1, choices=generos, null=True, default='S')
     nacionalidad = models.CharField(max_length=20, null=True)
     direccion = models.CharField(max_length=80, null=True)
 
@@ -29,19 +30,22 @@ class Profile(models.Model):
     provincia = models.CharField(max_length=50, null=True)
     comuna = models.CharField(max_length=50, null=True)
     estados_civil = (
+        ('-1', 'Seleccione'),
         ('SOLTERO', 'SOLTERO(A)'),
         ('CASADO', 'CASADO(A)'),
         ('VIUDO', 'VIUDO(A)'),
+        ('DIVORCIADO', 'DIVORCIADO(A)'),
     )
-    estado_civil = models.CharField(max_length=20, choices=estados_civil, null=True)
+    estado_civil = models.CharField(max_length=20, choices=estados_civil, null=True, default='Seleccione')
     telefono_casa = models.CharField(null=True, max_length=20)
     telefono_cel = models.CharField(null=True, max_length=20)
     profesiones = (
+        ('-1', 'Seleccione'),
         ('ingGeoMen', 'Ingeniero en Geomensura'),
         ('ingEjecGeo', 'Ingeniero de Ejecución en Geomensura'),
         ('ingEjecMin', 'Ingeniero de Ejecución en Minas'),
     )
-    profesion = models.CharField(max_length=40, null=True)
+    profesion = models.CharField(max_length=40, null=True, choices=profesiones, default='Seleccione')
     universidad = models.CharField(max_length=50, null=True)
     archivo_titulo = models.FileField(null=True, blank=True)
     archivo_ci = models.FileField(upload_to='Archivo/', null=True, blank=True)

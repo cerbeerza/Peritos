@@ -186,16 +186,23 @@
                                                 {{ profile_form.telefono_casa }}
 											</div>
 
-                                     <div class="form-group label-floating col-md-6">
-                                                <label class="bmd-label-floating" for="{{ profile_form.universidad.name }}">{{ profile_form.universidad.label }}</label>
-                                                {{ profile_form.universidad }}
-											</div>
+
 
 
 
                                      <div class="form-group label-floating col-md-6">
                                                 <label class="bmd-label-floating" for="{{ user_form.password.name }}">{{ user_form.password.label }}</label>
                                                 {{ user_form.password }}
+											</div>
+
+                                    <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="txtPass2">Confirma Password</label>
+                                                <input type="password" name="txtPass2" class="form-control">
+											</div>
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.universidad.name }}">{{ profile_form.universidad.label }}</label>
+                                                {{ profile_form.universidad }}
 											</div>
 
 
@@ -270,6 +277,10 @@
 
 
                             </div>
+
+                            {% if message %}
+                                 <b>{{ message }}</b>
+                            {% endif %}
 
                             <div class="text-center">
 

@@ -33,6 +33,7 @@ class UserProfileForm(forms.ModelForm):
             'provincia',
             'archivo_titulo',
 
+
         ]
 
         labels = {
@@ -55,7 +56,7 @@ class UserProfileForm(forms.ModelForm):
             'telefono_empresa' : 'Teléfono Empresa',
             'universidad' : 'Universidad',
             'year_titulo' : 'Año Titulación',
-            'rut' : 'Rut',
+            'rut' : 'Rut (Formato XXXXXXXX-X)',
             'provincia':'Provincia',
 
 
@@ -71,11 +72,11 @@ class UserProfileForm(forms.ModelForm):
             'direccion_empresa' : forms.TextInput(attrs={'class':'form-control'}),
             'empresa' : forms.TextInput(attrs={'class':'form-control'}),
             'estado_civil' : forms.Select(attrs={'class':'form-control'}),
-            'fecha_nac' : forms.DateInput(attrs={'class':'form-control'}),
+            'fecha_nac' : forms.DateInput(attrs={'class':'form-control','readonly':'true'}),
             'genero' : forms.Select(attrs={'class':'form-control'}),
             'nacionalidad' : forms.TextInput(attrs={'class':'form-control'}),
             'nombres' : forms.TextInput(attrs={'class':'form-control'}),
-            'profesion' : forms.TextInput(attrs={'class':'form-control'}),
+            'profesion' : forms.Select(attrs={'class':'form-control'}),
             'region' : forms.Select(attrs={'class':'form-control'}),
             'telefono_casa' : forms.TextInput(attrs={'class':'form-control'}),
             'telefono_empresa' : forms.TextInput(attrs={'class':'form-control'}),

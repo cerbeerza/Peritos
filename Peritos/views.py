@@ -141,13 +141,21 @@ def registro_page(request):
 
             if var is None:
 
+                pass2 = request.POST['txtPass2']
+                pass1 = request.POST['password']
+                if pass1 != pass2:
+                    message = 'Las contraseñas no coinciden'
+                    return render(request, 'templates/administrations/registro.html',{'message': message, 'user_form': user_form, 'profile_form': profile_form})
+
                 user_form.save()
 
                 #profile_form.save()
                 user = User.objects.get(username=request.POST['username'])
                 userId = user.id
 
-                user.password = make_password(request.POST['password'], salt=None, hasher='default')
+
+
+                user.password = make_password(pass1, salt=None, hasher='default')
                 user.save()
 
 
