@@ -24,9 +24,12 @@ def pruebaListFn(request):
 
     if request.user.is_authenticated():
         userId = request.user.id
-        getUser = Profile.objects.get(id=userId)
+        getUser = Profile.objects.get(user_id=userId)
+
+
         userRut = getUser.rut
         resultado = Prueba.objects.filter(rutx=userRut)
+
 
     return render(request, 'templates/prueba/prueba_list.html', {'objeto': resultado})
 

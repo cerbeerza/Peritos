@@ -135,7 +135,7 @@ def registro_page(request):
         if user_form.is_valid() and profile_form.is_valid():
         #if user_form.is_valid():
             try:
-                var = User.objects.get(username=request.POST['username'])
+                var = User.objects.get(username=request.POST['rut'])
             except ObjectDoesNotExist:
                 var = None
 
@@ -147,18 +147,16 @@ def registro_page(request):
                     message = 'Las contraseñas no coinciden'
                     return render(request, 'templates/administrations/registro.html',{'message': message, 'user_form': user_form, 'profile_form': profile_form})
 
-                user_form.save()
+                #Cambio por sacado de username
+                #user_form.save()
+                User.objects.create(username=request.POST['rut'], password=request.POST['password'], email=request.POST['email'] )
+
 
                 #profile_form.save()
-                user = User.objects.get(username=request.POST['username'])
+                user = User.objects.get(username=request.POST['rut'])
                 userId = user.id
-
-
-
                 user.password = make_password(pass1, salt=None, hasher='default')
                 user.save()
-
-
 
                 profile = Profile.objects.get(user_id=userId)
                 profile.direccion = request.POST['direccion']
@@ -187,7 +185,8 @@ def registro_page(request):
                 profile.save()
 
                 message = 'Se ha creado el usuario'
-            else: 'Usuario ya existe'
+            else:
+                message = 'Usuario ya existe'
         else:
             message = 'Formulario no valido'
 

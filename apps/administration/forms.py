@@ -66,6 +66,13 @@ class UserProfileForm(forms.ModelForm):
 
             'direccion' : forms.TextInput(attrs={'class':'form-control'}),
             'telefono_cel' : forms.TextInput(attrs={'class':'form-control'}),
+            'nombres' : forms.TextInput(attrs={'class':'form-control'}),
+            'profesion' : forms.Select(attrs={'class':'form-control'}),
+            'region' : forms.Select(attrs={'class':'form-control'}),
+            'telefono_casa' : forms.TextInput(attrs={'class':'form-control'}),
+            'telefono_empresa' : forms.TextInput(attrs={'class':'form-control'}),
+            'universidad' : forms.TextInput(attrs={'class':'form-control'}),
+            'year_titulo' : forms.TextInput(attrs={'class':'form-control'}),
             'apellido_p' : forms.TextInput(attrs={'class':'form-control'}),
             'apellido_m' : forms.TextInput(attrs={'class':'form-control'}),
             'comuna' : forms.Select(attrs={'class':'form-control'}),
@@ -75,13 +82,6 @@ class UserProfileForm(forms.ModelForm):
             'fecha_nac' : forms.DateInput(attrs={'class':'form-control','readonly':'true'}),
             'genero' : forms.Select(attrs={'class':'form-control'}),
             'nacionalidad' : forms.TextInput(attrs={'class':'form-control'}),
-            'nombres' : forms.TextInput(attrs={'class':'form-control'}),
-            'profesion' : forms.Select(attrs={'class':'form-control'}),
-            'region' : forms.Select(attrs={'class':'form-control'}),
-            'telefono_casa' : forms.TextInput(attrs={'class':'form-control'}),
-            'telefono_empresa' : forms.TextInput(attrs={'class':'form-control'}),
-            'universidad' : forms.TextInput(attrs={'class':'form-control'}),
-            'year_titulo' : forms.TextInput(attrs={'class':'form-control'}),
             'rut' : forms.TextInput(attrs={'class':'form-control'}),
             'provincia': forms.Select(attrs={'class':'form-control'}),
 
@@ -94,7 +94,7 @@ class UserForm(forms.ModelForm):
 
         fields = [
 
-                    'username',
+
                     'password',
                     'email',
 
@@ -102,7 +102,7 @@ class UserForm(forms.ModelForm):
 
         labels = {
 
-                    'username': 'Nombre de Usuario',
+
                     'password': 'Password',
                     'email': 'Email',
 
@@ -110,7 +110,7 @@ class UserForm(forms.ModelForm):
 
         widgets = {
 
-                    'username': forms.TextInput(attrs={'class': 'form-control'}),
+
                     'password': forms.PasswordInput(attrs={'class': 'form-control'}),
                     'email': forms.EmailInput(attrs={'class': 'form-control'}),
 
