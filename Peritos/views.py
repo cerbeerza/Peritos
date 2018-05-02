@@ -116,7 +116,11 @@ def login_page(request):
                             elif total == 0.0:
                                 message2 = 'No presenta notas'
 
-                    return render(request, 'templates/administrations/homepage.html', {'message': message, 'message2' : message2})
+
+                    objUsuario = Profile.objects.get(rut=rutRut)
+                    nombreUsuario = objUsuario.nombres
+                    apellidoUsuario = objUsuario.apellido_p
+                    return render(request, 'templates/administrations/homepage.html', {'message': message, 'message2' : message2, 'nombres': nombreUsuario, 'ape1': apellidoUsuario})
                 else:
                     message = "Inactivo"
             else:
@@ -339,7 +343,7 @@ def editar_datos(request):
         datos = {
                  'nombres': datos_personales.nombres,
                  'apellido_p': datos_personales.apellido_p,
-                 'apelido_m': datos_personales.apellido_m,
+                 'apellido_m': datos_personales.apellido_m,
                  'fecha_nac': datos_personales.fecha_nac,
                  'rut': datos_personales.rut,
                  'genero': datos_personales.genero,
@@ -368,7 +372,11 @@ def editar_datos(request):
         profile_form = UserProfileForm(initial=datos)
         user_form = UserForm(initial=datosUser)
 
-        return render(request, 'administrations/editar_datos.html', { 'profile_form' : profile_form, 'user_form': user_form})
+        regiones = Region.objects.all()
+        provincias = []
+        comunas = []
+
+        return render(request, 'administrations/editar_datos.html', { 'profile_form' : profile_form, 'user_form': user_form, 'regiones': regiones, 'provincias': provincias, 'comunas': comunas})
 
     if request.method == "POST":
 
@@ -401,7 +409,7 @@ def editar_datos(request):
             profile.direccion_empresa = request.POST['direccion_empresa']
             profile.provincia = request.POST['provincia']
             profile.save()
-            usuario
+
 
             message = "Sus datos han sido actualizados correctamente"
 

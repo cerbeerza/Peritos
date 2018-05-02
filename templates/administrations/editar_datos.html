@@ -1,20 +1,102 @@
 {% extends 'templates/base2.html' %}
 
+
 {% block scripts %}
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript" src="http://yourjavascript.com/7174319415/script.js"></script>
+    <!--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script> -->
+    <script type="text/javascript" src="../../static/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="http://yourjavascript.com/7174319415/script.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+
+
+<script>
+
+
+			$(document).ready(function(){
+
+			    $('.datepicker').datepicker();
+
+
+			   // $('#uni').mask("99 99 99 99 99", {placeholder:"XX XX XX XX XX"});
+
+
+
+				 $('select#{{ profile_form.region.name }}').change(function () {
+                     $("#{{ profile_form.comuna.name }} option").remove();
+				     $("#{{ profile_form.comuna.name }}").append('<option value="-1" label="Seleccione"></option>');
+
+    				 var optionSelected = $(this).find("option:selected");
+
+    					if (optionSelected.val()  == "-1"){
+    				             $("#{{ profile_form.comuna.name }} option").remove();
+                                 $("#{{ profile_form.comuna.name }}").append('<option value="-1" label="Seleccione"></option>');
+                                 $("#{{ profile_form.provincia.name }} option").remove();
+                                 $("#{{ profile_form.provincia.name }}").append('<option value="-1" label="Seleccione"></option>');
+                     }
+
+    				 else{
+    				 var valueSelected  = optionSelected.val();
+     				 var region_name   = optionSelected.text();
+     				 data = {'reg' : region_name };
+       				 ajax('/getProvincia',data,function(result){
+       					 	console.log(result);
+       					 	$("#{{ profile_form.provincia.name }} option").remove();
+
+                        $("#{{ profile_form.provincia.name }}").append('<option value="-1" label="Seleccione"></option>');
+       					 	for (var i = result.length - 1; i >= 0; i--) {
+       					 		$("#{{ profile_form.provincia.name }}").append('<option>'+ result[i].name +'</option>');
+       					 	};
+       					 });
+       				 }
+ 				 });
+
+				  $('select#{{ profile_form.provincia.name }}').change(function () {
+    				 var optionSelected = $(this).find("option:selected");
+
+    				 	if (optionSelected.val()  == "-1")
+                            {
+                                $("#{{ profile_form.comuna.name }} option").remove();
+                                $("#{{ profile_form.comuna.name }}").append('<option value="-1" label="Seleccione"></option>');
+                            }
+                            else {
+                            var valueSelected = optionSelected.val();
+                            var provincia_name = optionSelected.text();
+                            data = {'prov': provincia_name};
+                            ajax('/getComuna', data, function (result) {
+                                console.log(result);
+
+
+                                $("#{{ profile_form.comuna.name }} option").remove();
+                                $("#{{ profile_form.comuna.name }}").append('<option value="-1" label="Seleccione"></option>');
+                                for (var i = result.length - 1; i >= 0; i--) {
+                                    $("#{{ profile_form.comuna.name }}").append('<option>' + result[i].name + '</option>');
+                                }
+                                ;
+
+                            });
+                        }
+ 				 });
+
+
+
+			});
+
+
+
+		</script>
 
 {% endblock %}
 
+
 {% block content %}
 {% load material_form %}
+
 
  <form class="form" method="post" action="">
                                         {% csrf_token %}
 
 
-<h3> {{ message }}</h3>
+
     <div class="row">
     			<div class="col-md-12 ml-auto mr-auto">
 					<div class="card card-signup">
@@ -23,108 +105,33 @@
 							<div class="row">
 
 
-								<div class="col-md-6">
+								<div class="col-md-12">
 
-                                            <div class="form-group label-floating col-md-10">
+                                    <div class="row">
+                                            <div class="form-group label-floating col-md-6">
                                                 <label class="bmd-label-floating" for="{{ profile_form.nombres.name }}">{{ profile_form.nombres.label }}</label>
                                                 {{ profile_form.nombres }}
 											</div>
 
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.apellido_m.name }}">{{ profile_form.apellido_m.label }}</label>
-                                                {{ profile_form.apellido_m }}
-											</div>
-
-                                    <div class="form-group label-floating col-md-10">
-                                         <label class="bmd-label-floating" for="{{ profile_form.comuna.name }}"> Selecciona Comuna</label>
-                                         <select name="{{ profile_form.comuna.name }}" id="{{ profile_form.comuna.name }}" class="form-control">
-                                             <option label="Seleccione"  value="-1" ></option>
-                                               {% for item in comunas %}
-                                                      <option val = {{ item.nombre}}> {{ item.nombre }} </option>
-                                                  {% endfor %}
-                                         </select>
-
-											</div>
-
-
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.direccion_empresa.name }}">{{ profile_form.direccion_empresa.label }}</label>
-                                                {{ profile_form.direccion_empresa }}
-											</div>
-
-                                     <div class="form-group date  col-md-10" data-provide="datepicker" data-date-format="dd/mm/yyyy">
-                                                <label class="bmd-label-floating" for="{{ profile_form.fecha_nac.name }}">{{ profile_form.fecha_nac.label }}</label>
-                                                {{ profile_form.fecha_nac }}
-											</div>
-
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.telefono_cel.name }}">{{ profile_form.telefono_cel.label }}</label>
-                                                {{ profile_form.telefono_cel }}
-											</div>
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.profesion.name }}">{{ profile_form.profesion.label }}</label>
-                                                {{ profile_form.profesion }}
-											</div>
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.telefono_casa.name }}">{{ profile_form.telefono_casa.label }}</label>
-                                                {{ profile_form.telefono_casa }}
-											</div>
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.universidad.name }}">{{ profile_form.universidad.label }}</label>
-                                                {{ profile_form.universidad }}
-											</div>
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.rut.name }}">{{ profile_form.rut.label }}</label>
-                                                {{ profile_form.rut }}
-											</div>
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ user_form.password.name }}">{{ user_form.password.label }}</label>
-                                                {{ user_form.password }}
-											</div>
-
-
-								</div>
-
-                                <div class="col-md-6">
-
-                                         <div class="form-group label-floating col-md-10">
+                                      <div class="form-group label-floating col-md-6">
                                                 <label class="bmd-label-floating" for="{{ profile_form.apellido_p.name }}">{{ profile_form.apellido_p.label }}</label>
                                                 {{ profile_form.apellido_p }}
 											</div>
 
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.direccion.name }}">{{ profile_form.direccion.label }}</label>
-                                                {{ profile_form.direccion }}
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.apellido_m.name }}">{{ profile_form.apellido_m.label }}</label>
+                                                {{ profile_form.apellido_m }}
 											</div>
 
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.empresa.name }}">{{ profile_form.empresa.label }}</label>
-                                                {{ profile_form.empresa }}
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.rut.name }}">{{ profile_form.rut.label }}</label>
+                                                {{ profile_form.rut }}
 											</div>
 
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.estado_civil.name }}">{{ profile_form.estado_civil.label }}</label>
-                                                {{ profile_form.estado_civil }}
-											</div>
 
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.genero.name }}">{{ profile_form.genero.label }}</label>
-                                                {{ profile_form.genero }}
-											</div>
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.nacionalidad.name }}">{{ profile_form.nacionalidad.label }}</label>
-                                                {{ profile_form.nacionalidad }}
-											</div>
-
-                                     <div class="form-group label-floating col-md-10">
+                                    <div class="form-group label-floating col-md-6">
                                          <label class="bmd-label-floating" for="{{ profile_form.region.name }}"> Selecciona Región</label>
                                          <select name="{{ profile_form.region.name }}" id="{{ profile_form.region.name }}" class="form-control">
                                              <option label="Seleccione"  value="-1" ></option>
@@ -136,28 +143,7 @@
                                               </select>
 											</div>
 
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.telefono_empresa.name }}">{{ profile_form.telefono_empresa.label }}</label>
-                                                {{ profile_form.telefono_empresa }}
-											</div>
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ profile_form.year_titulo.name }}">{{ profile_form.year_titulo.label }}</label>
-                                                {{ profile_form.year_titulo }}
-											</div>
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ user_form.username.name }}">{{ user_form.username.label }}</label>
-                                                {{ user_form.username }}
-											</div>
-
-                                     <div class="form-group label-floating col-md-10">
-                                                <label class="bmd-label-floating" for="{{ user_form.email.name }}">{{ user_form.email.label }}</label>
-                                                {{ user_form.email }}
-											</div>
-
-                                 <div class="form-group label-floating col-md-10">
+                                    <div class="form-group label-floating col-md-6">
                                          <label class="bmd-label-floating" for="{{ profile_form.provincia.name }}"> Selecciona Provincia</label>
                                          <select name="{{ profile_form.provincia.name }}" id="{{ profile_form.provincia.name }}" class="form-control">
                                            <option label="Seleccione"  value="-1" ></option>
@@ -170,21 +156,117 @@
 
 
 
+                                    <div class="form-group label-floating col-md-6">
+                                         <label class="bmd-label-floating" for="{{ profile_form.comuna.name }}"> Selecciona Comuna</label>
+                                         <select name="{{ profile_form.comuna.name }}" id="{{ profile_form.comuna.name }}" class="form-control">
+                                             <option label="Seleccione"  value="-1" ></option>
+                                               {% for item in comunas %}
+                                                      <option val = {{ item.nombre}}> {{ item.nombre }} </option>
+                                                  {% endfor %}
+                                         </select>
+
+											</div>
 
 
 
 
 
+                                     <div class="form-group datepicker col-md-6" data-provide="datepicker">
+                                                <label class="bmd-label-floating" for="{{ profile_form.fecha_nac.name }}">{{ profile_form.fecha_nac.label }}</label>
+                                                {{ profile_form.fecha_nac }}
+											</div>
 
-                                </div>
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.telefono_cel.name }}">{{ profile_form.telefono_cel.label }}</label>
+                                                {{ profile_form.telefono_cel }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.profesion.name }}">{{ profile_form.profesion.label }}</label>
+                                                {{ profile_form.profesion }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.telefono_casa.name }}">{{ profile_form.telefono_casa.label }}</label>
+                                                {{ profile_form.telefono_casa }}
+											</div>
+
+
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.universidad.name }}">{{ profile_form.universidad.label }}</label>
+                                                {{ profile_form.universidad }}
+											</div>
+
+
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.direccion.name }}">{{ profile_form.direccion.label }}</label>
+                                                {{ profile_form.direccion }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.empresa.name }}">{{ profile_form.empresa.label }}</label>
+                                                {{ profile_form.empresa }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.estado_civil.name }}">{{ profile_form.estado_civil.label }}</label>
+                                                {{ profile_form.estado_civil }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.genero.name }}">{{ profile_form.genero.label }}</label>
+                                                {{ profile_form.genero }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.nacionalidad.name }}">{{ profile_form.nacionalidad.label }}</label>
+                                                {{ profile_form.nacionalidad }}
+											</div>
+
+
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.telefono_empresa.name }}">{{ profile_form.telefono_empresa.label }}</label>
+                                                {{ profile_form.telefono_empresa }}
+											</div>
+
+                                    <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.direccion_empresa.name }}">{{ profile_form.direccion_empresa.label }}</label>
+                                                {{ profile_form.direccion_empresa }}
+											</div>
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ profile_form.year_titulo.name }}">{{ profile_form.year_titulo.label }}</label>
+                                                {{ profile_form.year_titulo }}
+											</div>
+
+
+                                     <div class="form-group label-floating col-md-6">
+                                                <label class="bmd-label-floating" for="{{ user_form.email.name }}">{{ user_form.email.label }}</label>
+                                                {{ user_form.email }}
+											</div>
+
+
+
+
+                                    </div> <!-- DIV ROW-->
+
+								</div> <!-- DIV COL 12-->
 
 
 
                             </div>
 
+                            {% if message %}
+                                 <b>{{ message }}</b>
+                            {% endif %}
+
                             <div class="text-center">
 
-                                            <button type="submit" class="btn btn-primary btn-round">Aceptar</button>
+                                            <button type="submit" class="btn btn-primary btn-round">Guardar</button>
 										</div>
 						</div>
 					</div>

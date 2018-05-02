@@ -10,9 +10,16 @@
     {% if user.is_authenticated %}
 
 
-    <p>Hola, <b>{{ user.username }}</b></p>
-       <br>  {{ message }}
+    <p>Bienvenido, <b>{{ nombres }} {{ ape1 }}</b></p>
+
+
+      {% if message %}
+          <br>  {{ message }}
+      {% endif %}
+
+      {% if message2 %}
         <br> {{ message2 }}
+      {% endif %}
 
     {% else %}
     <p>Hola, no estás logeado</p>
