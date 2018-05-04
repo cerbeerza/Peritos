@@ -25,6 +25,8 @@
                      $("#{{ profile_form.comuna.name }} option").remove();
 				     $("#{{ profile_form.comuna.name }}").append('<option value="-1" label="Seleccione"></option>');
 
+
+
     				 var optionSelected = $(this).find("option:selected");
 
     					if (optionSelected.val()  == "-1"){
@@ -92,7 +94,7 @@
 {% load material_form %}
 
 
- <form class="form" method="post" action="">
+ <form class="form" method="post" action="" name="formEditarDatos" id="formEditarDatos">
                                         {% csrf_token %}
 
 
@@ -134,7 +136,7 @@
                                     <div class="form-group label-floating col-md-6">
                                          <label class="bmd-label-floating" for="{{ profile_form.region.name }}"> Selecciona Región</label>
                                          <select name="{{ profile_form.region.name }}" id="{{ profile_form.region.name }}" class="form-control">
-                                             <option label="Seleccione"  value="-1" ></option>
+                                             <option label="{{ datosPersonales.region }}"  value="{{ datosPersonales.region }}" ></option>
                                              {% for item in regiones %}
                                                       <option val = {{ item.nombre}}> {{ item.nombre }} </option>
                                                   {% endfor %}
@@ -146,7 +148,7 @@
                                     <div class="form-group label-floating col-md-6">
                                          <label class="bmd-label-floating" for="{{ profile_form.provincia.name }}"> Selecciona Provincia</label>
                                          <select name="{{ profile_form.provincia.name }}" id="{{ profile_form.provincia.name }}" class="form-control">
-                                           <option label="Seleccione"  value="-1" ></option>
+                                           <option label="{{ datosPersonales.provincia }}"  value="{{ datosPersonales.provincia }}" ></option>
                                               {% for item in provincias %}
                                                       <option val = {{ item.nombre}}> {{ item.nombre }} </option>
                                                   {% endfor %}
@@ -159,7 +161,7 @@
                                     <div class="form-group label-floating col-md-6">
                                          <label class="bmd-label-floating" for="{{ profile_form.comuna.name }}"> Selecciona Comuna</label>
                                          <select name="{{ profile_form.comuna.name }}" id="{{ profile_form.comuna.name }}" class="form-control">
-                                             <option label="Seleccione"  value="-1" ></option>
+                                             <option label="{{ datosPersonales.comuna }}"  value="{{ datosPersonales.comuna }}" ></option>
                                                {% for item in comunas %}
                                                       <option val = {{ item.nombre}}> {{ item.nombre }} </option>
                                                   {% endfor %}

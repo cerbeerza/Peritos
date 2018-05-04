@@ -26,9 +26,9 @@ class Profile(models.Model):
     nacionalidad = models.CharField(max_length=20, null=True)
     direccion = models.CharField(max_length=80, null=True)
 
-    region = models.CharField(max_length=50, null=True)
-    provincia = models.CharField(max_length=50, null=True)
-    comuna = models.CharField(max_length=50, null=True)
+    region = models.CharField(max_length=80, null=True)
+    provincia = models.CharField(max_length=80, null=True)
+    comuna = models.CharField(max_length=80, null=True)
     estados_civil = (
         ('-1', 'Seleccione'),
         ('SOLTERO', 'SOLTERO(A)'),
@@ -45,7 +45,7 @@ class Profile(models.Model):
         ('ingEjecGeo', 'Ingeniero de Ejecución en Geomensura'),
         ('ingEjecMin', 'Ingeniero de Ejecución en Minas'),
     )
-    profesion = models.CharField(max_length=40, null=True, choices=profesiones, default='Seleccione')
+    profesion = models.CharField(max_length=50, null=True, choices=profesiones, default='Seleccione')
     universidad = models.CharField(max_length=50, null=True)
     archivo_titulo = models.FileField(null=True, blank=True)
     archivo_ci = models.FileField(upload_to='Archivo/', null=True, blank=True)

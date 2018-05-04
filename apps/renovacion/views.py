@@ -3,7 +3,7 @@ from apps.administration.models import User
 from apps.renovacion.models import Renovacion
 from datetime import date
 from apps.periodo.models import PeriodoProceso
-
+from django.core.mail import EmailMessage
 
 
 
@@ -40,10 +40,19 @@ def renueva(request):
         handle_uploaded_file(request.FILES['fileTIT'], ruta3)
         renovacion = Renovacion.objects.create(periodo=year, fecha_creacion=fecha_actual, doc_ci=ruta, doc_ant=ruta2, doc_tit=ruta3, id_user_id=userId)
 
+        mensaje_email = EmailMessage(subject='Renovación Proceso Peritos',
+                                     body='Se ha Realizado correctamente su Renovación',
+                                     from_email='ignacio.beltran.silva@gmail.com',
+                                     to=[idUsuarioFk.email],
+                                     )
+        mensaje_email.send()
+
+        message = "Se ha realizado correctamente su Renovación"
 
 
 
-        return render(request, 'templates/renovacion/renovacion.html')
+
+        return render(request, 'templates/renovacion/renovacion.html', {'message', message})
 
 
 

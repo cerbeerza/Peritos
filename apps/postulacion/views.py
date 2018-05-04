@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from apps.postulacion.forms import PostulacionForm
 from apps.zona.models import Region
+from apps.administration.models import Profile
 from apps.postulacion.models import Postulacion
 from django.contrib.auth.models import User
 from datetime import date
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMessage
 
 @login_required()
 def crea_postulacion(request):
@@ -31,6 +33,16 @@ def crea_postulacion(request):
             postulacion.save()
 
             message = "Se ha realizado su postulación correctamente"
+
+
+            mensaje_email = EmailMessage(subject='Postulación Proceso Peritos',
+                                         body='Se ha Realizado correctamente su Postulación',
+                                         from_email='ignacio.beltran.silva@gmail.com',
+                                         to=[idUsuarioFk.email],
+                                         )
+            mensaje_email.send()
+
+
             return render(request, 'templates/administrations/homepage.html', {'message': message})
     else:
         form = PostulacionForm

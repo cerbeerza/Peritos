@@ -184,11 +184,24 @@ def registro_page(request):
                 profile.universidad = request.POST['universidad']
                 profile.year_titulo = request.POST['year_titulo']
                 profile.rut = request.POST['rut']
+                profile.provincia = request.POST['provincia']
 
                 #handle_uploaded_file(request.FILES['archivo_titulo'])
                 profile.save()
 
                 message = 'Se ha creado el usuario'
+
+                correo = request.POST['email']
+
+                mensaje_email = EmailMessage(subject='Registro de Usuario Plataforma Peritos',
+                                             body='Se ha registrado correctamente a nuestra plataforma para Proceso de Postulación y Renovación de Peritos Mensuradores',
+                                             from_email='ignacio.beltran.silva@gmail.com',
+                                             to=[correo],
+                                             )
+                mensaje_email.send()
+
+                return render(request, 'templates/administrations/login.html', {'message': message})
+
             else:
                 message = 'Usuario ya existe'
         else:
@@ -376,7 +389,7 @@ def editar_datos(request):
         provincias = []
         comunas = []
 
-        return render(request, 'administrations/editar_datos.html', { 'profile_form' : profile_form, 'user_form': user_form, 'regiones': regiones, 'provincias': provincias, 'comunas': comunas})
+        return render(request, 'administrations/editar_datos.html', { 'profile_form' : profile_form, 'user_form': user_form, 'regiones': regiones, 'provincias': provincias, 'comunas': comunas, 'datosPersonales': datos_personales})
 
     if request.method == "POST":
 
@@ -397,8 +410,8 @@ def editar_datos(request):
             profile.nacionalidad = request.POST['nacionalidad']
             profile.direccion = request.POST['direccion']
             profile.region = request.POST['region']
-            profile.comuna = request.POST['nombres']
-            profile.estado_civil = request.POST['comuna']
+            profile.comuna = request.POST['comuna']
+            profile.estado_civil = request.POST['estado_civil']
             profile.telefono_casa = request.POST['telefono_casa']
             profile.telefono_cel = request.POST['telefono_cel']
             profile.profesion = request.POST['profesion']
