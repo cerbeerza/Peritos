@@ -183,7 +183,9 @@ def registro_page(request):
                 profile.telefono_empresa  = request.POST['telefono_empresa']
                 profile.universidad = request.POST['universidad']
                 profile.year_titulo = request.POST['year_titulo']
-                profile.rut = request.POST['rut']
+                rutFormateado = request.POST['rut']
+                rutFormateado = rutFormateado[len(rutFormateado -2)]
+                profile.rut = rutFormateado
                 profile.provincia = request.POST['provincia']
 
                 #handle_uploaded_file(request.FILES['archivo_titulo'])

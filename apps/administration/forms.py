@@ -82,7 +82,7 @@ class UserProfileForm(forms.ModelForm):
             'fecha_nac' : forms.DateInput(attrs={'class':'form-control','readonly':'true'}),
             'genero' : forms.Select(attrs={'class':'form-control'}),
             'nacionalidad' : forms.TextInput(attrs={'class':'form-control'}),
-            'rut' : forms.TextInput(attrs={'class':'form-control'}),
+            'rut' : forms.TextInput(attrs={'class':'form-control', 'onblur' : 'Rut(rut.value)'}),
             'provincia': forms.Select(attrs={'class':'form-control'}),
 
 
