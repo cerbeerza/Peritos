@@ -22,7 +22,7 @@ class Profile(models.Model):
     apellido_p = models.CharField(max_length=50, null=True)
     apellido_m = models.CharField(max_length=50, null=True)
     fecha_nac = models.DateField(null=True)
-    rut = models.CharField(max_length=10, null=True)
+    rut = models.CharField(max_length=12, null=True)
     generos = (
         ('S', 'Seleccione'),
         ('M', 'MASCULINO'),

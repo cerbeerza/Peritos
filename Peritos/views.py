@@ -138,9 +138,16 @@ def registro_page(request):
         user_form = UserForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
         #if user_form.is_valid():
+            rutOriginal = request.POST['rut']
+            largo = len(rutOriginal)
+            rutFormateado = rutOriginal[0: largo - 2]
+            rutFinal = rutFormateado.replace('.', '')
+
             try:
-                var = User.objects.get(username=request.POST['rut'])
+                #var = User.objects.get(rutFinal)
+                var = Profile.objects.get(rut=rutFinal)
             except ObjectDoesNotExist:
+
                 var = None
 
             if var is None:
@@ -183,15 +190,18 @@ def registro_page(request):
                 profile.telefono_empresa  = request.POST['telefono_empresa']
                 profile.universidad = request.POST['universidad']
                 profile.year_titulo = request.POST['year_titulo']
-                rutFormateado = request.POST['rut']
-                rutFormateado = rutFormateado[len(rutFormateado -2)]
-                profile.rut = rutFormateado
+                #rutFormateado = request.POST['rut']
+                #rutFormateado = rutFormateado[0: len(rutFormateado) - 2]
+                #rutFormateado = rutFormateado.replace('.', '')
+                profile.rut = rutFinal
                 profile.provincia = request.POST['provincia']
 
                 #handle_uploaded_file(request.FILES['archivo_titulo'])
                 profile.save()
 
                 message = 'Se ha creado el usuario'
+
+                form = LoginForm()
 
                 correo = request.POST['email']
 
@@ -202,7 +212,7 @@ def registro_page(request):
                                              )
                 mensaje_email.send()
 
-                return render(request, 'templates/administrations/login.html', {'message': message})
+                return render(request, 'templates/administrations/login.html', {'message': message, 'form' : form})
 
             else:
                 message = 'Usuario ya existe'
