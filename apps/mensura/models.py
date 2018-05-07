@@ -3,6 +3,11 @@ from django.db import models
 
 class MensuraGeneral(models.Model):
 
+
+    class Meta:
+        verbose_name = 'Mensura'
+        verbose_name_plural = 'Mensuras'
+
     periodo = models.CharField(max_length=4)
     num_mensura = models.IntegerField()
     promedio = models.FloatField()

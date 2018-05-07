@@ -4,6 +4,10 @@ from apps.administration.models import Profile
 
 class Postulacion(models.Model):
 
+    class Meta:
+        verbose_name = 'Postulación'
+        verbose_name_plural = 'Postulaciones'
+
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_creacion = models.DateField(auto_now_add=True)
     periodo = models.CharField(max_length=4)

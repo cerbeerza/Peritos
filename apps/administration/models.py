@@ -11,6 +11,12 @@ from apps.zona.models import Region, Provincia, Comuna
 
 
 class Profile(models.Model):
+
+    class Meta:
+        verbose_name = 'Usuario'
+        verbose_name_plural = 'Usuarios'
+
+
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nombres = models.CharField(max_length=50, null=True)
     apellido_p = models.CharField(max_length=50, null=True)
@@ -55,7 +61,8 @@ class Profile(models.Model):
     telefono_empresa = models.CharField(null=True, max_length=20)
     direccion_empresa = models.CharField(max_length=80, null=True)
 
-
+    def __str__(self):
+        return self.nombres + " " + self.apellido_p + " " + self.apellido_m
 
 
 

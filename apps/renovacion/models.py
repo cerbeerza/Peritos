@@ -3,6 +3,10 @@ from django.contrib.auth.models import User
 
 class Renovacion(models.Model):
 
+    class Meta:
+        verbose_name = 'Renovación'
+        verbose_name_plural = 'Renovaciones'
+
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_creacion = models.DateField(auto_now_add=True)
     periodo = models.CharField(max_length=4)

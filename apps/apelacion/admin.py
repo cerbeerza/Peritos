@@ -1,3 +1,4 @@
 from django.contrib import admin
+from apps.apelacion.models import Apelacion
 
-# Register your models here.
+admin.site.register(Apelacion)
