@@ -160,11 +160,11 @@ def registro_page(request):
 
                 #Cambio por sacado de username
                 #user_form.save()
-                User.objects.create(username=request.POST['rut'], password=request.POST['password'], email=request.POST['email'] )
+                User.objects.create(username=rutFinal, password=request.POST['password'], email=request.POST['email'], first_name=request.POST['nombres'], last_name=request.POST['apellido_p'] )
 
 
                 #profile_form.save()
-                user = User.objects.get(username=request.POST['rut'])
+                user = User.objects.get(username=rutFinal)
                 userId = user.id
                 user.password = make_password(pass1, salt=None, hasher='default')
                 user.save()
