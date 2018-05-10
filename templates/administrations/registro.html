@@ -223,6 +223,38 @@ function Rut(texto)
 {% block content %}
 {% load material_form %}
 
+
+
+   {% if registrado %}
+
+        <div class="row">
+    			<div class="col-md-12 ml-auto mr-auto">
+					<div class="card card-signup">
+						<h2 class="card-title text-center">Registro de Nuevo Usuario</h2>
+						<div class="card-body">
+							<div class="row">
+
+
+								<div class="col-md-12">
+
+                                   <h3>Se ha creado correctamente tu usuario</h3>
+
+								</div> <!-- DIV COL 12-->
+
+
+
+                            </div>
+
+
+
+						</div>
+					</div>
+                </div>
+            </div>
+
+
+    {% else %}
+
  <form name="formRut" class="form" method="post" action="">
                                         {% csrf_token %}
 
@@ -424,5 +456,7 @@ function Rut(texto)
 
 
 	</form>
+
+    {% endif %}
 
 {% endblock %}

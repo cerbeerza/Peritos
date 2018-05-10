@@ -39,7 +39,7 @@ class UserProfileForm(forms.ModelForm):
         labels = {
 
             'direccion' : 'Dirección',
-            'telefono_cel' : 'Celular',
+            'telefono_cel' : 'Celular (Formato +569 XXXXXXXX)',
             'apellido_p' : 'Apellido Paterno',
             'apellido_m' : 'Apellido Materno',
             'comuna' : 'Comuna',

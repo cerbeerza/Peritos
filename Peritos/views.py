@@ -45,7 +45,11 @@ def login_page(request):
 
         form = LoginForm(request.POST)
         if form.is_valid():
-            username = request.POST['username']
+            rutOriginal = request.POST['username']
+            largo = len(rutOriginal)
+            rutFormateado = rutOriginal[0: largo - 2]
+            rutFinal = rutFormateado.replace('.', '')
+            username = rutFinal
             password = request.POST['password']
 
             user = authenticate(username=username, password=password)
@@ -134,6 +138,7 @@ def login_page(request):
 def registro_page(request):
 
     if request.method == 'POST':
+        registrado = False
         profile_form = UserProfileForm(request.POST, request.FILES)
         user_form = UserForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
@@ -207,12 +212,14 @@ def registro_page(request):
 
                 mensaje_email = EmailMessage(subject='Registro de Usuario Plataforma Peritos',
                                              body='Se ha registrado correctamente a nuestra plataforma para Proceso de Postulación y Renovación de Peritos Mensuradores',
-                                             from_email='ignacio.beltran.silva@gmail.com',
+                                             from_email='procesoperitos@sernageomin.cl',
                                              to=[correo],
                                              )
                 mensaje_email.send()
 
-                return render(request, 'templates/administrations/login.html', {'message': message, 'form' : form})
+                #return render(request, 'templates/administrations/login.html', {'message': message, 'form' : form})
+                return render(request, 'templates/administrations/registro.html', {'registrado' : True, 'message' : message})
+                #return redirect('/')
 
             else:
                 message = 'Usuario ya existe'
