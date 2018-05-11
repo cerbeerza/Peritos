@@ -31,7 +31,7 @@ class UserProfileForm(forms.ModelForm):
             'year_titulo',
             'rut',
             'provincia',
-            'archivo_titulo',
+
 
 
         ]

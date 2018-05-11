@@ -10,10 +10,10 @@ class Renovacion(models.Model):
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     fecha_creacion = models.DateField(auto_now_add=True)
     periodo = models.CharField(max_length=4)
-    doc_ci = models.CharField(max_length=100, null=True)
-    doc_ant = models.CharField(max_length=100, null=True)
-    doc_tit = models.CharField(max_length=100, null=True)
-    archivo = models.FileField(null=True)
+    archivo_ci = models.FileField(upload_to='ci/', null=True)
+    archivo_ant = models.FileField(upload_to='ant/', null=True)
+    archivo_tit =models.FileField(upload_to='tit/', null=True)
+
 
 
     def __str__(self):
