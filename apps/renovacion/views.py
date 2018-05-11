@@ -4,6 +4,7 @@ from apps.renovacion.models import Renovacion
 from datetime import date
 from apps.periodo.models import PeriodoProceso
 from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
 
 
@@ -28,41 +29,29 @@ def renueva(request):
         periodo = objetoPeriodo.periodo
         year = periodo[0:4]
 
-        #renovacion.periodo = year
-        #renovacion.fecha_creacion = fecha_actual
-        #renovacion.doc_ci = ruta
-        #renovacion.id_user_id = userId
-        #ruta = 'd:/files/ci/ci'+rutUser+'.pdf'
-        #ruta2 = 'd:/files/ant/ant'+rutUser+'.pdf'
-        #ruta3 = 'd:/files/tit/tit'+rutUser+'.pdf'
-        #handle_uploaded_file(request.FILES['fileCCI'], ruta)
-        #handle_uploaded_file(request.FILES['fileANT'], ruta2)
-        #handle_uploaded_file(request.FILES['fileTIT'], ruta3)
-        archivo_ci = request.FILES['fileCCI']
-        archivo_ant = request.FILES['fileANT']
-        archivo_tit = request.FILES['fileTIT']
-        renovacion = Renovacion.objects.create(periodo=year, fecha_creacion=fecha_actual, doc_ci=archivo_ci, doc_ant=archivo_ant, doc_tit=archivo_tit, id_user_id=userId)
+        renovacion = Renovacion.objects.create(periodo=year, fecha_creacion=fecha_actual, id_user_id=userId, archivo_ci=request.FILES['fileCCI'], archivo_ant=request.FILES['fileANT'], archivo_tit=request.FILES['fileTIT'])
+
+
+
 
         mensaje_email = EmailMessage(subject='Renovación Proceso Peritos',
                                      body='Se ha Realizado correctamente su Renovación',
-                                     from_email='ignacio.beltran.silva@gmail.com',
+                                     from_email='procesoperitos@sernageomin.cl',
                                      to=[idUsuarioFk.email],
                                      )
         mensaje_email.send()
 
         message = "Se ha realizado correctamente su Renovación"
 
-
-
-
-        return render(request, 'templates/renovacion/renovacion.html', {'message', message})
+        return render(request, 'templates/renovacion/renovacion.html', {'message': message})
 
 
 
 
 
-def handle_uploaded_file(f, ruta):
-    with open(ruta, 'wb+') as destination:
+
+def handle_uploaded_file(f):
+    with open('default', 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
