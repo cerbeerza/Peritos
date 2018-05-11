@@ -32,13 +32,16 @@ def renueva(request):
         #renovacion.fecha_creacion = fecha_actual
         #renovacion.doc_ci = ruta
         #renovacion.id_user_id = userId
-        ruta = 'd:/files/ci/ci'+rutUser+'.pdf'
-        ruta2 = 'd:/files/ant/ant'+rutUser+'.pdf'
-        ruta3 = 'd:/files/tit/tit'+rutUser+'.pdf'
-        handle_uploaded_file(request.FILES['fileCCI'], ruta)
-        handle_uploaded_file(request.FILES['fileANT'], ruta2)
-        handle_uploaded_file(request.FILES['fileTIT'], ruta3)
-        renovacion = Renovacion.objects.create(periodo=year, fecha_creacion=fecha_actual, doc_ci=ruta, doc_ant=ruta2, doc_tit=ruta3, id_user_id=userId)
+        #ruta = 'd:/files/ci/ci'+rutUser+'.pdf'
+        #ruta2 = 'd:/files/ant/ant'+rutUser+'.pdf'
+        #ruta3 = 'd:/files/tit/tit'+rutUser+'.pdf'
+        #handle_uploaded_file(request.FILES['fileCCI'], ruta)
+        #handle_uploaded_file(request.FILES['fileANT'], ruta2)
+        #handle_uploaded_file(request.FILES['fileTIT'], ruta3)
+        archivo_ci = request.FILES['fileCCI']
+        archivo_ant = request.FILES['fileANT']
+        archivo_tit = request.FILES['fileTIT']
+        renovacion = Renovacion.objects.create(periodo=year, fecha_creacion=fecha_actual, doc_ci=archivo_ci, doc_ant=archivo_ant, doc_tit=archivo_tit, id_user_id=userId)
 
         mensaje_email = EmailMessage(subject='Renovación Proceso Peritos',
                                      body='Se ha Realizado correctamente su Renovación',
