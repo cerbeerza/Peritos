@@ -58,6 +58,10 @@ class Profile(models.Model):
     telefono_empresa = models.CharField(null=True, max_length=20)
     direccion_empresa = models.CharField(max_length=80, null=True)
 
+    sngm = models.BooleanField(default=False)
+    renovante = models.BooleanField(default=False)
+
+
     def __str__(self):
         return self.nombres + " " + self.apellido_p + " " + self.apellido_m
 
