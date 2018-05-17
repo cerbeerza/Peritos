@@ -86,6 +86,10 @@ class UserProfileForm(forms.ModelForm):
             'provincia': forms.Select(attrs={'class':'form-control'}),
 
 
+
+
+
+
         }
 
 class UserForm(forms.ModelForm):
