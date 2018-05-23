@@ -9,7 +9,7 @@ class RenovacionAdmin(admin.ModelAdmin):
     readonly_fields = ['archivo_ci', 'archivo_ant', 'archivo_tit']
 
     def get_nombre(self, instance):
-        return instance.id_user.profile.nombres
+        return instance.id_user.profile.nombres + " " + instance.id_user.profile.apellido_p + " " + instance.id_user.profile.apellido_m
     get_nombre.short_description = "Nombres"
 
 

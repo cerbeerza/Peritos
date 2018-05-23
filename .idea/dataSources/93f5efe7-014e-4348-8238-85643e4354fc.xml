@@ -1101,7 +1101,7 @@
     </column>
     <column id="282" parent="230" name="desc_apelacion">
       <Position>4</Position>
-      <DataType>varchar(300)|0s</DataType>
+      <DataType>longtext|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>

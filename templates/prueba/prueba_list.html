@@ -30,7 +30,13 @@
             <td> {{ prueba.parte_b }}</td>
             <td> {{ prueba.parte_final }}</td>
             <td> {{ prueba.nota }}</td>
+            {% if prueba.situacion == 'REPROBADO' %}
+            <td bgcolor="red"> {{ prueba.situacion }}</td>
+            {% elif prueba.situacion == 'APROBADO' %}
+            <td bgcolor=#00bfff> {{ prueba.situacion }}</td>
+            {% else %}
             <td> {{ prueba.situacion }}</td>
+            {% endif %}
             <td> {{ prueba.periodo }}</td>
 
         </tr>
