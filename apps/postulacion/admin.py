@@ -1,7 +1,8 @@
 from django.contrib import admin
 from apps.postulacion.models import Postulacion
+from import_export.admin import ImportExportModelAdmin
 
-class PostulacionAdmin(admin.ModelAdmin):
+class PostulacionAdmin(ImportExportModelAdmin):
     list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'periodo', 'region_examen')
     list_filter = ['periodo']
 
