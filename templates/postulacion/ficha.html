@@ -2,9 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Ficha Renovación</title>
+    <title>Ficha de Postulación</title>
 
-    <style>
+     <style>
 
         p {
             font-family: Arial;
@@ -29,13 +29,14 @@
 
 
     </style>
+
 </head>
 <body>
 
 {% load static %}
 <img src="{% static 'img/logo_sern.png' %}" height="15" width="15">
 
-<h2>FICHA RENOVACIÓN PERITO MENSURADOR 2019</h2>
+<h2>FICHA NUEVO PERITO MENSURADOR 2019</h2>
 <br>
 <br>
 <br>
@@ -72,6 +73,7 @@
 <p>DIRECCIÓN EMPRESA: {{ dic.diremp }}</p>
 <p>TELÉFONO EMPRESA: {{ dic.telemp }}</p>
 <p>FECHA DE PROCESO: {{ dic.fecha_proceso }}</p>
+<p>REGIONAL DONDE RENDIRÁ EL EXÁMEN: {{ dic.region_examen }}</p>
 
 </body>
 </html>

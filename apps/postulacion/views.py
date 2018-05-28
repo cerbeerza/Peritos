@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
+from apps.periodo.models import PeriodoProceso
 
 @login_required()
 def crea_postulacion(request):
@@ -16,12 +17,17 @@ def crea_postulacion(request):
         form = PostulacionForm(request.POST)
         if form.is_valid():
 
-            fechaActual = date.today()
-            yearPeriodo = fechaActual.year
+            #fechaActual = date.today()
+            #yearPeriodo = fechaActual.year
+            fecha_actual = date.today()
+            objetoPeriodo = PeriodoProceso.objects.get(fechaDesde__lte=fecha_actual, fechaHasta__gte=fecha_actual)
+            periodo = objetoPeriodo.periodo
+            year = periodo[0:4]
             region = request.POST['region_examen']
             userId = request.user.id
             idUsuarioFk = User.objects.get(id=userId)
-            registroPost = Postulacion.objects.filter(id_user_id=userId)
+            registroPost = Postulacion.objects.filter(id_user_id=userId, periodo=year)
+
             if len(registroPost) != 0:
                 message = "Ya ha realizado una postulación para este periodo"
                 regiones = Region.objects.all()
@@ -29,7 +35,7 @@ def crea_postulacion(request):
                 return render(request, 'templates/postulacion/postulacion_create.html',
                               {'form': form, 'regiones': regiones, 'message': message})
 
-            postulacion = Postulacion(id_user=idUsuarioFk, region_examen=region, periodo=yearPeriodo)
+            postulacion = Postulacion(id_user=idUsuarioFk, region_examen=region, periodo=year)
             postulacion.save()
 
             message = "Se ha realizado su postulación correctamente"

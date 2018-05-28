@@ -23,11 +23,18 @@ def renueva(request):
 
 
 
+
         #renovacion = Renovacion
         fecha_actual = date.today()
         objetoPeriodo = PeriodoProceso.objects.get(fechaDesde__lte=fecha_actual, fechaHasta__gte=fecha_actual)
         periodo = objetoPeriodo.periodo
         year = periodo[0:4]
+
+        renovaciones = Renovacion.objects.filter(id_user_id=userId, periodo=year)
+        if len(renovaciones) != 0:
+            message: 'Ya ha realizado renovación para este periodo'
+            return render(request, 'templates/renovacion/renovacion.html', {'message': message})
+
 
         renovacion = Renovacion.objects.create(periodo=year, fecha_creacion=fecha_actual, id_user_id=userId, archivo_ci=request.FILES['fileCCI'], archivo_ant=request.FILES['fileANT'], archivo_tit=request.FILES['fileTIT'])
 
