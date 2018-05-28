@@ -32,7 +32,7 @@ def renueva(request):
 
         renovaciones = Renovacion.objects.filter(id_user_id=userId, periodo=year)
         if len(renovaciones) != 0:
-            message: 'Ya ha realizado renovación para este periodo'
+            message =  'Ya ha realizado renovación para este periodo'
             return render(request, 'templates/renovacion/renovacion.html', {'message': message})
 
 
