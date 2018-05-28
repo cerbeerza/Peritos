@@ -6,5 +6,46 @@
 </head>
 <body>
 
+{% load static %}
+<img src="{% static 'img/sern.png' %}">
+
+<h1>FICHA RENOVACIÓN PERITO MENSURADOR 2019</h1>
+<br>
+<br>
+<br>
+<br>
+
+<h2>ANTECEDENTES PERSONALES</h2>
+
+<br>
+<br>
+<h3>NOMBRES: {{ dic.nombres }}</h3>
+<h3>APELLIDOS: {{ dic.apellidos }}</h3>
+<h3>NACIONALIDAD: {{ dic.nacionalidad }}</h3>
+<h3>ESTADO CIVIL: {{ dic.estado_civil }}</h3>
+<h3>RUT: {{ dic.rut }}</h3>
+<h3>DOMICILIO: {{ dic.domicilio }}</h3>
+<h3>COMUNA: {{ dic.comuna }}</h3>
+<h3>REGIÓN: {{ dic.region }}</h3>
+<h3>TELÉFONO: {{ dic.telefono }}</h3>
+<h3>CELULAR: {{ dic.celular }}</h3>
+<h3>EMAIL: {{ dic.email }}</h3>
+
+<br>
+<br>
+<br>
+<br>
+
+<h2>ANTECEDENTES PROFESIONALES Y LABORALES</h2>
+
+<br>
+<br>
+
+<h3>PROFESIÓN: {{ dic.profesion }}</h3>
+<h3>EMPRESA DONDE SE DESARROLLA: {{ dic.empresa }}</h3>
+<h3>DIRECCIÓN EMPRESA: {{ dic.diremp }}</h3>
+<h3>TELÉFONO EMPRESA: {{ dic.telemp }}</h3>
+<h3>FECHA DE PROCESO: {{ dic.fecha_proceso }}</h3>
+
 </body>
 </html>

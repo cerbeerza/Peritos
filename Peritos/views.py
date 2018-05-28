@@ -125,6 +125,7 @@ def login_page(request):
                     nombreUsuario = objUsuario.nombres
                     apellidoUsuario = objUsuario.apellido_p
                     return render(request, 'templates/administrations/homepage.html', {'message': message, 'message2' : message2, 'nombres': nombreUsuario, 'ape1': apellidoUsuario})
+                    #return render(request, 'templates/renovacion/ficha.html')
                 else:
                     message = "Inactivo"
             else:
