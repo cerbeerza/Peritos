@@ -42,6 +42,8 @@ def imprimir_ficha(self, request, queryset):
             'fecha_proceso': fecha_proceso, 'region_examen': region_examen
         }
 
+        aux = request.build_absolute_uri()
+
         html_string = render_to_string('templates/postulacion/ficha.html', {'dic': dict_ctx})
         html = HTML(string=html_string, base_url=request.build_absolute_uri())
         html.write_pdf(target='D:/files/pdf.pdf')
