@@ -72,7 +72,7 @@ def login_page(request):
                     nomina = Nomina.objects.filter(rut_nomina=rutUsuario.rut, periodo=year2)
 
                     if len(nomina) == 0:
-                        message = 'Según nuestros registros usted no aparece en nuestros registros como NOMINADO, usted debe postular'
+                        message = 'Según nuestros registros usted no aparece en como NOMINADO, usted debe postular'
 
                     else:
                         message = 'Usted aparece en nuestros Registros como NOMINADO'
@@ -85,7 +85,7 @@ def login_page(request):
                             "Content-Type": "application/json"
                         }
 
-                        datos = '{ "periodo": "' + year + '", "rutper": "'+rutRut+'", "pass": "sngmq21.,+"}'
+                        datos = '{ "periodo": "' + str(year2+2) + '", "rutper": "'+rutRut+'", "pass": "sngmq21.,+"}'
 
                         notas = requests.post(
                             "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser",
@@ -94,7 +94,7 @@ def login_page(request):
 
                         if len(listadoNotas) == 0:
 
-                            datos = '{ "periodo": "' + str(year2) + '", "rutper": "'+rutRut+'", "pass": "sngmq21.,+"}'
+                            datos = '{ "periodo": "' + str(year2+1) + '", "rutper": "'+rutRut+'", "pass": "sngmq21.,+"}'
                             notas = requests.post(
                                 "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser",
                                 data=datos, headers=cabeceras)
@@ -314,8 +314,8 @@ def reset_password(request):
 
 
         mensaje_email = EmailMessage(subject='TEST',
-                                     body='Su contraseña es: '+ p,
-                                     from_email='ignacio.beltran.silva@gmail.com',
+                                     body='Estimado, usuario, su contraseña es: '+ p,
+                                     from_email='procesoperitos@sernageomin.cl',
                                      to=[correo],
                                      )
         mensaje_email.send()

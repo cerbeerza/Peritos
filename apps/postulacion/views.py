@@ -43,7 +43,7 @@ def crea_postulacion(request):
 
             mensaje_email = EmailMessage(subject='Postulación Proceso Peritos',
                                          body='Se ha Realizado correctamente su Postulación',
-                                         from_email='ignacio.beltran.silva@gmail.com',
+                                         from_email='procesoperitos@sernageomin.cl',
                                          to=[idUsuarioFk.email],
                                          )
             mensaje_email.send()

@@ -5,6 +5,7 @@ class Region(models.Model):
     nombre = models.CharField(max_length=50)
     descripcion = models.CharField(max_length=80)
     cod_region = models.CharField(max_length=2, primary_key=True)
+    ord_region = models.IntegerField(null=True)
 
     def __str__(self):
         return self.nombre
