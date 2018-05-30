@@ -11,6 +11,13 @@ class Apelacion(models.Model):
     fecha_creacion = models.DateField(auto_now_add=True)
     periodo = models.CharField(max_length=4)
     desc_apelacion = models.TextField()
+    respuesta = models.TextField(null=True, blank=True)
+
+
+
+
+
+
 
 
 

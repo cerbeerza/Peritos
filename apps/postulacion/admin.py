@@ -45,9 +45,13 @@ def imprimir_ficha(self, request, queryset):
 
         html_string = render_to_string('templates/postulacion/ficha.html', {'dic': dict_ctx})
         html = HTML(string=html_string, base_url=request.build_absolute_uri())
-        html.write_pdf(target='D:/files/pdf.pdf')
+        #html.write_pdf(target='D:/files/pdf.pdf')
+        #html.write_pdf(target='/home/files/pdf.pdf')
+        html.write_pdf(target='/Users/ignaciobeltransilva/filesTmp/pdf.pdf')
 
-        fs = FileSystemStorage('D:/files')
+        #fs = FileSystemStorage('D:/files')
+        # fs = FileSystemStorage('/home/files')
+        fs = FileSystemStorage('/Users/ignaciobeltransilva/filesTmp')
         with fs.open('pdf.pdf') as pdf:
             response = HttpResponse(pdf, content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
