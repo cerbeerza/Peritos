@@ -3,6 +3,7 @@ from datetime import date
 from apps.periodo.models import PeriodoProceso
 from apps.apelacion.models import Apelacion
 from django.contrib.auth.models import User
+from django.core.mail import EmailMessage
 
 def apelacion(request):
 
@@ -20,6 +21,13 @@ def apelacion(request):
         userId = request.user.id
         idUsuarioFk = User.objects.get(id=userId)
         message = 'Se ha realizado su Apelación'
+
+        mensaje_email = EmailMessage(subject='Apelación Proceso Peritos',
+                                     body='Se ha Realizado correctamente su Apelación, será respondida a su email registrado',
+                                     from_email='procesoperitos@sernageomin.cl',
+                                     to=[idUsuarioFk.email],
+                                     )
+        mensaje_email.send()
 
         Apelacion.objects.create(periodo=year, desc_apelacion=apelacionDesc, usuario_id=userId)
         return render(request, 'templates/apelacion/apelacion.html', {'message': message})

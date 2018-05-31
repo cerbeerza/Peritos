@@ -27,6 +27,7 @@ from django.core.exceptions import ObjectDoesNotExist
 def login_page(request):
     message = None
     message2 = None
+    message3 = None
     verificaNota = False
     calculaNota = False
     if request.method == "POST":
@@ -115,6 +116,7 @@ def login_page(request):
                                 suma = suma + notaParcial
                             total = suma / len(listadoNotas)
 
+                            message3 = 'Su nota promedio actual para este periodo es ' + str(total)
                             if total < 4.0:
                                 message2 = 'Hasta el momento su nota es inferior a 4.0, lo que significa que por el momento no puede renovar'
                             elif total == 0.0:
@@ -124,7 +126,7 @@ def login_page(request):
                     objUsuario = Profile.objects.get(rut=rutRut)
                     nombreUsuario = objUsuario.nombres
                     apellidoUsuario = objUsuario.apellido_p
-                    return render(request, 'templates/administrations/homepage.html', {'message': message, 'message2' : message2, 'nombres': nombreUsuario, 'ape1': apellidoUsuario})
+                    return render(request, 'templates/administrations/homepage.html', {'message': message, 'message2' : message2,'message3': message3, 'nombres': nombreUsuario, 'ape1': apellidoUsuario})
                     #return render(request, 'templates/renovacion/ficha.html')
                 else:
                     message = "Inactivo"

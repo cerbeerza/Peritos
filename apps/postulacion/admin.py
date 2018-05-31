@@ -62,6 +62,7 @@ class PostulacionAdmin(ImportExportModelAdmin):
     list_filter = ['periodo']
     actions = [imprimir_ficha]
 
+
     def get_nombre(self, instance):
         return instance.id_user.profile.nombres + " " + instance.id_user.profile.apellido_p + " " + instance.id_user.profile.apellido_m
     get_nombre.short_description = "Nombres"

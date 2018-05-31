@@ -3,7 +3,12 @@ from apps.apelacion.models import Apelacion
 
 
 def responde_apelacion(self, request, queryset):
-    pass
+
+    lista = list(queryset)
+
+
+
+
 
 
 
