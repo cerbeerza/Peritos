@@ -33,6 +33,6 @@ urlpatterns = [
     url(r'^mis_datos/', editar_datos, name="editar_datos"),
     url(r'^reset_password/', reset_password, name="resetear_password"),
     url(r'^cambiar_password/', cambiar_password, name="cambiar_password"),
-    url(r'^apelacion/', apelacion, name="apelacion"),
+    #url(r'^apelacion/', apelacion, name="apelacion"),
 
 ]

@@ -54,8 +54,12 @@ def crea_postulacion(request):
         form = PostulacionForm
         regiones = Region.objects.all()
 
+        userId = request.user.id
+        profile = Profile.objects.get(user_id=userId)
+        renueva = profile.renovante
 
 
-    return render(request, 'templates/postulacion/postulacion_create.html', {'form': form, 'regiones': regiones})
+
+    return render(request, 'templates/postulacion/postulacion_create.html', {'form': form, 'regiones': regiones, 'renueva': renueva})
 
 

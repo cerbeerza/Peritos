@@ -74,10 +74,21 @@ def login_page(request):
 
                     if len(nomina) == 0:
                         message = 'Según nuestros registros usted no aparece en como NOMINADO, usted debe postular'
+                        rutUsuario.renovante = False
+                        rutUsuario.save()
+
 
                     else:
                         message = 'Usted aparece en nuestros Registros como NOMINADO'
                         verificaNota = True
+
+                        #si es SNGM
+                        if rutUsuario.sngm:
+                            verificaNota = False
+                            rutUsuario.renovante = True
+                            rutUsuario.save()
+
+
 
                     if verificaNota:
 
@@ -119,8 +130,12 @@ def login_page(request):
                             message3 = 'Su nota promedio actual para este periodo es ' + str(total)
                             if total < 4.0:
                                 message2 = 'Hasta el momento su nota es inferior a 4.0, lo que significa que por el momento no puede renovar'
+                                rutUsuario.renovante = False
+                                rutUsuario.save()
                             elif total == 0.0:
                                 message2 = 'No presenta notas'
+                                rutUsuario.renovante = False
+                                rutUsuario.save()
 
 
                     objUsuario = Profile.objects.get(rut=rutRut)
@@ -305,28 +320,30 @@ def reset_password(request):
         rutFormat = rutFormat.replace(".","")
         profile = Profile.objects.get(rut=rutFormat)
         usuario = User.objects.get(id=profile.user_id)
-        longitud = 16
-        valores = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ<=>@#%&+"
+        longitud = 10
+        valores = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         p = ""
         p = p.join([choice(valores) for i in range(longitud)])
         pc = make_password(p, salt=None, hasher='default')
         usuario.password = pc
         usuario.save()
         correo = usuario.email
+        volver = False
 
 
-        mensaje_email = EmailMessage(subject='TEST',
-                                     body='Estimado, usuario, su contraseña es: '+ p,
+        mensaje_email = EmailMessage(subject='Reseteo de Password',
+                                     body='Estimado, usuario, su contraseña ha sido reestablecida, su contraseña ahora es: '+ p + '  Recuerde que puede cambiarla desde el menú una vez iniciada la sesión.',
                                      from_email='procesoperitos@sernageomin.cl',
                                      to=[correo],
                                      )
         mensaje_email.send()
 
         message = "Mensaje Enviado a su correo electrónico"
+        volver = True
 
 
 
-        return render(request, 'templates/administrations/reset_password.html', { 'message' : message})
+        return render(request, 'templates/administrations/reset_password.html', { 'message' : message, 'volver': volver})
 
 
 @login_required()
@@ -338,6 +355,7 @@ def cambiar_password(request):
     if request.method == 'POST':
 
         message = None
+        volver = False
         usuario = request.user.id
         pass1 = request.POST['pass1_input']
         pass2 = request.POST['pass2_input']
@@ -352,14 +370,10 @@ def cambiar_password(request):
             objetoUser.password = hashPass
             objetoUser.save()
             message = 'Su contraseña a sido actualizada'
+            volver = True
 
 
-        return render(request, 'templates/administrations/cambia_password.html', { 'message' : message})
-
-
-
-
-
+        return render(request, 'templates/administrations/cambia_password.html', { 'message' : message, 'volver': volver})
 
 
 

@@ -239,6 +239,10 @@ function Rut(texto)
 
                                    <h3>Se ha creado correctamente tu usuario</h3>
 
+                                    <a class="btn btn-primary btn-round" href="/">REGRESAR </a>
+
+
+
 								</div> <!-- DIV COL 12-->
 
 
@@ -266,6 +270,12 @@ function Rut(texto)
 						<h2 class="card-title text-center">Registro de Nuevo Usuario</h2>
 						<div class="card-body">
 							<div class="row">
+
+
+                            {% if message %}
+                                 <b>{{ message }}</b>
+                            {% endif %}
+
 
 
 								<div class="col-md-12">
@@ -427,11 +437,6 @@ function Rut(texto)
 											</div>
 
 
-
-
-
-
-
                                     </div> <!-- DIV ROW-->
 
 								</div> <!-- DIV COL 12-->
@@ -440,9 +445,7 @@ function Rut(texto)
 
                             </div>
 
-                            {% if message %}
-                                 <b>{{ message }}</b>
-                            {% endif %}
+
 
                             <div class="text-center">
 

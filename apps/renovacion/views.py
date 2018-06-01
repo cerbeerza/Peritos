@@ -5,15 +5,20 @@ from datetime import date
 from apps.periodo.models import PeriodoProceso
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from apps.administration.models import Profile
+from django.contrib.auth.decorators import login_required
 
 
-
+@login_required()
 def renueva(request):
 
     if request.method == 'GET':
 
+        userId = request.user.id
+        profile = Profile.objects.get(user_id=userId)
+        renueva = profile.renovante
 
-        return render(request, 'templates/renovacion/renovacion.html')
+        return render(request, 'templates/renovacion/renovacion.html', {'renueva': renueva})
 
     if request.method == 'POST':
 
