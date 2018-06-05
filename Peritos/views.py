@@ -16,6 +16,8 @@ from apps.nomina.models import Nomina
 from datetime import date
 from apps.periodo.models import PeriodoProceso
 import requests, json
+from apps.prueba.models import Prueba
+
 
 
 
@@ -88,6 +90,13 @@ def login_page(request):
                             rutUsuario.renovante = True
                             rutUsuario.save()
 
+                        #si dio prueba recientemente
+                        contExamen = Prueba.objects.filter(rutx=rutRut, periodo=year, situacion='APROBADO')
+
+                        if len(contExamen) > 0:
+                            verificaNota = False
+                            rutUsuario.renovante = True
+                            rutUsuario.save()
 
 
                     if verificaNota:
