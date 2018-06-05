@@ -72,7 +72,7 @@ def login_page(request):
                     usuario = request.user.id
                     rutUsuario = Profile.objects.get(user_id=usuario)
                     rutRut = rutUsuario.rut
-                    nomina = Nomina.objects.filter(rut_nomina=rutUsuario.rut, periodo=year2)
+                    nomina = Nomina.objects.filter(rut_nomina=rutUsuario.rut, periodo=year)
 
                     if len(nomina) == 0:
                         message = 'Según nuestros registros usted no aparece en como NOMINADO, usted debe postular'
@@ -81,7 +81,7 @@ def login_page(request):
 
 
                     else:
-                        message = 'Usted aparece en nuestros Registros como NOMINADO'
+                        message = 'Usted aparece en nuestros Registros como NOMINADO, usted debe renovar'
                         verificaNota = True
 
                         #si es SNGM
