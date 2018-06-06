@@ -83,6 +83,9 @@ def login_page(request):
                     else:
                         message = 'Usted aparece en nuestros Registros como NOMINADO, usted debe renovar'
                         verificaNota = True
+                        rutUsuario.renovante = True
+                        rutUsuario.save()
+
 
                         #si es SNGM
                         if rutUsuario.sngm:

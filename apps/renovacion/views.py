@@ -55,7 +55,9 @@ def renueva(request):
 
         message = "Se ha realizado correctamente su Renovación"
 
-        return render(request, 'templates/renovacion/renovacion.html', {'message': message})
+        renueva = True
+
+        return render(request, 'templates/renovacion/renovacion.html', {'message': message, 'renueva': renueva})
 
 
 
