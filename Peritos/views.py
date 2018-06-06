@@ -381,7 +381,7 @@ def cambiar_password(request):
             hashPass = make_password(pass1, salt=None, hasher='default')
             objetoUser.password = hashPass
             objetoUser.save()
-            message = 'Su contraseña a sido actualizada'
+            message = 'Su contraseña ha sido actualizada'
             volver = True
 
 
