@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 #from apps.usuario.models import Usuario
 from apps.administration.models import Profile
-from apps.administration.forms import UserProfileForm, UserForm
+from apps.administration.forms import UserProfileForm, UserForm, UserEditForm
 from apps.zona.models import *
 from django.http import HttpResponse
 from django.http import JsonResponse
@@ -406,7 +406,7 @@ def editar_datos(request):
                  'apellido_p': datos_personales.apellido_p,
                  'apellido_m': datos_personales.apellido_m,
                  'fecha_nac': datos_personales.fecha_nac,
-                 'rut': datos_personales.rut,
+                 #'rut': datos_personales.rut,
                  'genero': datos_personales.genero,
                  'nacionalidad': datos_personales.nacionalidad,
                  'direccion': datos_personales.direccion,
@@ -430,7 +430,7 @@ def editar_datos(request):
                         'username': idUsuarioFk.username,
                     }
 
-        profile_form = UserProfileForm(initial=datos)
+        profile_form = UserEditForm(initial=datos)
         user_form = UserForm(initial=datosUser)
 
         regiones = Region.objects.all()
@@ -441,7 +441,7 @@ def editar_datos(request):
 
     if request.method == "POST":
 
-        form = UserProfileForm(request.POST)
+        form = UserEditForm(request.POST)
         if form.is_valid():
 
             userId = request.user.id
@@ -453,7 +453,7 @@ def editar_datos(request):
             fecha_nac = request.POST['fecha_nac']
             fechaFormat = datetime.datetime.strptime(fecha_nac, '%d/%m/%Y')
             profile.fecha_nac = fechaFormat
-            profile.rut = request.POST['rut']
+            #profile.rut = request.POST['rut']
             profile.genero = request.POST['genero']
             profile.nacionalidad = request.POST['nacionalidad']
             profile.direccion = request.POST['direccion']
