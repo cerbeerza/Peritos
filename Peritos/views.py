@@ -139,7 +139,7 @@ def login_page(request):
                                 suma = suma + notaParcial
                             total = suma / len(listadoNotas)
 
-                            message3 = 'Su nota promedio actual para este periodo es ' + str(total)
+                            message3 = 'Su nota promedio actual para este periodo es ' + str(round(total,1))
                             if total < 4.0:
                                 message2 = 'Hasta el momento su nota es inferior a 4.0, lo que significa que por el momento no puede renovar'
                                 rutUsuario.renovante = False
