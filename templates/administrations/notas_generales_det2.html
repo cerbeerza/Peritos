@@ -1,0 +1,44 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+<div class="card">
+	<div class="card-header" style="background: #c87050" >
+		<h4 class="title">Notas Promedio Mensuras Peritos</h4>
+		<p class="category">Notas de Mensuras Peritos Parciales Admin</p>
+	</div>
+	<div class="card-content table-responsive table-full-width">
+		<table class="table">
+			<thead class="text-danger">
+
+				<th>Rut</th>
+                <th>Concesión</th>
+				<th>Rol Nacional</th>
+                <th>Nota</th>
+				<th>Fecha</th>
+            </thead>
+			<tbody>
+			 {% if listadoNotas  %}
+        {% for perito in listadoNotas  %}
+        <tr>
+            <td> {{ rut }} </td>
+            <td> {{ perito.nombreCons }}</td>
+            <td> {{ perito.norol }}</td>
+            <td> {{ perito.notaParcial }}</td>
+            <td> {{ perito.fecper }}</td>
+
+
+        </tr>
+        {% endfor %}
+
+        {% else %}
+
+        <h1>No hay registros</h1>
+
+        {% endif %}
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
+{% endblock %}

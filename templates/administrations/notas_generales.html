@@ -1,0 +1,43 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+
+    <div class="card">
+	<div class="card-header" style="background: #c87050" >
+		<h4 class="title">Notas Mensuras Peritos</h4>
+		<p class="category">Notas de Mensuras Peritos Generales Admin</p>
+	</div>
+	<div class="card-content table-responsive table-full-width">
+		<table class="table">
+			<thead class="text-danger">
+				<th>Nombres</th>
+				<th>Apellido P</th>
+				<th>Apellido M</th>
+                <th>Rut</th>
+				<th>Acción</th>
+            </thead>
+			<tbody>
+			 {% if  qs_profiles  %}
+        {% for perito in qs_profiles  %}
+        <tr>
+            <td> {{ perito.nombres|upper }}</td>
+            <td> {{ perito.apellido_p|upper }}</td>
+            <td> {{ perito.apellido_m|upper }}</td>
+            <td> {{ perito.rut }}</td>
+            <td> <a class="btn btn-primary" href="{% url 'notas_generales_det' perito.rut %}">Ver Notas</a> </td>
+        </tr>
+        {% endfor %}
+
+        {% else %}
+
+        <h1>No hay registros</h1>
+
+        {% endif %}
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
+
+{% endblock %}

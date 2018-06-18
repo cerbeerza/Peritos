@@ -1,0 +1,43 @@
+{% extends 'base2.html' %}
+{% block content %}
+
+<div class="card">
+	<div class="card-header" style="background: #c87050" >
+		<h4 class="title">Notas Promedio Mensuras Peritos</h4>
+		<p class="category">Notas de Mensuras Peritos Promedio Admin</p>
+	</div>
+	<div class="card-content table-responsive table-full-width">
+		<table class="table">
+			<thead class="text-danger">
+
+				<th>Rut</th>
+                <th>Mov Notas</th>
+				<th>Nota Promedio</th>
+                <th>Periodo</th>
+				<th>Acción</th>
+            </thead>
+			<tbody>
+			 {% if listadoNotas  %}
+        {% for perito in listadoNotas|dictsort:"periodo"  %}
+        <tr>
+            <td> {{ rut }} </td>
+            <td> {{ perito.movPerito }}</td>
+            <td> {{ perito.notaPromedio }}</td>
+            <td> {{ perito.periodo }}</td>
+            <td> <a class="btn btn-primary" href="{% url 'notas_generales_det2' rut=rut periodo=perito.periodo %}">Ver Notas</a> </td>
+
+        </tr>
+        {% endfor %}
+
+        {% else %}
+
+        <h1>No hay registros</h1>
+
+        {% endif %}
+			</tbody>
+		</table>
+
+	</div>
+</div>
+
+{% endblock %}

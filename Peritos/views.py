@@ -165,6 +165,57 @@ def login_page(request):
     return render(request, 'templates/administrations/login.html', {'message': message, 'form': form})
 
 
+@login_required()
+def notas_generales(request):
+
+    if request.method == 'GET' and request.user.is_superuser:
+
+        qs_profiles = Profile.objects.filter(renovante=True).order_by('nombres')
+        return render(request, 'templates/administrations/notas_generales.html', {'qs_profiles': qs_profiles})
+
+
+@login_required()
+def notas_generales_det(request, rut):
+
+    if request.method == 'GET' and request.user.is_superuser:
+
+        cabeceras = {
+            "Content-Type": "application/json"
+        }
+
+        datos = '{ "rutper": "' + rut + '", "pass": "sngmq21.,+"}'
+
+        notas = requests.post(
+            "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotasGenerales",
+            data=datos, headers=cabeceras)
+        listadoNotas = notas.json()
+
+
+        return render(request, 'templates/administrations/notas_generales_det.html', {'listadoNotas': listadoNotas, 'rut': rut})
+
+@login_required()
+def notas_generales_det2(request, rut, periodo):
+
+    if request.method == 'GET' and request.user.is_superuser:
+
+        cabeceras = {
+            "Content-Type": "application/json"
+        }
+
+        datos = '{ "rutper": "' + rut + '", "periodo": "'+ periodo +'", "pass": "sngmq21.,+"}'
+
+        notas = requests.post(
+            "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser",
+            data=datos, headers=cabeceras)
+        listadoNotas = notas.json()
+
+        return render(request, 'templates/administrations/notas_generales_det2.html', {'listadoNotas': listadoNotas, 'rut': rut})
+
+
+
+
+
+
 def registro_page(request):
 
     if request.method == 'POST':

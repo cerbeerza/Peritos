@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from Peritos.views import login_page, registro_page, getProvincia, getComuna, homepage_view, logout_view, editar_datos, reset_password, cambiar_password
+from Peritos.views import login_page, registro_page, getProvincia, getComuna, homepage_view, logout_view, editar_datos, reset_password, cambiar_password, notas_generales, notas_generales_det, notas_generales_det2
 from apps.apelacion.views import apelacion
 
 urlpatterns = [
@@ -33,6 +33,9 @@ urlpatterns = [
     url(r'^mis_datos/', editar_datos, name="editar_datos"),
     url(r'^reset_password/', reset_password, name="resetear_password"),
     url(r'^cambiar_password/', cambiar_password, name="cambiar_password"),
+    url(r'^notas_generales/', notas_generales, name="notas_generales"),
+    url(r'^notas_generales_det/(?P<rut>\d+)$', notas_generales_det, name="notas_generales_det"),
+    url(r'^notas_generales_det2/(?P<rut>\d+)/(?P<periodo>\d+)$', notas_generales_det2, name="notas_generales_det2"),
     #url(r'^apelacion/', apelacion, name="apelacion"),
 
 ]
