@@ -17,6 +17,7 @@ from datetime import date
 from apps.periodo.models import PeriodoProceso
 import requests, json
 from apps.prueba.models import Prueba
+from PyPDF2 import PdfFileWriter, PdfFileReader
 
 
 
@@ -526,6 +527,21 @@ def editar_datos(request):
             message = "Sus datos han sido actualizados correctamente"
 
             return render(request, 'administrations/homepage.html', {'message': message})
+
+
+
+def descargaTodo(request):
+
+    if request.method == 'GET':
+
+        inputpdf = PdfFileReader(open("D:/files/pdf.pdf", "rb"))
+
+        for i in range (inputpdf.numPages):
+            output = PdfFileWriter()
+            output.addPage(inputpdf.getPage(i))
+            with open("document-page%s.pdf" %i, "wb") as outputStream:
+                output.write(outputStream)
+
 
 
 

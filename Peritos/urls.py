@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from Peritos.views import login_page, registro_page, getProvincia, getComuna, homepage_view, logout_view, editar_datos, reset_password, cambiar_password, notas_generales, notas_generales_det, notas_generales_det2
+from Peritos.views import login_page, registro_page, getProvincia, getComuna, homepage_view, logout_view, editar_datos, reset_password, cambiar_password, notas_generales, notas_generales_det, notas_generales_det2, descargaTodo
 from apps.apelacion.views import apelacion
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -36,6 +38,7 @@ urlpatterns = [
     url(r'^notas_generales/', notas_generales, name="notas_generales"),
     url(r'^notas_generales_det/(?P<rut>\d+)$', notas_generales_det, name="notas_generales_det"),
     url(r'^notas_generales_det2/(?P<rut>\d+)/(?P<periodo>\d+)$', notas_generales_det2, name="notas_generales_det2"),
+    url(r'^prueba_archivos/', descargaTodo, name="descarga_todo"),
     #url(r'^apelacion/', apelacion, name="apelacion"),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
