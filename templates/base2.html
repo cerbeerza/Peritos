@@ -108,6 +108,11 @@
                       <a href="/cambiar_password" class="dropdown-item">
                         <i class="material-icons">vpn_key</i> Cambiar Password
                     </a>
+                        {% if user.is_superuser %}
+                      <a href="/notas_generales/" class="dropdown-item">
+                        <i class="material-icons">how_to_reg</i> Notas Globales (Admin)
+                    </a>
+                            {% endif %}
 
                        <a href="/logout/" class="dropdown-item">
                         <i class="material-icons">directions_run</i> Cerrar Sesión
