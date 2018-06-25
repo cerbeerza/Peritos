@@ -36,6 +36,9 @@ def imprimir_ficha(self, request, queryset):
         region_examen = objPost.region_examen
 
         dv = digito_verificador(rut)
+        if dv == 10:
+            dv = 'K'
+
 
         dict_ctx = {
             'nombres': nombres, 'apellidos': apellidos, 'nacionalidad': nacionalidad,

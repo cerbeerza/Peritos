@@ -38,6 +38,8 @@ def imprimir_ficha(self, request, queryset):
         fecha_proceso = objRenov.fecha_creacion
 
         dv = digito_verificador(rut)
+        if dv == 10:
+            dv = 'K'
 
 
 
