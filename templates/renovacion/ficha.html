@@ -45,17 +45,17 @@
 
 <br>
 
-<p>NOMBRES: {{ dic.nombres }}</p>
-<p>APELLIDOS: {{ dic.apellidos }}</p>
-<p>NACIONALIDAD: {{ dic.nacionalidad }}</p>
-<p>ESTADO CIVIL: {{ dic.estado_civil }}</p>
-<p>RUT: {{ dic.rut }}</p>
-<p>DOMICILIO: {{ dic.domicilio }}</p>
-<p>COMUNA: {{ dic.comuna }}</p>
-<p>REGIÓN: {{ dic.region }}</p>
+<p>NOMBRES: {{ dic.nombres|upper }}</p>
+<p>APELLIDOS: {{ dic.apellidos|upper }}</p>
+<p>NACIONALIDAD: {{ dic.nacionalidad|upper }}</p>
+<p>ESTADO CIVIL: {{ dic.estado_civil|upper }}</p>
+<p>RUT: {{ dic.rut }}-{{ dic.dv }}</p>
+<p>DOMICILIO: {{ dic.domicilio|upper }}</p>
+<p>COMUNA: {{ dic.comuna|upper }}</p>
+<p>REGIÓN: {{ dic.region|upper }}</p>
 <p>TELÉFONO: {{ dic.telefono }}</p>
 <p>CELULAR: {{ dic.celular }}</p>
-<p>EMAIL: {{ dic.email }}</p>
+<p>EMAIL: {{ dic.email|upper }}</p>
 
 <br>
 <br>
@@ -67,11 +67,20 @@
 <br>
 
 
-<p>PROFESIÓN: {{ dic.profesion }}</p>
-<p>EMPRESA DONDE SE DESARROLLA: {{ dic.empresa }}</p>
-<p>DIRECCIÓN EMPRESA: {{ dic.diremp }}</p>
+{% if dic.profesion == 'geoMen' or dic.profesion == 'ingGeoMen' %}
+    <p>PROFESIÓN: INGENIERO EN GEOMENSURA</p>
+    {% elif dic.profesion == 'geoMenEj' or dic.profesion == 'ingEjecGeo' %}
+    <p>PROFESIÓN: INGENIERO DE EJECUCIÓN EN GEOMENSURA</p>
+    {% elif dic.profesion == 'ingEjecMin' %}
+    <p>PROFESIÓN: INGENIERO DE EJECUCIÓN EN MINAS</p>
+    {% elif dic.profesion == 'ingMin' %}
+    <p>PROFESIÓN: INGENIERO EN MINAS</p>
+{% endif %}
+
+<p>EMPRESA DONDE SE DESARROLLA: {{ dic.empresa|upper }}</p>
+<p>DIRECCIÓN EMPRESA: {{ dic.diremp|upper }}</p>
 <p>TELÉFONO EMPRESA: {{ dic.telemp }}</p>
-<p>FECHA DE PROCESO: {{ dic.fecha_proceso }}</p>
+<p>FECHA DE PROCESO: {{ dic.fecha_proceso|upper }}</p>
 
 </body>
 </html>

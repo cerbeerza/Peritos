@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from weasyprint import HTML
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
+from itertools import cycle
 
 
 def imprimir_ficha(self, request, queryset):
@@ -34,12 +35,14 @@ def imprimir_ficha(self, request, queryset):
         fecha_proceso = objPost.fecha_creacion
         region_examen = objPost.region_examen
 
+        dv = digito_verificador(rut)
+
         dict_ctx = {
             'nombres': nombres, 'apellidos': apellidos, 'nacionalidad': nacionalidad,
             'estado_civil': estado_civil, 'rut': rut, 'domicilio': domicilio, 'comuna': comuna,
             'region': region, 'telefono': telefono, 'celular': celular, 'email': email,
             'profesion': profesion, 'empresa': empresa, 'diremp': diremp, 'telemp': telemp,
-            'fecha_proceso': fecha_proceso, 'region_examen': region_examen
+            'fecha_proceso': fecha_proceso, 'region_examen': region_examen, 'dv': dv
         }
 
 
@@ -69,3 +72,10 @@ class PostulacionAdmin(ImportExportModelAdmin):
 
 
 admin.site.register(Postulacion, PostulacionAdmin)
+
+
+def digito_verificador(rut):
+    reversed_digits = map(int, reversed(str(rut)))
+    factors = cycle(range(2, 8))
+    s = sum(d * f for d, f in zip(reversed_digits, factors))
+    return (-s) % 11
