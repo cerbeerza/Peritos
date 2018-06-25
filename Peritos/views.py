@@ -539,7 +539,7 @@ def descargaTodo(request):
         for i in range (inputpdf.numPages):
             output = PdfFileWriter()
             output.addPage(inputpdf.getPage(i))
-            with open("document-page%s.pdf" %i, "wb") as outputStream:
+            with open("D:/files/document-page%s.pdf" %i, "wb") as outputStream:
                 output.write(outputStream)
 
 
