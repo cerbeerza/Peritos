@@ -18,6 +18,7 @@ from apps.periodo.models import PeriodoProceso
 import requests, json
 from apps.prueba.models import Prueba
 from PyPDF2 import PdfFileWriter, PdfFileReader
+from django.db.models import Max
 
 
 
@@ -127,6 +128,10 @@ def login_page(request):
 
                             if len(listadoNotas) == 0:
                                 message2 = 'No presenta notas de mensuras en 2 periodos, no puede renovar'
+                                message = None
+                                #nuevo
+                                rutUsuario.renovante = False
+                                rutUsuario.save()
                             else:
                                 calculaNota = True
                         else:
@@ -171,7 +176,13 @@ def notas_generales(request):
 
     if request.method == 'GET' and request.user.is_superuser:
 
-        qs_profiles = Profile.objects.filter(renovante=True).order_by('nombres')
+
+        fecha_actual = date.today()
+        year = fecha_actual.year
+        periodo = year - 1
+
+        #qs_profiles = Profile.objects.filter(renovante=True).order_by('nombres')
+        qs_profiles = Profile.objects.raw('SELECT pf.id as id, pf.nombres as nombres, pf.apellido_p as apellido_p, pf.apellido_m as apellido_m, pf.rut as rut from administration_profile pf, nomina_nomina nm where pf.rut = nm.rut_nomina and nm.periodo = "'+ str(periodo) +'" order by pf.nombres ')
         return render(request, 'templates/administrations/notas_generales.html', {'qs_profiles': qs_profiles})
 
 
