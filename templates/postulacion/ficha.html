@@ -38,10 +38,11 @@
         }
 
         td{
-            border: 1px solid black;
+            'border: 1px solid black;
             font-family: Arial;
             font-size: 12px;
             font-weight: bold;
+            padding: 3px 5px 5px 5px;
 
         }
 
@@ -63,50 +64,89 @@
 
 
 <h3>ANTECEDENTES PERSONALES</h3>
-
 <br>
+
 <table>
     <tr>
-        <td><h5>NOMBRES: </h5></td><td><h5>{{ dic.nombres|upper }}</h5></td>
+        <td>NOMBRES </td><td>: </td><td>{{ dic.nombres|upper }}</td>
     </tr>
     <tr>
-        <td><h5>APELLIDOS: </h5></td><td><h5>{{ dic.apellidos|upper }}</h5></td>
+        <td>APELLIDOS </td><td>: </td></td><td>{{ dic.apellidos|upper }}</td>
     </tr>
+    <tr>
+        <td>NACIONALIDAD </td><td>: </td><td>{{ dic.nacionalidad|upper }}</td>
+    </tr>
+    <tr>
+        <td>ESTADO CIVIL </td><td>: </td><td>{{ dic.estado_civil|upper }}</td>
+    </tr>
+    <tr>
+        <td>RUT </td><td>: </td><td>{{ dic.rut }}-{{ dic.dv }}</td>
+    </tr>
+    <tr>
+        <td>DOMICILIO </td><td>: </td><td> {{ dic.domicilio|upper }}</td>
+    </tr>
+    <tr>
+        <td>COMUNA </td><td>: </td><td>{{ dic.comuna|upper }}</td>
+    </tr>
+    <tr>
+        <td>REGIÓN </td><td>: </td><td>{{ dic.region|upper }}</td>
+    </tr>
+    <tr>
+        <td>TELÉFONO </td><td>: </td><td>{{ dic.telefono|upper }}</td>
+    </tr>
+    <tr>
+        <td>CELULAR </td><td>: </td><td>{{ dic.celular }}</td>
+    </tr>
+    <tr>
+        <td>EMAIL </td><td>: </td><td>{{ dic.email|upper }}</td>
+    </tr>
+
 </table>
-<p>NACIONALIDAD: {{ dic.nacionalidad|upper }}</p>
-<p>ESTADO CIVIL: {{ dic.estado_civil|upper }}</p>
-<p>RUT: {{ dic.rut }}-{{ dic.dv }}</p>
-<p>DOMICILIO: {{ dic.domicilio|upper }}</p>
-<p>COMUNA: {{ dic.comuna|upper }}</p>
-<p>REGIÓN: {{ dic.region|upper }}</p>
-<p>TELÉFONO: {{ dic.telefono|upper }}</p>
-<p>CELULAR: {{ dic.celular }}</p>
-<p>EMAIL: {{ dic.email|upper }}</p>
-
 <br>
 <br>
 <br>
-
+<br>
 
 <h3>ANTECEDENTES PROFESIONALES Y LABORALES</h3>
 
 <br>
 
+
+<table>
 {% if dic.profesion == 'geoMen' or dic.profesion == 'ingGeoMen' %}
-    <p>PROFESIÓN: INGENIERO EN GEOMENSURA</p>
+    <tr>
+        <td>PROFESIÓN </td><td>: </td><td> INGENIERO EN GEOMENSURA</td>
+    </tr>
     {% elif dic.profesion == 'geoMenEj' or dic.profesion == 'ingEjecGeo' %}
-    <p>PROFESIÓN: INGENIERO DE EJECUCIÓN EN GEOMENSURA</p>
+    <tr>
+        <td>PROFESIÓN </td><td>: </td><td> INGENIERO DE EJECUCIÓN EN GEOMENSURA</td>
+    </tr>
     {% elif dic.profesion == 'ingEjecMin' %}
-    <p>PROFESIÓN: INGENIERO DE EJECUCIÓN EN MINAS</p>
+    <tr>
+        <td>PROFESIÓN </td><td>: </td><td> INGENIERO DE EJECUCIÓN EN MINAS</td>
+    </tr>
     {% elif dic.profesion == 'ingMin' %}
-    <p>PROFESIÓN: INGENIERO EN MINAS</p>
+    <tr>
+        <td>PROFESIÓN </td><td>: </td><td> INGENIERO EN MINAS</td>
+    </tr>
 {% endif %}
 
-<p>EMPRESA DONDE SE DESARROLLA: {{ dic.empresa|upper }}</p>
-<p>DIRECCIÓN EMPRESA: {{ dic.diremp|upper }}</p>
-<p>TELÉFONO EMPRESA: {{ dic.telemp }}</p>
-<p>FECHA DE PROCESO: {{ dic.fecha_proceso|upper }}</p>
-<p>REGIONAL DONDE RENDIRÁ EL EXÁMEN: {{ dic.region_examen|upper }}</p>
+    <tr>
+        <td>EMPRESA DONDE SE DESARROLLA </td><td>: </td><td> {{ dic.empresa|upper }}</td>
+    </tr>
+    <tr>
+        <td>DIRECCIÓN EMPRESA </td><td>: </td><td> {{ dic.diremp|upper }}</td>
+    </tr>
+    <tr>
+        <td>TELÉFONO EMPRESA </td><td>: </td><td> {{ dic.telemp }}</td>
+    </tr>
+    <tr>
+        <td>FECHA DE PROCESO </td><td>: </td><td> {{ dic.fecha_proceso|upper }}</td>
+    </tr>
+    <tr>
+        <td>REGIONAL DONDE RENDIRÁ EL EXÁMEN </td><td>: </td><td> {{ dic.region_examen|upper }}</td>
+    </tr>
+</table>
 
 </body>
 </html>

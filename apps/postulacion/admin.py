@@ -8,6 +8,7 @@ from weasyprint import HTML
 from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 from itertools import cycle
+from django.shortcuts import render
 
 
 def imprimir_ficha(self, request, queryset):
@@ -48,6 +49,8 @@ def imprimir_ficha(self, request, queryset):
             'fecha_proceso': fecha_proceso, 'region_examen': region_examen, 'dv': dv
         }
 
+        # IB
+        #return render(request, 'templates/postulacion/ficha.html', {'dic': dict_ctx})
 
         html_string = render_to_string('templates/postulacion/ficha.html', {'dic': dict_ctx})
         html = HTML(string=html_string, base_url=request.build_absolute_uri())
