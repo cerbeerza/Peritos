@@ -9,6 +9,8 @@ from django.http import HttpResponse
 from django.core.files.storage import FileSystemStorage
 from itertools import cycle
 from django.shortcuts import render
+from import_export.fields import Field
+from import_export import resources
 
 
 def imprimir_ficha(self, request, queryset):
@@ -75,11 +77,22 @@ def imprimir_ficha(self, request, queryset):
             response['Content-Disposition'] = 'attachment; filename="mypdf.pdf"'
             return response
 
+
+class PostulacionResource(resources.ModelResource):
+    test_field = Field()
+
+
+
+    def dehydrate_test_field(self, Profile):
+        return 'OK'
+
+
+
 class PostulacionAdmin(ImportExportModelAdmin):
     list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'periodo', 'region_examen')
     list_filter = ['periodo']
     actions = [imprimir_ficha]
-
+    resource_class = PostulacionResource
 
     def get_nombre(self, instance):
         return instance.id_user.profile.nombres + " " + instance.id_user.profile.apellido_p + " " + instance.id_user.profile.apellido_m
