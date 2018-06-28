@@ -41,14 +41,21 @@ def imprimir_ficha(self, request, queryset):
         if dv == 10:
             dv = 'K'
 
+        rutReverso = rut[::-1]
+        rutPunto = rutReverso[0:3] + '.' + rutReverso[3:6] + '.' + rutReverso[6:]
+        rutFormat = rutPunto[::-1]
+
+        fechaFormat = "%d/%m/%Y"
+        fechaFinal = fecha_proceso.strftime(fechaFormat)
+
 
 
         dict_ctx = {
                      'nombres': nombres, 'apellidos': apellidos, 'nacionalidad': nacionalidad,
-                     'estado_civil': estado_civil, 'rut': rut, 'domicilio': domicilio, 'comuna': comuna,
+                     'estado_civil': estado_civil, 'rut': rutFormat, 'domicilio': domicilio, 'comuna': comuna,
                      'region': region, 'telefono': telefono, 'celular': celular, 'email': email,
                      'profesion': profesion, 'empresa': empresa, 'diremp': diremp, 'telemp': telemp,
-                     'fecha_proceso': fecha_proceso, 'dv': dv
+                     'fecha_proceso': fechaFinal, 'dv': dv
                    }
         html_string = render_to_string('templates/renovacion/ficha.html', {'dic': dict_ctx})
 
