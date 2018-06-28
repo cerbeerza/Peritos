@@ -71,6 +71,7 @@ def imprimir_ficha(self, request, queryset):
             return response
 
 
+
 class RenovacionAdmin(ImportExportModelAdmin):
     list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'periodo')
     list_filter = ['periodo']
