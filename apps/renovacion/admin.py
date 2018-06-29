@@ -75,6 +75,7 @@ def imprimir_ficha(self, request, queryset):
 
 class RenovacionResource(resources.ModelResource):
     nombres = Field()
+    rut = Field()
     fecha_creacion = Field()
     periodo = Field()
 
@@ -83,6 +84,17 @@ class RenovacionResource(resources.ModelResource):
 
         profile = Profile.objects.get(user_id=Renovacion.id_user)
         return profile.nombres + " " + profile.apellido_p + " " + profile.apellido_m
+
+    def dehydrate_rut(self, Renovacion):
+
+        profile = Profile.objects.get(user_id=Renovacion.id_user)
+        dvRut = digito_verificador(profile.rut)
+        if dvRut == 10:
+            dvRut = 'K'
+        else:
+            dvRut = str(dvRut)
+
+        return profile.rut + "-" + dvRut
 
     def dehydrate_fecha_creacion(self, Renovacion):
 
