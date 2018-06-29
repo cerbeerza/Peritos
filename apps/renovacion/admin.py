@@ -10,6 +10,8 @@ from weasyprint import HTML
 from apps.administration.models import Profile
 from django.contrib.auth.models import User
 from itertools import cycle
+from import_export import resources
+from import_export.fields import Field
 
 
 def imprimir_ficha(self, request, queryset):
@@ -71,12 +73,38 @@ def imprimir_ficha(self, request, queryset):
             return response
 
 
+class RenovacionResource(resources.ModelResource):
+    nombres = Field()
+    fecha_creacion = Field()
+    periodo = Field()
+
+
+    def dehydrate_nombres(self, Renovacion):
+
+        profile = Profile.objects.get(user_id=Renovacion.id_user)
+        return profile.nombres + " " + profile.apellido_p + " " + profile.apellido_m
+
+    def dehydrate_fecha_creacion(self, Renovacion):
+
+        fechaFormat = "%d/%m/%Y"
+        fechaFinal = Renovacion.fecha_creacion.strftime(fechaFormat)
+
+        return fechaFinal
+
+    def dehydrate_periodo(self, Renovacion):
+
+        return Renovacion.periodo
+
+
+
+
 
 class RenovacionAdmin(ImportExportModelAdmin):
     list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'periodo')
     list_filter = ['periodo']
     readonly_fields = ['archivo_ci', 'archivo_ant', 'archivo_tit']
     actions = [imprimir_ficha]
+    resource_class = RenovacionResource
 
     def get_nombre(self, instance):
         return instance.id_user.profile.nombres + " " + instance.id_user.profile.apellido_p + " " + instance.id_user.profile.apellido_m

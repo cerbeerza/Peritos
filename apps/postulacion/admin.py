@@ -79,12 +79,30 @@ def imprimir_ficha(self, request, queryset):
 
 
 class PostulacionResource(resources.ModelResource):
-    test_field = Field()
+    nombres = Field()
+    fecha_creacion = Field()
+    periodo = Field()
+    region_examen = Field()
 
+    def dehydrate_nombres(self, Postulacion):
 
+        profile = Profile.objects.get(user_id=Postulacion.id_user)
+        return profile.nombres + " " + profile.apellido_p + " " + profile.apellido_m
 
-    def dehydrate_test_field(self, Profile):
-        return 'OK'
+    def dehydrate_fecha_creacion(self, Postulacion):
+
+        fechaFormat = "%d/%m/%Y"
+        fechaFinal = Postulacion.fecha_creacion.strftime(fechaFormat)
+
+        return fechaFinal
+
+    def dehydrate_periodo(self, Postulacion):
+
+        return Postulacion.periodo
+
+    def dehydrate_region_examen(self, Postulacion):
+
+        return Postulacion.region_examen
 
 
 
