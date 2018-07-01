@@ -63,6 +63,8 @@ def login_page(request):
                     login(request, user)
                     message = "Correcto"
 
+
+
                     #Validación de Tipo de Usuario
                     fecha_actual = date.today()
                     objetoPeriodo = PeriodoProceso.objects.get(fechaDesde__lte=fecha_actual,
@@ -74,6 +76,7 @@ def login_page(request):
                     usuario = request.user.id
                     rutUsuario = Profile.objects.get(user_id=usuario)
                     rutRut = rutUsuario.rut
+                    '''
                     nomina = Nomina.objects.filter(rut_nomina=rutUsuario.rut, periodo=year)
 
                     if len(nomina) == 0:
@@ -154,6 +157,7 @@ def login_page(request):
                                 message2 = 'No presenta notas'
                                 rutUsuario.renovante = False
                                 rutUsuario.save()
+                                '''
 
 
                     objUsuario = Profile.objects.get(rut=rutRut)
