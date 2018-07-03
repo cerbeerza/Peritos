@@ -112,7 +112,7 @@ class RenovacionResource(resources.ModelResource):
 
 
 class RenovacionAdmin(ImportExportModelAdmin):
-    list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'periodo')
+    list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'periodo','archivo_ant', 'archivo_ci', 'archivo_tit')
     list_filter = ['periodo']
     readonly_fields = ['archivo_ci', 'archivo_ant', 'archivo_tit']
     actions = [imprimir_ficha]
