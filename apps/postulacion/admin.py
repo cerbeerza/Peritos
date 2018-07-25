@@ -78,6 +78,68 @@ def imprimir_ficha(self, request, queryset):
             return response
 
 
+
+def imprimir_ficha_todos(self, request, queryset):
+
+    i = 1
+    lista = Postulacion.objects.all()
+    for objPost in lista:
+
+        profile = Profile.objects.get(user_id=objPost.id_user_id)
+        user = User.objects.get(id=profile.user_id)
+        nombres = profile.nombres
+        apellidos = profile.apellido_p + " " + profile.apellido_m
+        nacionalidad = profile.nacionalidad
+        estado_civil = profile.estado_civil
+        rut = profile.rut
+        domicilio = profile.direccion
+        comuna = profile.comuna
+        region = profile.region
+        telefono = profile.telefono_casa
+        celular = profile.telefono_cel
+        email = user.email
+        profesion = profile.profesion
+        empresa = profile.empresa
+        diremp = profile.direccion_empresa
+        telemp = profile.telefono_empresa
+        fecha_proceso = objPost.fecha_creacion
+        region_examen = objPost.region_examen
+
+        dv = digito_verificador(rut)
+        if dv == 10:
+            dv = 'K'
+
+        rutReverso = rut[::-1]
+        rutPunto = rutReverso[0:3] + '.' + rutReverso[3:6] + '.' + rutReverso[6:]
+        rutFormat = rutPunto[::-1]
+
+        fechaFormat = "%d/%m/%Y"
+        fechaFinal = fecha_proceso.strftime(fechaFormat)
+
+
+
+
+        dict_ctx = {
+            'nombres': nombres, 'apellidos': apellidos, 'nacionalidad': nacionalidad,
+            'estado_civil': estado_civil, 'rut': rutFormat, 'domicilio': domicilio, 'comuna': comuna,
+            'region': region, 'telefono': telefono, 'celular': celular, 'email': email,
+            'profesion': profesion, 'empresa': empresa, 'diremp': diremp, 'telemp': telemp,
+            'fecha_proceso': fechaFinal, 'region_examen': region_examen, 'dv': dv
+        }
+
+        # IB
+        #return render(request, 'templates/postulacion/ficha.html', {'dic': dict_ctx})
+
+        html_string = render_to_string('templates/postulacion/ficha.html', {'dic': dict_ctx})
+        html = HTML(string=html_string, base_url=request.build_absolute_uri())
+        html.write_pdf(target='D:/files/'+str(i)+'.pdf')
+        i += 1
+
+
+
+
+
+
 class PostulacionResource(resources.ModelResource):
     nombres = Field()
     rut = Field()
@@ -121,7 +183,7 @@ class PostulacionResource(resources.ModelResource):
 class PostulacionAdmin(ImportExportModelAdmin):
     list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'periodo', 'region_examen')
     list_filter = ['periodo']
-    actions = [imprimir_ficha]
+    actions = [imprimir_ficha, imprimir_ficha_todos]
     resource_class = PostulacionResource
 
     def get_nombre(self, instance):
