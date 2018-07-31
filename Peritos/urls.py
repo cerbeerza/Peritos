@@ -39,6 +39,6 @@ urlpatterns = [
     url(r'^notas_generales_det/(?P<rut>\d+)$', notas_generales_det, name="notas_generales_det"),
     url(r'^notas_generales_det2/(?P<rut>\d+)/(?P<periodo>\d+)$', notas_generales_det2, name="notas_generales_det2"),
     url(r'^prueba_archivos/', descargaTodo, name="descarga_todo"),
-    #url(r'^apelacion/', apelacion, name="apelacion"),
+    url(r'^apelacion/', apelacion, name="apelacion"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

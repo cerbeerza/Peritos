@@ -21,15 +21,27 @@
 
                                 <div class="col-md-1"></div>
 
-								<div class="col-md-6">
+								<div class="col-md-10">
+
 
                                    <div class="form-group label-floating col-md-10">
+
+                                       {% if renovante %}
+
+                                       <h4>La opción de Apelación es sólo para Usuarios que han realizado el exámen este periodo</h4>
+
+                                       {% else %}
+
+                                    <h4>La reclamación es solo para los Postulantes, o sea para quienes rindieron el examen de competencias para postular al cargo de perito mensurador. El objetivo de la Reclamación es poder aclarar dudas sobre la revisión del examen y de la nota obtenida.
+Una vez registrada la reclamación en la plataforma, el Sernageomin tiene un plazo de 5 días hábiles para comunicarse con el postulante (a través del mail registrado en la plataforma), para citarlo a una reunión en donde se le mostrará la corrección de su examen.
+</h4>
 
 
                                         <textarea id="txtApelacion" name="txtApelacion" rows="10" cols="100" required></textarea>
 
 											</div>
 
+                                    {% endif %}
 
 								</div>
 

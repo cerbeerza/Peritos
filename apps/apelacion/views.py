@@ -4,12 +4,19 @@ from apps.periodo.models import PeriodoProceso
 from apps.apelacion.models import Apelacion
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
+from apps.administration.models import Profile
+from apps.postulacion.models import Postulacion
+from apps.prueba.models import Prueba
 
 def apelacion(request):
 
     if request.method == 'GET':
 
-        return render(request, 'templates/apelacion/apelacion.html')
+
+        profile = Profile.objects.get(user_id=request.user.id)
+        renueva = profile.renovante
+
+        return render(request, 'templates/apelacion/apelacion.html',{'renovante': renueva})
 
     if request.method == 'POST':
 
@@ -20,17 +27,38 @@ def apelacion(request):
         apelacionDesc = request.POST['txtApelacion']
         userId = request.user.id
         idUsuarioFk = User.objects.get(id=userId)
-        message = 'Se ha realizado su Apelación'
+        profile = Profile.objects.get(user_id=userId)
+        if len(Postulacion.objects.filter(periodo=2017, id_user_id=userId)) > 0 and len(Prueba.objects.filter(rutx=profile.rut, periodo='2017')) > 0:
 
-        mensaje_email = EmailMessage(subject='Apelación Proceso Peritos',
-                                     body='Se ha Realizado correctamente su Apelación, será respondida a su email registrado',
-                                     from_email='procesoperitos@sernageomin.cl',
-                                     to=[idUsuarioFk.email],
-                                     )
-        mensaje_email.send()
+            postulacion = Postulacion.objects.get(id_user_id=userId)
 
-        Apelacion.objects.create(periodo=year, desc_apelacion=apelacionDesc, usuario_id=userId)
-        return render(request, 'templates/apelacion/apelacion.html', {'message': message})
+            prueba = Prueba.objects.get(rutx=profile.rut, periodo='2017')
+
+            message = 'Se ha realizado correctamente su Apelación, recibirá un correo electrónico con información sobre su respuesta'
+
+            mensaje_email = EmailMessage(subject='Apelación Proceso Peritos',
+                                         body='Estimado/a ' + profile.nombres + ' ' + profile.apellido_p + ' Su reclamación ha sido registrada satisfactoriamente, y prontamente nos contactaremos con usted al correo ' + idUsuarioFk.email + ' para fijar una reunión en donde se le mostrará la corrección de su examen. Saludos.',
+                                         from_email='procesoperitos@sernageomin.cl',
+                                         to=[idUsuarioFk.email],
+                                         )
+            mensaje_email.send()
+
+            mensaje_email2 = EmailMessage(subject='Información de Apelación',
+                                          body='El siguiente sujeto ha apelado: ' + profile.nombres + ' ' + profile.apellido_p + ' Rut: ' + profile.rut + ' Región Exámen: ' + postulacion.region_examen + ' Nota Prueba: ' + prueba.nota,
+                                          from_email='procesoperitos@sernageomin.cl',
+                                          to=['rodrigo.urrutia@sernageomin.cl', 'msoledad.cortes@sernageomin.cl'],
+                                          )
+
+            mensaje_email2.send()
+
+            Apelacion.objects.create(periodo=year, desc_apelacion=apelacionDesc, usuario_id=userId)
+
+
+            return render(request, 'templates/administrations/homepage.html', {'message': message})
+        else:
+
+            message = 'No posee los datos necesarios para realizar su apelación'
+            return render(request, 'templates/administrations/homepage.html', {'message': message})
 
 
 
