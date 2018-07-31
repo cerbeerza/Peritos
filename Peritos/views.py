@@ -19,6 +19,7 @@ import requests, json
 from apps.prueba.models import Prueba
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from django.db.models import Max
+from apps.apelacion.models import Apelacion
 
 
 
@@ -173,6 +174,42 @@ def login_page(request):
     else:
         form = LoginForm()
     return render(request, 'templates/administrations/login.html', {'message': message, 'form': form})
+
+
+
+def responde_reclamacion(request, id):
+
+    if request.method == 'GET':
+
+        return render(request, 'templates/administrations/responde_reclamacion.html')
+
+    if request.method == 'POST':
+
+        detalleMsg = request.POST['txtApelacion']
+        apelacion = Apelacion.objects.get(id=id)
+        apelacion.respuesta = detalleMsg
+        apelacion.save()
+        usuario = User.objects.get(id=apelacion.usuario_id)
+
+
+
+        mensaje_email = EmailMessage(subject='Respuesta Reclamación',
+                                     body='Estimado/a, su reclamación ha sido respondida con el siguiente mensaje: ' + detalleMsg,
+                                     from_email='procesoperitos@sernageomin.cl',
+                                     to=[usuario.email],
+                                     cc=['procesoperitos@sernageomin.cl']
+                                     )
+        mensaje_email.send()
+
+        message = "La reclamación ha sido respondida correctamente"
+
+
+        return render(request, 'templates/administrations/responde_reclamacion.html', {'message_reclama': message})
+
+
+
+
+
 
 
 @login_required()

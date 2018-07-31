@@ -34,16 +34,16 @@ def apelacion(request):
 
             prueba = Prueba.objects.get(rutx=profile.rut, periodo='2017')
 
-            message = 'Se ha realizado correctamente su Apelación, recibirá un correo electrónico con información sobre su respuesta'
+            message = 'Se ha realizado correctamente su Reclamación, recibirá un correo electrónico con información sobre su respuesta'
 
-            mensaje_email = EmailMessage(subject='Apelación Proceso Peritos',
+            mensaje_email = EmailMessage(subject='Reclamación Proceso Peritos',
                                          body='Estimado/a ' + profile.nombres + ' ' + profile.apellido_p + ' Su reclamación ha sido registrada satisfactoriamente, y prontamente nos contactaremos con usted al correo ' + idUsuarioFk.email + ' para fijar una reunión en donde se le mostrará la corrección de su examen. Saludos.',
                                          from_email='procesoperitos@sernageomin.cl',
                                          to=[idUsuarioFk.email],
                                          )
             mensaje_email.send()
 
-            mensaje_email2 = EmailMessage(subject='Información de Apelación',
+            mensaje_email2 = EmailMessage(subject='Información de Reclamación',
                                           body='El siguiente sujeto ha apelado: ' + profile.nombres + ' ' + profile.apellido_p + ' Rut: ' + profile.rut + ' Región Exámen: ' + postulacion.region_examen + ' Nota Prueba: ' + prueba.nota,
                                           from_email='procesoperitos@sernageomin.cl',
                                           to=['rodrigo.urrutia@sernageomin.cl', 'msoledad.cortes@sernageomin.cl'],
@@ -57,7 +57,7 @@ def apelacion(request):
             return render(request, 'templates/administrations/homepage.html', {'message': message})
         else:
 
-            message = 'No posee los datos necesarios para realizar su apelación'
+            message = 'No posee los datos necesarios para realizar su reclamación'
             return render(request, 'templates/administrations/homepage.html', {'message': message})
 
 
