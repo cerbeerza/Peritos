@@ -28,11 +28,11 @@ def apelacion(request):
         userId = request.user.id
         idUsuarioFk = User.objects.get(id=userId)
         profile = Profile.objects.get(user_id=userId)
-        if len(Postulacion.objects.filter(periodo=2017, id_user_id=userId)) > 0 and len(Prueba.objects.filter(rutx=profile.rut, periodo='2017')) > 0:
+        if len(Postulacion.objects.filter(periodo='2017', id_user_id=userId)) > 0 and len(Prueba.objects.filter(rutx=profile.rut, periodo='2018')) > 0:
 
-            postulacion = Postulacion.objects.get(id_user_id=userId)
+            postulacion = Postulacion.objects.get(id_user_id=userId, periodo='2017')
 
-            prueba = Prueba.objects.get(rutx=profile.rut, periodo='2017')
+            prueba = Prueba.objects.get(rutx=profile.rut, periodo='2018')
 
             message = 'Se ha realizado correctamente su Reclamación, recibirá un correo electrónico con información sobre su respuesta'
 

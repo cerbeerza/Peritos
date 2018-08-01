@@ -1,0 +1,75 @@
+{% extends 'templates/base2.html' %}
+
+{% block content %}
+
+
+    {% load material_form %}
+
+ <form class="form" method="post" action="">
+                                        {% csrf_token %}
+
+
+
+    <div class="row">
+    			<div class="col-md-12 ml-auto mr-auto">
+					<div class="card card-signup">
+						<h2 class="card-title text-center">Responder Apelación</h2>
+						<div class="card-body">
+							<div class="row">
+                                <b>{{ message }}</b>
+
+
+                                <div class="col-md-1"></div>
+
+								<div class="col-md-10">
+
+
+                                   <div class="form-group label-floating col-md-10">
+
+
+                                       {% if message_reclama %}
+
+                                       <h4> {{ message_reclama }}</h4>
+
+                                       <a href="/admin/apelacion">VOLVER</a>
+
+                                       {% else %}
+
+                                       <h4>Responde la Apelación</h4>
+
+
+
+                                        <textarea id="txtApelacion" name="txtApelacion" rows="10" cols="100" required></textarea>
+
+                                       {% endif %}
+
+											</div>
+
+
+
+								</div>
+
+<!--                                <div class="col-md-6">
+
+                                </div> -->
+
+
+
+                            </div>
+
+                            <div class="text-center">
+
+                                            <button type="submit" class="btn btn-primary btn-round">Aceptar</button>
+										</div>
+						</div>
+					</div>
+                </div>
+            </div>
+
+
+
+	</form>
+
+
+
+{% endblock %}
