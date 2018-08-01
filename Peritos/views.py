@@ -176,14 +176,14 @@ def login_page(request):
     return render(request, 'templates/administrations/login.html', {'message': message, 'form': form})
 
 
-
+@login_required()
 def responde_reclamacion(request, id):
 
-    if request.method == 'GET':
+    if request.method == 'GET' and request.user.is_superuser:
 
         return render(request, 'templates/administrations/responde_reclamacion.html')
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.user.is_superuser:
 
         detalleMsg = request.POST['txtApelacion']
         apelacion = Apelacion.objects.get(id=id)
