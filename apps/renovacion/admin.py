@@ -176,7 +176,7 @@ class RenovacionResource(resources.ModelResource):
 
 
 class RenovacionAdmin(ImportExportModelAdmin):
-    list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'periodo','archivo_ant', 'archivo_ci', 'archivo_tit')
+    list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'get_periodo','archivo_ant', 'archivo_ci', 'archivo_tit')
     list_filter = ['periodo']
     readonly_fields = ['archivo_ci', 'archivo_ant', 'archivo_tit']
     actions = [imprimir_ficha, imprimir_ficha_todos]
@@ -186,6 +186,13 @@ class RenovacionAdmin(ImportExportModelAdmin):
         return instance.id_user.profile.nombres + " " + instance.id_user.profile.apellido_p + " " + instance.id_user.profile.apellido_m
     get_nombre.short_description = "Nombres"
 
+    def get_periodo(self, instance):
+        periodo = int(instance.periodo)
+        periodo = periodo + 1
+
+        return str(periodo)
+
+    get_periodo.short_description = "Periodo"
 
 
 

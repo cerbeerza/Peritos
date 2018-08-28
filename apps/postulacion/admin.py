@@ -181,7 +181,7 @@ class PostulacionResource(resources.ModelResource):
 
 
 class PostulacionAdmin(ImportExportModelAdmin):
-    list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'periodo', 'region_examen')
+    list_display = ('id_user', 'get_nombre', 'fecha_creacion', 'get_periodo', 'region_examen')
     list_filter = ['periodo']
     actions = [imprimir_ficha, imprimir_ficha_todos]
     resource_class = PostulacionResource
@@ -189,6 +189,14 @@ class PostulacionAdmin(ImportExportModelAdmin):
     def get_nombre(self, instance):
         return instance.id_user.profile.nombres + " " + instance.id_user.profile.apellido_p + " " + instance.id_user.profile.apellido_m
     get_nombre.short_description = "Nombres"
+
+    def get_periodo(self, instance):
+
+        periodo = int(instance.periodo)
+        periodo = periodo + 1
+
+        return str(periodo)
+    get_periodo.short_description = "Periodo"
 
 
 admin.site.register(Postulacion, PostulacionAdmin)
