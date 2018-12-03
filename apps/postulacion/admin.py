@@ -52,6 +52,7 @@ def imprimir_ficha(self, request, queryset):
 
 
 
+
         dict_ctx = {
             'nombres': nombres, 'apellidos': apellidos, 'nacionalidad': nacionalidad,
             'estado_civil': estado_civil, 'rut': rutFormat, 'domicilio': domicilio, 'comuna': comuna,
