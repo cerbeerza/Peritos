@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^notas_generales/', notas_generales, name="notas_generales"),
     url(r'^notas_generales_det/(?P<rut>\d+)$', notas_generales_det, name="notas_generales_det"),
     url(r'^notas_generales_det2/(?P<rut>\d+)/(?P<periodo>\d+)$', notas_generales_det2, name="notas_generales_det2"),
-    url(r'^prueba_archivos/', descargaTodo, name="descarga_todo"),
+    #url(r'^prueba_archivos/', descargaTodo, name="descarga_todo"),
     #url(r'^apelacion/', apelacion, name="apelacion"),
     #url(r'^responder_reclamacion/(?P<id>\d+)$', responde_reclamacion, name="responde_reclamacion"),
 
