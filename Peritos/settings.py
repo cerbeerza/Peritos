@@ -141,7 +141,7 @@ USE_L10N = False
 
 USE_TZ = True
 
-DATE_INPUT_FORMATS = ['%d/%m/%Y','%Y-%m-%d']
+DATE_INPUT_FORMATS = ['%d/%m/%Y', '%Y-%m-%d']
 
 
 # Static files (CSS, JavaScript, Images)
@@ -149,7 +149,7 @@ DATE_INPUT_FORMATS = ['%d/%m/%Y','%Y-%m-%d']
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static' ),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'mail.sernageomin.cl'
