@@ -221,9 +221,15 @@ def notas_generales(request):
         fecha_actual = date.today()
         year = fecha_actual.year
         periodo = year - 1
+        objetoPeriodo = PeriodoProceso.objects.get(fechaDesde__lte=fecha_actual,
+                                                   fechaHasta__gte=fecha_actual)
+        soloPeriodo = objetoPeriodo.periodo
+        substr = soloPeriodo[0:4]
+        numericPeriodo = int(substr)
+        periodoFinal = numericPeriodo - 1
 
         #qs_profiles = Profile.objects.filter(renovante=True).order_by('nombres')
-        qs_profiles = Profile.objects.raw('SELECT pf.id as id, pf.nombres as nombres, pf.apellido_p as apellido_p, pf.apellido_m as apellido_m, pf.rut as rut from administration_profile pf, nomina_nomina nm where pf.rut = nm.rut_nomina and nm.periodo = "'+ str(periodo) +'" order by pf.nombres ')
+        qs_profiles = Profile.objects.raw('SELECT pf.id as id, pf.nombres as nombres, pf.apellido_p as apellido_p, pf.apellido_m as apellido_m, pf.rut as rut from administration_profile pf, nomina_nomina nm where pf.rut = nm.rut_nomina and nm.periodo = "'+ str(periodoFinal) +'" order by pf.nombres ')
         return render(request, 'templates/administrations/notas_generales.html', {'qs_profiles': qs_profiles})
 
 
