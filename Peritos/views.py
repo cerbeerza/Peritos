@@ -64,10 +64,12 @@ def login_page(request):
                     login(request, user)
                     message = "Correcto"
 
-
-
                     #Validación de Tipo de Usuario
-                    fecha_actual = date.today()
+                    #NO OLVIDAD SACAR FECHA
+                    #fecha_actual_str = '2019-07-01'
+                    #fecha_actual_obj = dt.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S')
+                    #fecha_actual = date.today()
+                    fecha_actual = '2019-07-01'
                     objetoPeriodo = PeriodoProceso.objects.get(fechaDesde__lte=fecha_actual,
                                                                fechaHasta__gte=fecha_actual)
                     periodo = objetoPeriodo.periodo
@@ -77,11 +79,11 @@ def login_page(request):
                     usuario = request.user.id
                     rutUsuario = Profile.objects.get(user_id=usuario)
                     rutRut = rutUsuario.rut
-                    '''
+
                     nomina = Nomina.objects.filter(rut_nomina=rutUsuario.rut, periodo=year)
 
                     if len(nomina) == 0:
-                        message = 'Según nuestros registros usted no aparece en como NOMINADO, usted debe postular'
+                        message = 'Según nuestros registros usted no aparece como NOMINADO, usted debe postular'
                         rutUsuario.renovante = False
                         rutUsuario.save()
 
@@ -115,7 +117,7 @@ def login_page(request):
                             "Content-Type": "application/json"
                         }
 
-                        datos = '{ "periodo": "' + str(year2+2) + '", "rutper": "'+rutRut+'", "pass": "sngmq21.,+"}'
+                        datos = '{ "periodo": "' + str(year2+1) + '", "rutper": "'+rutRut+'", "pass": "sngmq21.,+"}'
 
                         notas = requests.post(
                             "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser",
@@ -124,7 +126,7 @@ def login_page(request):
 
                         if len(listadoNotas) == 0:
 
-                            datos = '{ "periodo": "' + str(year2+1) + '", "rutper": "'+rutRut+'", "pass": "sngmq21.,+"}'
+                            datos = '{ "periodo": "' + str(year2) + '", "rutper": "'+rutRut+'", "pass": "sngmq21.,+"}'
                             notas = requests.post(
                                 "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaParcialByUser",
                                 data=datos, headers=cabeceras)
@@ -158,7 +160,7 @@ def login_page(request):
                                 message2 = 'No presenta notas'
                                 rutUsuario.renovante = False
                                 rutUsuario.save()
-                                '''
+
 
 
                     objUsuario = Profile.objects.get(rut=rutRut)
@@ -454,7 +456,7 @@ def reset_password(request):
 
 
         mensaje_email = EmailMessage(subject='Reseteo de Password',
-                                     body='Estimado, usuario, su contraseña ha sido reestablecida, su contraseña ahora es: '+ p + '  Recuerde que puede cambiarla desde el menú una vez iniciada la sesión.',
+                                     body='Estimado, usuario, su contraseña ha sido reestablecida, su contraseña ahora es: '+ p + ' (Respete Mayúscula o Minúsculas). Recuerde que puede cambiarla desde el menú una vez iniciada la sesión.',
                                      from_email='procesoperitos@sernageomin.cl',
                                      to=[correo],
                                      )

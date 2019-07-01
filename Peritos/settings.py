@@ -101,8 +101,8 @@ DATABASES = {
         'NAME': 'peritos',
         'USER': 'root',
         'PASSWORD': 'Peritos0104',
-        #'HOST': '172.16.60.35',
-        'HOST': '172.16.13.235',
+        'HOST': '172.16.60.35',
+        #'HOST': '172.16.13.235',
         'PORT': '3306',
     }
 }
@@ -152,7 +152,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'mail.sernageomin.cl'
+EMAIL_HOST = 'smtp.office365.com'
 EMAIL_HOST_USER = 'procesoperitos@sernageomin.cl'
 EMAIL_HOST_PASSWORD = 'Per2018.,+'
-EMAIL_PORT = 25
+EMAIL_PORT = 587
+
