@@ -68,8 +68,8 @@ def login_page(request):
                     #NO OLVIDAD SACAR FECHA
                     #fecha_actual_str = '2019-07-01'
                     #fecha_actual_obj = dt.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S')
-                    #fecha_actual = date.today()
-                    fecha_actual = '2019-07-01'
+                    fecha_actual = date.today()
+                    #fecha_actual = '2019-07-01'
                     objetoPeriodo = PeriodoProceso.objects.get(fechaDesde__lte=fecha_actual,
                                                                fechaHasta__gte=fecha_actual)
                     periodo = objetoPeriodo.periodo
@@ -151,9 +151,9 @@ def login_page(request):
                                 suma = suma + notaParcial
                             total = suma / len(listadoNotas)
 
-                            message3 = 'Su nota promedio actual para este periodo es ' + str(round(total,1))
+                            message3 = 'Su nota promedio actual para este periodo es ' + str(round(total, 1))
                             if total < 4.0:
-                                message2 = 'Hasta el momento su nota es inferior a 4.0, lo que significa que por el momento no puede renovar'
+                                message2 = 'Hasta el momento su nota es inferior a 4.0, por lo que no puede renovar'
                                 rutUsuario.renovante = False
                                 rutUsuario.save()
                             elif total == 0.0:
@@ -231,7 +231,7 @@ def notas_generales(request):
         periodoFinal = numericPeriodo - 1
 
         #qs_profiles = Profile.objects.filter(renovante=True).order_by('nombres')
-        qs_profiles = Profile.objects.raw('SELECT pf.id as id, pf.nombres as nombres, pf.apellido_p as apellido_p, pf.apellido_m as apellido_m, pf.rut as rut from administration_profile pf, nomina_nomina nm where pf.rut = nm.rut_nomina and nm.periodo = "'+ str(periodoFinal) +'" order by pf.nombres ')
+        qs_profiles = Profile.objects.raw('SELECT pf.id as id, pf.nombres as nombres, pf.apellido_p as apellido_p, pf.apellido_m as apellido_m, pf.rut as rut from administration_profile pf, nomina_nomina nm where pf.rut = nm.rut_nomina and nm.periodo = "'+ str(periodoFinal) +'" order by pf.nombres')
         return render(request, 'templates/administrations/notas_generales.html', {'qs_profiles': qs_profiles})
 
 
@@ -517,13 +517,13 @@ def editar_datos(request):
                  'nombres': datos_personales.nombres,
                  'apellido_p': datos_personales.apellido_p,
                  'apellido_m': datos_personales.apellido_m,
-                 'fecha_nac': datos_personales.fecha_nac,
+                 #'fecha_nac': datos_personales.fecha_nac,
                  #'rut': datos_personales.rut,
                  'genero': datos_personales.genero,
                  'nacionalidad': datos_personales.nacionalidad,
                  'direccion': datos_personales.direccion,
                  'region': datos_personales.region,
-                 'comuna': datos_personales.comuna,
+                 #'comuna': datos_personales.comuna,
                  'estado_civil': datos_personales.estado_civil,
                  'telefono_casa': datos_personales.telefono_casa,
                  'telefono_cel': datos_personales.telefono_cel,
@@ -533,7 +533,7 @@ def editar_datos(request):
                  'empresa': datos_personales.empresa,
                  'telefono_empresa': datos_personales.telefono_empresa,
                  'direccion_empresa': datos_personales.direccion_empresa,
-                 'provincia': datos_personales.provincia,
+                 #'provincia': datos_personales.provincia,
 
                 }
 
@@ -549,7 +549,7 @@ def editar_datos(request):
         provincias = []
         comunas = []
 
-        return render(request, 'administrations/editar_datos.html', { 'profile_form' : profile_form, 'user_form': user_form, 'regiones': regiones, 'provincias': provincias, 'comunas': comunas, 'datosPersonales': datos_personales})
+        return render(request, 'administrations/editar_datos.html', { 'profile_form': profile_form, 'user_form': user_form, 'regiones': regiones, 'provincias': provincias, 'comunas': comunas, 'datosPersonales': datos_personales})
 
     if request.method == "POST":
 
@@ -562,15 +562,15 @@ def editar_datos(request):
             profile.nombres = request.POST['nombres']
             profile.apellido_p = request.POST['apellido_p']
             profile.apellido_m = request.POST['apellido_m']
-            fecha_nac = request.POST['fecha_nac']
-            fechaFormat = datetime.datetime.strptime(fecha_nac, '%d/%m/%Y')
-            profile.fecha_nac = fechaFormat
+            #fecha_nac = request.POST['fecha_nac']
+            #fechaFormat = datetime.datetime.strptime(fecha_nac, '%d/%m/%Y')
+            #profile.fecha_nac = fechaFormat
             #profile.rut = request.POST['rut']
             profile.genero = request.POST['genero']
             profile.nacionalidad = request.POST['nacionalidad']
             profile.direccion = request.POST['direccion']
             profile.region = request.POST['region']
-            profile.comuna = request.POST['comuna']
+            #profile.comuna = request.POST['comuna']
             profile.estado_civil = request.POST['estado_civil']
             profile.telefono_casa = request.POST['telefono_casa']
             profile.telefono_cel = request.POST['telefono_cel']
@@ -580,7 +580,7 @@ def editar_datos(request):
             profile.empresa = request.POST['empresa']
             profile.telefono_empresa = request.POST['telefono_empresa']
             profile.direccion_empresa = request.POST['direccion_empresa']
-            profile.provincia = request.POST['provincia']
+            #profile.provincia = request.POST['provincia']
             profile.save()
 
 

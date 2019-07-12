@@ -135,11 +135,11 @@ class UserEditForm(forms.ModelForm):
             'telefono_cel',
             'apellido_p',
             'apellido_m',
-            'comuna',
+            #'comuna',
             'direccion_empresa',
             'empresa',
             'estado_civil',
-            'fecha_nac',
+            #'fecha_nac',
             'genero',
             'nacionalidad',
             'nombres',
@@ -149,7 +149,7 @@ class UserEditForm(forms.ModelForm):
             'telefono_empresa',
             'universidad',
             'year_titulo',
-            'provincia',
+            #'provincia',
 
 
 
@@ -161,11 +161,11 @@ class UserEditForm(forms.ModelForm):
             'telefono_cel' : 'Celular (Formato +569 XXXXXXXX)',
             'apellido_p' : 'Apellido Paterno',
             'apellido_m' : 'Apellido Materno',
-            'comuna' : 'Comuna',
+            #'comuna' : 'Comuna',
             'direccion_empresa' : 'Dirección Empresa',
             'empresa' : 'Empresa',
             'estado_civil' : 'Estado Civil',
-            'fecha_nac' : 'Fecha de Nacimiento',
+            #'fecha_nac' : 'Fecha de Nacimiento',
             'genero' : 'Género',
             'nacionalidad' : 'Nacionalidad',
             'nombres' : 'Nombres',
@@ -175,7 +175,7 @@ class UserEditForm(forms.ModelForm):
             'telefono_empresa' : 'Teléfono Empresa',
             'universidad' : 'Universidad',
             'year_titulo' : 'Año Titulación',
-            'provincia':'Provincia',
+            #'provincia':'Provincia',
 
 
         }
@@ -193,13 +193,13 @@ class UserEditForm(forms.ModelForm):
             'year_titulo' : forms.TextInput(attrs={'class':'form-control'}),
             'apellido_p' : forms.TextInput(attrs={'class':'form-control'}),
             'apellido_m' : forms.TextInput(attrs={'class':'form-control'}),
-            'comuna' : forms.Select(attrs={'class':'form-control'}),
+            #'comuna' : forms.Select(attrs={'class':'form-control'}),
             'direccion_empresa' : forms.TextInput(attrs={'class':'form-control'}),
             'empresa' : forms.TextInput(attrs={'class':'form-control'}),
             'estado_civil' : forms.Select(attrs={'class':'form-control'}),
-            'fecha_nac' : forms.DateInput(attrs={'class':'form-control','readonly':'true'}),
+            #'fecha_nac' : forms.DateInput(attrs={'class':'form-control','readonly':'true'}),
             'genero' : forms.Select(attrs={'class':'form-control'}),
             'nacionalidad' : forms.TextInput(attrs={'class':'form-control'}),
-            'provincia': forms.Select(attrs={'class':'form-control'}),
+            #'provincia': forms.Select(attrs={'class':'form-control'}),
 
         }

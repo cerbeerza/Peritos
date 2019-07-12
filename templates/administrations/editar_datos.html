@@ -145,38 +145,6 @@
                                               </select>
 											</div>
 
-                                    <div class="form-group label-floating col-md-6">
-                                         <label class="bmd-label-floating" for="{{ profile_form.provincia.name }}"> Selecciona Provincia</label>
-                                         <select name="{{ profile_form.provincia.name }}" id="{{ profile_form.provincia.name }}" class="form-control">
-                                           <option label="{{ datosPersonales.provincia }}"  value="{{ datosPersonales.provincia }}" ></option>
-                                              {% for item in provincias %}
-                                                      <option val = {{ item.nombre}}> {{ item.nombre }} </option>
-                                                  {% endfor %}
-                                         </select>
-
-											</div>
-
-
-
-                                    <div class="form-group label-floating col-md-6">
-                                         <label class="bmd-label-floating" for="{{ profile_form.comuna.name }}"> Selecciona Comuna</label>
-                                         <select name="{{ profile_form.comuna.name }}" id="{{ profile_form.comuna.name }}" class="form-control">
-                                             <option label="{{ datosPersonales.comuna }}"  value="{{ datosPersonales.comuna }}" ></option>
-                                               {% for item in comunas %}
-                                                      <option val = {{ item.nombre}}> {{ item.nombre }} </option>
-                                                  {% endfor %}
-                                         </select>
-
-											</div>
-
-
-
-
-
-                                     <div class="form-group datepicker col-md-6" data-provide="datepicker">
-                                                <label class="bmd-label-floating" for="{{ profile_form.fecha_nac.name }}">{{ profile_form.fecha_nac.label }}</label>
-                                                {{ profile_form.fecha_nac }}
-											</div>
 
 
                                      <div class="form-group label-floating col-md-6">

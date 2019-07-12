@@ -12,6 +12,9 @@ from apps.periodo.models import PeriodoProceso
 @login_required()
 def crea_postulacion(request):
     message = None
+    # Arreglo
+    renueva = None
+
     regiones = []
     if request.method == "POST":
         form = PostulacionForm(request.POST)
@@ -28,6 +31,8 @@ def crea_postulacion(request):
             idUsuarioFk = User.objects.get(id=userId)
             registroPost = Postulacion.objects.filter(id_user_id=userId, periodo=year)
 
+
+
             if len(registroPost) != 0:
                 message = "Ya ha realizado una postulación para este periodo"
                 regiones = Region.objects.all()
@@ -42,9 +47,10 @@ def crea_postulacion(request):
 
 
             mensaje_email = EmailMessage(subject='Postulación Proceso Peritos',
-                                         body='Se ha Realizado correctamente su Postulación',
+                                         body='Se ha Realizado correctamente su Postulación, por lo tanto debe rendir el exámen el día 02 de Agosto a las 09:00 Horas. Si usted rinde el examen en Santiago, debe dirigirse al auditorio de Sta María 0180, y, si desea rendir el exámen en regiones, debe dirigirse a la dirección Regional correspondiente. No olvide que debe presentar la siguiente documentación el día del examen: Título original o copia legalizada ante notario, Certificado de Antecedentes, Copia C.I en ambos lados.',
                                          from_email='procesoperitos@sernageomin.cl',
                                          to=[idUsuarioFk.email],
+                                         cc=('procesoperitos@sernageomin.cl',),
                                          )
             mensaje_email.send()
 

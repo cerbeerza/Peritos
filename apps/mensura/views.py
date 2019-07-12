@@ -41,7 +41,7 @@ def mensuraGeneralFn(request):
                                      data=datos, headers=cabeceras)
         except:
             estado = False
-            message = "Ha ocurrido un problema para realizar tu consulta, no necesitas saber por que"
+            message = "Ha ocurrido un problema para realizar tu consulta."
             return render(request, 'templates/mensura/mensura_general_list.html', {'listaPeriodos': None, 'estado': estado, 'message': message})
 
 
@@ -71,7 +71,7 @@ def mensuraGeneralFn(request):
             response = requests.post("http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaPromedioByUser",
                                      data=datos, headers=cabeceras)
         except:
-            message = "Ha ocurrido un problema para realizar tu consulta, no necesitas saber por que"
+            message = "Ha ocurrido un problema para realizar tu consulta."
             estado = False
             return render(request, 'templates/mensura/mensura_general_list.html',
                           {'objeto2': None, 'listaPeriodos': None, 'estado':estado})

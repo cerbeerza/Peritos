@@ -37,19 +37,16 @@ def renueva(request):
 
         renovaciones = Renovacion.objects.filter(id_user_id=userId, periodo=year)
         if len(renovaciones) != 0:
-            message =  'Ya ha realizado renovación para este periodo'
+            message = 'Ya ha realizado renovación para este periodo'
             return render(request, 'templates/renovacion/renovacion.html', {'message': message})
 
-
         renovacion = Renovacion.objects.create(periodo=year, fecha_creacion=fecha_actual, id_user_id=userId, archivo_ci=request.FILES['fileCCI'], archivo_ant=request.FILES['fileANT'], archivo_tit=request.FILES['fileTIT'])
-
-
-
 
         mensaje_email = EmailMessage(subject='Renovación Proceso Peritos',
                                      body='Se ha Realizado correctamente su Renovación',
                                      from_email='procesoperitos@sernageomin.cl',
                                      to=[idUsuarioFk.email],
+                                     cc=('procesoperitos@sernageomin.cl',),
                                      )
         mensaje_email.send()
 
