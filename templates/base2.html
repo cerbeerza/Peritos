@@ -30,6 +30,17 @@
 {% block scripts %}
  {% endblock %}
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136932874-6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-136932874-6');
+</script>
+
+
 
 <!--     Fonts and icons     -->
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
@@ -92,11 +103,11 @@
                         <i class="material-icons">border_all</i> Notas Mensuras
                     </a>
 
-                      <a href="/postulacion/postular" class="dropdown-item">
+                      <a href="/postulacion/postular" class="dropdown-item" onclick="gtag('event','Inicio_tramite_UA-136932874-6', {'event_category': 'PERITOS MENSURADORES', 'event_label': ' Inicio Trámite UA-136932874-6'});">
                         <i class="material-icons">mode_edit</i> Proceso de Postulación
                     </a>
 
-                      <a href="/renovacion/renovar" class="dropdown-item">
+                      <a href="/renovacion/renovar" class="dropdown-item" onclick="gtag('event','Inicio_tramite_UA-136932874-6', {'event_category': 'PERITOS MENSURADORES', 'event_label': ' Inicio Trámite UA-136932874-6'});">
                         <i class="material-icons">transfer_within_a_station</i> Proceso de Renovación
                     </a>
 

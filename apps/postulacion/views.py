@@ -14,6 +14,7 @@ def crea_postulacion(request):
     message = None
     # Arreglo
     renueva = None
+    finalizado = False
 
     regiones = []
     if request.method == "POST":
@@ -44,6 +45,7 @@ def crea_postulacion(request):
             postulacion.save()
 
             message = "Se ha realizado su postulación correctamente"
+            finalizado = True
 
 
             mensaje_email = EmailMessage(subject='Postulación Proceso Peritos',
@@ -52,10 +54,10 @@ def crea_postulacion(request):
                                          to=[idUsuarioFk.email],
                                          cc=('procesoperitos@sernageomin.cl',),
                                          )
-            mensaje_email.send()
+            #mensaje_email.send()
 
 
-            return render(request, 'templates/administrations/homepage.html', {'message': message})
+            return render(request, 'templates/administrations/homepage.html', {'message': message, 'finalizado': finalizado})
     else:
         form = PostulacionForm
         regiones = Region.objects.all()

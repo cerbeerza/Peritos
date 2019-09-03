@@ -11,9 +11,9 @@
       </driver-properties>
     </data-source>
     <data-source source="LOCAL" name="PeritosMySql" uuid="93f5efe7-014e-4348-8238-85643e4354fc">
-      <driver-ref>mysql</driver-ref>
+      <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://172.16.60.35:3306/peritos</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />

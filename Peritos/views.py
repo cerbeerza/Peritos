@@ -102,7 +102,7 @@ def login_page(request):
                             rutUsuario.save()
 
                         #si dio prueba recientemente
-                        contExamen = Prueba.objects.filter(rutx=rutRut, periodo=year, situacion='APROBADO')
+                        contExamen = Prueba.objects.filter(rutx=rutRut, periodo=year2, situacion='APROBADO')
 
                         if len(contExamen) > 0:
                             verificaNota = False
@@ -144,14 +144,43 @@ def login_page(request):
                             calculaNota = True
 
                         if calculaNota:
+
+                            #llamar servicio para promedio conopro
+                            datos = '{ "periodo": "' + str(
+                                year2+1) + '", "rutper": "' + rutRut + '", "pass": "sngmq21.,+"}'
+                            notasPromedio = requests.post(
+                                "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaPromedioByUser",
+                                data=datos, headers=cabeceras)
+                            notaPromedio = notasPromedio.json()
+                            notaPromedioNumeric = 0.0
+                            if notaPromedio["notaPromedio"] is not None:
+                                notaPromedioNumeric = float(notaPromedio["notaPromedio"])
+
+                            #nuevo
+                            if notaPromedioNumeric == 0.0:
+                                # llamar servicio para promedio conopro
+                                datos = '{ "periodo": "' + str(
+                                    year2) + '", "rutper": "' + rutRut + '", "pass": "sngmq21.,+"}'
+                                notasPromedio = requests.post(
+                                    "http://syspminweb-prod:8080/NotasPeritosREST/service/NotasPeritos/getNotaPromedioByUser",
+                                    data=datos, headers=cabeceras)
+                                notaPromedio = notasPromedio.json()
+                                notaPromedioNumeric = 0.0
+                                if notaPromedio["notaPromedio"] is not None:
+                                    notaPromedioNumeric = float(notaPromedio["notaPromedio"])
+
                             suma = 0.0
                             for indice in range(len(listadoNotas)):
 
                                 notaParcial = float(listadoNotas[indice]['notaParcial'])
                                 suma = suma + notaParcial
                             total = suma / len(listadoNotas)
+                            if notaPromedioNumeric != 0.0:
+                                total = notaPromedioNumeric
 
-                            message3 = 'Su nota promedio actual para este periodo es ' + str(round(total, 1))
+                            #message3 = 'Su nota promedio actual para este periodo es ' + str(round(total, 1))
+                            message3 = 'Su nota promedio actual para este periodo es ' + str(notaPromedioNumeric)
+                            #if notaPromedioNumeric < 4.0:
                             if total < 4.0:
                                 message2 = 'Hasta el momento su nota es inferior a 4.0, por lo que no puede renovar'
                                 rutUsuario.renovante = False
@@ -160,8 +189,6 @@ def login_page(request):
                                 message2 = 'No presenta notas'
                                 rutUsuario.renovante = False
                                 rutUsuario.save()
-
-
 
                     objUsuario = Profile.objects.get(rut=rutRut)
                     nombreUsuario = objUsuario.nombres

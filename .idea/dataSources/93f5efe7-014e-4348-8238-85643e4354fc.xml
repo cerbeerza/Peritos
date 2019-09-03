@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="PeritosMySql">
-  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.15">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.16">
     <root id="1">
       <ServerVersion>5.7.20</ServerVersion>
       <DefaultEngine>InnoDB</DefaultEngine>
@@ -19,7 +19,6 @@
     </schema>
     <schema id="5" parent="1" name="peritos">
       <Current>1</Current>
-      <Visible>1</Visible>
       <Collation>latin1_swedish_ci</Collation>
     </schema>
     <schema id="6" parent="1" name="sys">
@@ -1278,7 +1277,7 @@ codename</ColNames>
       <Position>4</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="314" parent="234" name="username">
@@ -1309,14 +1308,14 @@ codename</ColNames>
       <Position>9</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <DefaultExpression>0</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="319" parent="234" name="is_active">
       <Position>10</Position>
       <DataType>tinyint(1)|0s</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+      <DefaultExpression>1</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="320" parent="234" name="date_joined">
@@ -1703,6 +1702,7 @@ model</ColNames>
       <Position>4</Position>
       <DataType>varchar(4)|0s</DataType>
       <NotNull>1</NotNull>
+      <DefaultExpression>&apos;2018&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <key id="388" parent="243" name="PRIMARY">

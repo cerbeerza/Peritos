@@ -17,19 +17,19 @@ def renueva(request):
         userId = request.user.id
         profile = Profile.objects.get(user_id=userId)
         renueva = profile.renovante
+        finalizado = False
 
-        return render(request, 'templates/renovacion/renovacion.html', {'renueva': renueva})
+        return render(request, 'templates/renovacion/renovacion.html', {'renueva': renueva, 'finalizado': finalizado})
 
     if request.method == 'POST':
 
         userId = request.user.id
         idUsuarioFk = User.objects.get(id=userId)
         rutUser = idUsuarioFk.profile.rut
+        finalizado = False
+        renueva = False
 
-
-
-
-        #renovacion = Renovacion
+        # renovacion = Renovacion
         fecha_actual = date.today()
         objetoPeriodo = PeriodoProceso.objects.get(fechaDesde__lte=fecha_actual, fechaHasta__gte=fecha_actual)
         periodo = objetoPeriodo.periodo
@@ -38,7 +38,7 @@ def renueva(request):
         renovaciones = Renovacion.objects.filter(id_user_id=userId, periodo=year)
         if len(renovaciones) != 0:
             message = 'Ya ha realizado renovación para este periodo'
-            return render(request, 'templates/renovacion/renovacion.html', {'message': message})
+            return render(request, 'templates/renovacion/renovacion.html', {'message': message, 'renueva': renueva, 'finalizado': finalizado})
 
         renovacion = Renovacion.objects.create(periodo=year, fecha_creacion=fecha_actual, id_user_id=userId, archivo_ci=request.FILES['fileCCI'], archivo_ant=request.FILES['fileANT'], archivo_tit=request.FILES['fileTIT'])
 
@@ -51,10 +51,11 @@ def renueva(request):
         mensaje_email.send()
 
         message = "Se ha realizado correctamente su Renovación"
+        finalizado = True
 
         renueva = True
 
-        return render(request, 'templates/renovacion/renovacion.html', {'message': message, 'renueva': renueva})
+        return render(request, 'templates/renovacion/renovacion.html', {'message': message, 'renueva': renueva, 'finalizado': finalizado})
 
 
 

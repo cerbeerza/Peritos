@@ -5,7 +5,16 @@
 
     <h3>Página de INICIO HOME</h3>
 
+{% if finalizado %}
 
+    <script>
+   gtag('event', 'Fin_tramite_UA-136932874-6', {
+        'event_category': 'PERITOS MENSURADORES',
+        'event_label': ' Fin Trámite UA-136932874-6'
+   });
+    </script>
+
+    {% endif %}
 
     {% if user.is_authenticated %}
 
